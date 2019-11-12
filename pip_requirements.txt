@@ -2,5 +2,8 @@
 # These additional PIP3 packages are required
 #############################################
 
+# Miscellaneous packages
+pyYAML
+
 # Web server packages
 Flask
