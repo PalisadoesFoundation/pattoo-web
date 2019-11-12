@@ -2,5 +2,11 @@
 # These additional PIP3 packages are required
 #############################################
 
+# Pattoo package
+PattooShared
+
+# Miscellaneous packages
+pyYAML
+
 # Web server packages
 Flask
