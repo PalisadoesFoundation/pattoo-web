@@ -2,8 +2,9 @@
 # These additional PIP3 packages are required
 #############################################
 
-# Pattoo package
-PattooShared
+# Pattoo packages
+
+PattooShared>=0.0.48
 
 # Miscellaneous packages
 pyYAML
