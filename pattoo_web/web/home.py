@@ -1,9 +1,7 @@
 """Pattoo version routes."""
 
 # PIP libraries
-from flask import Blueprint, jsonify, request
-
-# pattoo imports
+from flask import Blueprint, jsonify, request, render_template
 
 # Define the various global variables
 PATTOO_WEB_HOME = Blueprint('PATTOO_WEB_HOME', __name__)
@@ -21,7 +19,7 @@ def route_data():
 
     """
     # Initialize key variables
-    return 'You have found Pattoo Web.\n'
+    return render_template('index.html')
 
 
 @PATTOO_WEB_HOME.route('/status')

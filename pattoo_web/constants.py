@@ -4,8 +4,6 @@ The aim is to have a single location for constants that may be used across
 agents to prevent the risk of duplication.
 
 """
-# Standard imports
-import collections
 
 ###############################################################################
 # Constants for pattoo Web API
@@ -14,3 +12,6 @@ import collections
 PATTOO_WEBD_EXECUTABLE = 'pattoo-webd'
 PATTOO_WEBD_PROXY = '{}-gunicorn'.format(
     PATTOO_WEBD_EXECUTABLE)
+
+FOLDER_WEB_STATIC = 'theme/static'
+FOLDER_WEB_TEMPLATE = 'theme/templates'
