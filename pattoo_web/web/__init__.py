@@ -9,6 +9,7 @@ from pattoo_web.constants import FOLDER_WEB_STATIC, FOLDER_WEB_TEMPLATE
 
 # Import PATTOO_WEBD Blueprints
 from pattoo_web.web.home import PATTOO_WEB_HOME
+from pattoo_web.web.chart import PATTOO_WEB_CHART
 
 # Setup flask
 PATTOO_WEBD = Flask(
@@ -21,7 +22,10 @@ PATTOO_WEBD = Flask(
 # Register Blueprints
 PATTOO_WEBD.register_blueprint(
     PATTOO_WEB_HOME, url_prefix=PATTOO_WEB_SITE_PREFIX)
-
+# Register Blueprints
+PATTOO_WEBD.register_blueprint(
+    PATTOO_WEB_CHART, url_prefix=PATTOO_WEB_SITE_PREFIX)
+    
 # Function to easily find your assests
 PATTOO_WEBD.jinja_env.globals['static'] = (
     lambda filename: url_for(

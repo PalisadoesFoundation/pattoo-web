@@ -11,3 +11,4 @@ pyYAML
 
 # Web server packages
 Flask
+Flask-Table

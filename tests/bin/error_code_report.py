@@ -37,8 +37,8 @@ def main():
 
     """
     # Get code report
-    minimum = 1000
-    maximum = 19999
+    minimum = 80000
+    maximum = 99999
     errors.check_source_code(ROOT_DIR, minimum=minimum, maximum=maximum)
 
 
