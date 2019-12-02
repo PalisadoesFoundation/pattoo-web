@@ -167,11 +167,11 @@ Then run this command again.
 
     # Make sure the PATTOO_CONFIGDIR environment variable is set
     if 'PATTOO_CONFIGDIR' not in os.environ:
-        log.log2die_safe(1023, screen_message)
+        log.log2die_safe(80005, screen_message)
 
     # Make sure the PATTOO_CONFIGDIR environment variable is set correctly
     if os.environ['PATTOO_CONFIGDIR'] != config_directory:
-        log.log2die_safe(1024, screen_message)
+        log.log2die_safe(80006, screen_message)
 
     # Update message
     screen_message = ('''{}
@@ -184,4 +184,4 @@ PATTOO_CONFIGDIR is incorrectly set to {}
     if 'unittest' not in os.environ['PATTOO_CONFIGDIR']:
         log_message = (
             'The PATTOO_CONFIGDIR is not set to a unittest directory')
-        log.log2die_safe(1025, log_message)
+        log.log2die_safe(80008, log_message)

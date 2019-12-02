@@ -39,7 +39,7 @@ class RawCol(Col):
 
 class ItemTable(Table):
     """Table definition."""
-    
+
     # Add attributes
     classes = ['table table-bordered']
     table_id = 'dataTable'
@@ -113,28 +113,28 @@ def main():
         log_message = ('''\
 Timeout when attempting to access {}. Message: {}\
 '''.format(url, err))
-        log.log2warning(80000, log_message)
+        log.log2warning(80100, log_message)
     except requests.exceptions.TooManyRedirects as err:
         # Tell the user their URL was bad and try a different one
         log_message = ('''\
 Too many redirects when attempting to access {}. Message: {}\
 '''.format(url, err))
-        log.log2warning(80001, log_message)
+        log.log2warning(80101, log_message)
     except requests.exceptions.HTTPError as err:
         log_message = ('''\
 HTTP error when attempting to access {}. Message: {}\
 '''.format(url, err))
-        log.log2warning(80002, log_message)
+        log.log2warning(80102, log_message)
     except requests.exceptions.RequestException as err:
         # catastrophic error. bail.
         log_message = ('''\
 Exception when attempting to access {}. Message: {}\
 '''.format(url, err))
-        log.log2warning(80003, log_message)
+        log.log2warning(80103, log_message)
     except:
         log_message = ('''API Failure: [{}, {}, {}]\
 '''.format(sys.exc_info()[0], sys.exc_info()[1], sys.exc_info()[2]))
-        log.log2warning(80004, log_message)
+        log.log2warning(80104, log_message)
 
     # Process the data
     if bool(success) is True:
