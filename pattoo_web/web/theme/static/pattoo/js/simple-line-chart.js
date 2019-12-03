@@ -30,9 +30,17 @@ function SimpleLineChart( url, heading ) {
     var x = d3.scaleTime().range([0, innerWidth]),
         y = d3.scaleLinear().range([innerHeight, 0]);
 
+    // .defined(d => !isNaN(d.value))
+    // .defined(function(d) { return !isNaN(d.value); })
+    // .defined(function(d){return d.value !== null && d.value !== undefined})
+    // .defined(function(d) { return d.value; })
+    // .data(data.filter(function(d) { return d; }))
+    // .defined(function(d) { return d.value != null; })
+
     // Define the line
     var line = d3.line()
         .curve(d3.curveBasis)
+        .defined(d => !isNaN(d.value))
         .x(function(d) {return x(d.timestamp);})
         .y(function(d) {return y(d.value);});
 
@@ -50,7 +58,7 @@ function SimpleLineChart( url, heading ) {
       x.domain(d3.extent(data, d => d.timestamp));
       y.domain([0, d3.max(data, d => Math.max(d.value))]);
 
-      // Add the valueline path.
+      // Add the line path.
       g.append('path')
           .datum(data)
           .attr('class', 'line')
