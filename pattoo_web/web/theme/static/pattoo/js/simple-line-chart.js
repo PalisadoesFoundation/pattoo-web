@@ -1,7 +1,7 @@
 
 function SimpleLineChart( url, heading ) {
     // set the dimensions and margins of the graph
-    var margin = {top: 20, right: 50, bottom: 50, left: 50};
+    var margin = {top: 20, right: 50, bottom: 50, left: 75};
     var headingVOffset = 0;
     var outerWidth = 950;
     var outerHeight = 400;
