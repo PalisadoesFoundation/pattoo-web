@@ -1,61 +1,87 @@
 
 function SimpleLineChart( url, heading ) {
     // set the dimensions and margins of the graph
-    var margin = {top: 20, right: 40, bottom: 30, left: 50},
-        width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+    var margin = {top: 20, right: 50, bottom: 50, left: 50};
+    var headingVOffset = 0;
+    var outerWidth = 950;
+    var outerHeight = 400;
+    var innerWidth = outerWidth - margin.left - margin.right;
+    var innerHeight = outerHeight - margin.top - margin.bottom;
 
     // Define where we are placing the chart
-    var div_id = 'pattoo-simple-line-chart'
+    var div_id = '#pattoo_simple_line_chart'
 
-    // set the ranges
-    var x = d3.scaleTime().range([0, width]);
-    var y = d3.scaleLinear().range([height, 0]);
+    // Setup standard colors
+    var standard_colors = d3.scaleOrdinal(d3.schemeCategory10);
 
-    // define the line
-    var valueline = d3.line()
-        .x((d) => x(d.date))
-        .y((d) => y(d.value));
+    // Append the svg obgect to the body of the page
+    // Define the limits of the SVG canvas
+    var svg = d3.select(div_id).append('svg')
+      .attr('width', outerWidth)
+      .attr('height', outerHeight);
 
-    // append the svg obgect to the body of the page
-    // appends a 'group' element to 'svg'
-    // moves the 'group' element to the top left margin
-    var svg = d3.select(div_id).append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-        .attr("transform",
-              "translate(" + margin.left + "," + margin.top + ")");
+    // Define the graph area on the canvas
+    // Appends a 'group' element to 'svg'
+    // Moves the 'group' element to the top left margin
+    var g = svg.append('g')
+      .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
+
+    // Set scales and colors for chart area
+    var x = d3.scaleTime().range([0, innerWidth]),
+        y = d3.scaleLinear().range([innerHeight, 0]);
+
+    // Define the line
+    var line = d3.line()
+        .curve(d3.curveBasis)
+        .x(function(d) {return x(d.timestamp);})
+        .y(function(d) {return y(d.value);});
 
     // Get the data
     d3.json(url, (error, data) => {
       if (error) throw error;
 
-      // format the data
+      // Format the data
       data.forEach(function(d) {
-           d.timestamp = new Date(d.timestamp * 1000);
+           d.timestamp = new Date(d.timestamp);
            d.value = +d.value;
        });
 
       // Scale the range of the data
-      x.domain(d3.extent(data, d => d.date));
+      x.domain(d3.extent(data, d => d.timestamp));
       y.domain([0, d3.max(data, d => Math.max(d.value))]);
 
       // Add the valueline path.
-      svg.append("path")
-          .data([data])
-          .attr("class", "line")
-          .attr("d", valueline);
+      g.append('path')
+          .datum(data)
+          .attr('class', 'line')
+          .attr('d', line)
+          .attr('fill', 'none')
+          .style('stroke-width', 2)
+          .style('stroke', function(d) { return standard_colors(); });
 
-      // Add the X Axis
-      svg.append("g")
-          .attr("transform", "translate(0," + height + ")")
-          .call(d3.axisBottom(x));
+      // Define formatting for X axis lines and labels
+      g.append('g')
+          .attr('class', 'axisChart')
+          .attr('transform', 'translate(0,' + innerHeight + ')')
+          .call(d3.axisBottom(x)
+          .tickFormat(d3.timeFormat('%Y-%m-%d %H:%M')))
+          .selectAll('text')
+          .style('font', '10px Nunito')
+          .style('text-anchor', 'end')
+          .attr('dx', '-.8em')
+          .attr('dy', '.15em')
+          .attr('transform', "rotate(-20)");
 
-      // Add the Y0 Axis
-      svg.append("g")
-          .attr("class", "axisSteelBlue")
-          .call(d3.axisLeft(y));
+      // Define formatting for Y axis lines and labels (Rotation)
+      g.append('g')
+          .attr('class', 'axisChart')
+          .call(d3.axisLeft(y))
+          .append('text')
+          .style('font', '20px Nunito')
+          .attr('transform', 'rotate(-90)')
+          .attr('y', 6)
+          .attr('dy', '0.71em');
 
-    }).header("Content-Type", "application/json");
+    });
+
 }
