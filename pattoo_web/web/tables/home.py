@@ -139,8 +139,8 @@ def _flask_table_rows(rows):
         metadata = row['metadata']
 
         # Create link to charts
-        link = '{}/chart/{}?heading={}'.format(
-            PATTOO_WEB_SITE_PREFIX, row['idx_datapoint'], heading)
+        link = '{}/chart/{}?heading={}&device={}'.format(
+            PATTOO_WEB_SITE_PREFIX, row['idx_datapoint'], heading, device)
         link_html = ('''\
 <a href="{}">Chart Data</a>'''.format(link))
 

@@ -1,0 +1,15 @@
+
+/* Chart line ticks */
+.axisChart line{
+  stroke: #C8C8CC;
+}
+
+.axisChart path{
+  stroke: #C8C8CC;
+}
+
+/* Chart line text */
+.axisChart text{
+  fill: #858796;
+  font-family: 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+}

@@ -5,8 +5,8 @@ from flask import Blueprint, render_template, request, jsonify
 import requests
 
 # Pattoo imports
-from pattoo_shared.constants import PATTOO_WEB_SITE_PREFIX
 from pattoo_web.configuration import Config
+from pattoo_web.web.tables import chart
 
 # Define the various global variables
 PATTOO_WEB_CHART = Blueprint('PATTOO_WEB_CHART', __name__)
@@ -23,15 +23,19 @@ def route_chart(idx_datapoint):
         None
 
     """
-    # Get URL for DataPoint data
-    url = ('{}/chart/{}/data'.format(PATTOO_WEB_SITE_PREFIX, idx_datapoint))
-
     # Get heading for DataPoint
-    heading = request.args.get('heading')
-    if bool(heading) is False:
-        heading = 'Unknown Heading'
-
-    return render_template('chart.html', url=url, heading=heading)
+    args = {}
+    args['heading'] = request.args.get('heading')
+    args['device'] = request.args.get('device')
+    for key, value in args.items():
+        if bool(value) is False:
+            args[key] = 'Unknown {}'.format(key)
+    table = chart.table(idx_datapoint, args['heading'])
+    return render_template(
+        'chart.html',
+        main_table=table,
+        key=args['heading'],
+        device=args['device'])
 
 
 @PATTOO_WEB_CHART.route('/chart/<int:idx_datapoint>/data')
