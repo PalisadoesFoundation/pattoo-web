@@ -43,21 +43,23 @@ def check():
     config = files.read_yaml_files(config_directory)
 
     # Check main keys
-    keys = ['main', 'pattoo-api-agentd']
+    keys = ['main', 'pattoo-webd']
     for key in keys:
         if key not in config:
             log_message = ('''\
 Section "{}" not found in configuration file in directory {}. Please fix.\
 '''.format(key, config_directory))
-            log.log2die_safe(51008, log_message)
+            log.log2die_safe(80007, log_message)
 
     # Check secondary keys
     secondaries = [
         'log_level', 'log_directory', 'cache_directory',
         'daemon_directory', 'polling_interval']
     secondary_key_check(config, 'main', secondaries)
-    secondaries = ['api_ip_address', 'api_ip_bind_port', 'api_uses_https']
-    secondary_key_check(config, 'pattoo-api-agentd', secondaries)
+    secondaries = [
+        'api_ip_address', 'api_ip_bind_port', 'api_uses_https',
+        'web_api_ip_address', 'web_api_ip_bind_port', 'web_api_uses_https']
+    secondary_key_check(config, 'pattoo-webd', secondaries)
 
     # Print Status
     print('OK: Configuration paramter check passed.')
@@ -81,7 +83,7 @@ def secondary_key_check(config, primary, secondaries):
             log_message = ('''\
 Configuration file's "{}" section does not have a "{}" sub-section. \
 Please fix.'''.format(primary, key))
-            log.log2die_safe(51009, log_message)
+            log.log2die_safe(80009, log_message)
 
 
 def main():
