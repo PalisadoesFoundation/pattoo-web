@@ -39,8 +39,8 @@ function SimpleLineChart( url, heading ) {
 
     // Define the line
     var line = d3.line()
+        .defined(function(d) { return d; })
         .curve(d3.curveBasis)
-        .defined(d => !isNaN(d.value))
         .x(function(d) {return x(d.timestamp);})
         .y(function(d) {return y(d.value);});
 
