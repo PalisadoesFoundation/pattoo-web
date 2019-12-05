@@ -60,12 +60,6 @@ class TestConfiguration(unittest.TestCase):
         result = self.config.web_api_ip_bind_port()
         self.assertEqual(result, 20202)
 
-    def test_web_api_uses_https(self):
-        """Testing method / function web_api_uses_https."""
-        # Test
-        result = self.config.web_api_uses_https()
-        self.assertEqual(result, False)
-
     def test_web_api_server_url(self):
         """Testing method / function web_api_server_url."""
         # Test

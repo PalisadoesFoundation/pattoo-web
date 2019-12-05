@@ -53,7 +53,6 @@ class UnittestConfig(object):
                 'api_ip_bind_port': 20200,
                 'web_api_ip_address': '127.0.0.3',
                 'web_api_ip_bind_port': 20202,
-                'web_api_uses_https': False
             }
         }
 

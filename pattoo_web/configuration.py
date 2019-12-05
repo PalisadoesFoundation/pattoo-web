@@ -112,26 +112,6 @@ class Config(ConfigShared):
             result = int(intermediate)
         return result
 
-    def web_api_uses_https(self):
-        """Get web_api_uses_https.
-
-        Args:
-            None
-
-        Returns:
-            result: result
-
-        """
-        # Initialize key variables
-        key = PATTOO_WEBD_EXECUTABLE
-        sub_key = 'web_api_uses_https'
-
-        # Get result
-        result = search(key, sub_key, self._configuration, die=False)
-        if result is None:
-            result = False
-        return result
-
     def web_api_server_url(self, graphql=True):
         """Get pattoo server's remote URL.
 
@@ -142,12 +122,6 @@ class Config(ConfigShared):
             result: URL.
 
         """
-        # Construct URL for server
-        if self.web_api_uses_https() is True:
-            prefix = 'https://'
-        else:
-            prefix = 'http://'
-
         # Create the suffix
         if bool(graphql) is True:
             suffix = '/graphql'
@@ -156,7 +130,7 @@ class Config(ConfigShared):
 
         # Return
         result = (
-            '{}{}:{}{}{}'.format(
-                prefix, self.web_api_ip_address(),
+            'http://{}:{}{}{}'.format(
+                self.web_api_ip_address(),
                 self.web_api_ip_bind_port(), PATTOO_API_WEB_PREFIX, suffix))
         return result
