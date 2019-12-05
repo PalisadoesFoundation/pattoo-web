@@ -36,36 +36,17 @@ class TestConfiguration(unittest.TestCase):
         """Testing method / function __init__."""
         pass
 
-    def test_api_listen_address(self):
-        """Testing method / function api_listen_address."""
+    def test_ip_listen_address(self):
+        """Testing method / function ip_listen_address."""
         # Test
-        result = self.config.api_listen_address()
+        result = self.config.ip_listen_address()
         self.assertEqual(result, '127.0.0.1')
 
-    def test_api_ip_bind_port(self):
-        """Testing method / function api_ip_bind_port."""
+    def test_ip_bind_port(self):
+        """Testing method / function ip_bind_port."""
         # Test
-        result = self.config.api_ip_bind_port()
+        result = self.config.ip_bind_port()
         self.assertEqual(result, 20200)
-
-    def test_web_api_ip_address(self):
-        """Testing method / function web_api_ip_address."""
-        # Test
-        result = self.config.web_api_ip_address()
-        self.assertEqual(result, '127.0.0.3')
-
-    def test_web_api_ip_bind_port(self):
-        """Testing method / function web_api_ip_bind_port."""
-        # Test
-        result = self.config.web_api_ip_bind_port()
-        self.assertEqual(result, 20202)
-
-    def test_web_api_server_url(self):
-        """Testing method / function web_api_server_url."""
-        # Test
-        result = self.config.web_api_server_url()
-        self.assertEqual(
-            result, 'http://127.0.0.3:20202/pattoo/api/v1/web/graphql')
 
 
 if __name__ == '__main__':

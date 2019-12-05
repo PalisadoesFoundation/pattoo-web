@@ -49,10 +49,10 @@ class UnittestConfig(object):
                 'polling_interval': 20
             },
             'pattoo-webd': {
-                'api_listen_address': '127.0.0.1',
-                'api_ip_bind_port': 20200,
+                'ip_listen_address': '127.0.0.1',
+                'ip_bind_port': 20200,
                 'web_api_ip_address': '127.0.0.3',
-                'web_api_ip_bind_port': 20202,
+                'web_ip_bind_port': 20202,
             }
         }
 
