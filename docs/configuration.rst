@@ -51,8 +51,10 @@ The ``config.yaml`` file created from the template will have sections that you w
 
       ip_listen_address: 127.0.0.1
       ip_bind_port: 20200
-      web_api_ip_address: 127.0.0.1
-      web_ip_bind_port: 20202
+
+  pattoo:
+      ip_address: 127.0.0.1
+      ip_bind_port: 20202
 
 
 Configuration Explanation
@@ -90,12 +92,15 @@ This table outlines the purpose of each configuration parameter.
    * -
      - ``ip_bind_port``
      - TCP port of used by the ``pattoo-webd`` daemon for accepting data from remote ``pattoo`` agents. Default of 20202.
+   * - ``pattoo``
+     -
+     -
    * -
-     - ``web_api_ip_address``
-     - IP address used by the ``pattoo`` daemon to provide data for ``pattoo-web``.
+     - ``ip_address``
+     - The ``pattoo`` server's IP address used to provide data for ``pattoo-web``.
    * -
-     - ``web_ip_bind_port``
-     - TCP port of used by the ``pattoo`` server daemon.
+     - ``ip_bind_port``
+     - The TCP port that the ``pattoo`` server is using to provide data for ``pattoo-web``.
 
 
 Notes
