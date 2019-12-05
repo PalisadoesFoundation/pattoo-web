@@ -48,45 +48,13 @@ class UnittestConfig(object):
                 'daemon_directory': self._daemon_directory,
                 'polling_interval': 20
             },
-            'pattoo-api-agentd': {
-                'api_ip_address': '127.0.0.1',
-                'api_ip_bind_port': 6060,
-                'api_uses_https': False
-            },
-            'pattoo-agent-snmpd': {
-                'oid_groups': [
-                    {
-                        'group_name': 'TEST',
-                        'ip_devices': ['localhost'],
-                        'oids': ['.1.3.6.1.2.1.2.2.1.10',
-                                 '.1.3.6.1.2.1.2.2.1.16']
-                    }
-                ],
-                'snmp_groups': [
-                    {
-                        'group_name': 'TEST',
-                        'snmp_authpassword': None,
-                        'snmp_authprotocol': None,
-                        'snmp_community': 'public',
-                        'snmp_port': 161,
-                        'snmp_privpassword': None,
-                        'snmp_privprotocol': None,
-                        'snmp_secname': None,
-                        'snmp_version': 2,
-                        'ip_devices': ['localhost']
-                    }
-                ]
-            },
-            'pattoo-agent-os-spoked': {
-                'listen_address': '127.0.0.1',
-                'ip_bind_port': 5000
-                },
-            'pattoo-agent-os-hubd': {
-
-                'ip_devices': [
-                    {'ip_address': '127.0.0.1',
-                     'ip_bind_port': 5000}]
-                }
+            'pattoo-webd': {
+                'api_listen_address': '127.0.0.1',
+                'api_ip_bind_port': 20200,
+                'web_api_ip_address': '127.0.0.3',
+                'web_api_ip_bind_port': 20202,
+                'web_api_uses_https': False
+            }
         }
 
     def create(self):

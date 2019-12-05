@@ -57,7 +57,7 @@ Section "{}" not found in configuration file in directory {}. Please fix.\
         'daemon_directory', 'polling_interval']
     secondary_key_check(config, 'main', secondaries)
     secondaries = [
-        'api_ip_address', 'api_ip_bind_port', 'api_uses_https',
+        'api_listen_address', 'api_ip_bind_port', 
         'web_api_ip_address', 'web_api_ip_bind_port', 'web_api_uses_https']
     secondary_key_check(config, 'pattoo-webd', secondaries)
 

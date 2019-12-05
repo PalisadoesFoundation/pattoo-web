@@ -7,6 +7,8 @@ import requests
 # Pattoo imports
 from pattoo_web.configuration import Config
 from pattoo_web.web.tables import chart
+from pattoo_web import uri
+from pattoo_web.constants import SECONDS_IN_DAY
 
 # Define the various global variables
 PATTOO_WEB_CHART = Blueprint('PATTOO_WEB_CHART', __name__)
@@ -27,13 +29,21 @@ def route_chart(idx_datapoint):
     args = {}
     args['heading'] = request.args.get('heading')
     args['device'] = request.args.get('device')
+    secondsago = uri.integerize_arg(request.args.get('secondsago'))
+
+    # Create URL args
     for key, value in args.items():
         if bool(value) is False:
             args[key] = 'Unknown {}'.format(key)
-    table = chart.table(idx_datapoint, args['heading'])
+
+    # Get table to present
+    table = chart.Table(
+        idx_datapoint, args['heading'], args['device'], secondsago)
+    html = table.html()
+
     return render_template(
         'chart.html',
-        main_table=table,
+        main_table=html,
         key=args['heading'],
         device=args['device'])
 
@@ -51,11 +61,15 @@ def route_chart_data(idx_datapoint):
     """
     # Initialize key variables
     config = Config()
+    secondsago = uri.integerize_arg(request.args.get('secondsago'))
+    if bool(secondsago) is False:
+        secondsago = SECONDS_IN_DAY
 
     # Create URL for DataPoint data
-    url = ('{}/{}'.format(
+    url = ('{}/{}?secondsago={}'.format(
         config.web_api_server_url(graphql=False),
-        idx_datapoint))
+        idx_datapoint,
+        secondsago))
 
     # Get data
     response = requests.get(url)

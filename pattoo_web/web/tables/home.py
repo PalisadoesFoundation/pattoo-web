@@ -6,6 +6,7 @@ from flask_table import Table, Col
 
 # Pattoo imports
 from pattoo_shared.constants import PATTOO_WEB_SITE_PREFIX
+from pattoo_web import uri
 
 
 class RawCol(Col):
@@ -139,16 +140,13 @@ def _flask_table_rows(rows):
         metadata = row['metadata']
 
         # Create link to charts
-        link = '{}/chart/{}?heading={}&device={}'.format(
-            PATTOO_WEB_SITE_PREFIX, row['idx_datapoint'], heading, device)
-        link_html = ('''\
-<a href="{}">Chart Data</a>'''.format(link))
+        link = uri.chart_link(row['idx_datapoint'], device, heading)
 
         # Create new HTML row
         result.append(dict(
             device=device,
             key=row['key'],
             metadata='<p>{}</p>'.format('</p><p>'.join(metadata)),
-            link=link_html
+            link=link
             ))
     return result
