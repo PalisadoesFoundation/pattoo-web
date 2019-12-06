@@ -42,8 +42,8 @@ class TestBasicFunctions(unittest.TestCase):
     def test_all(self):
         """Testing method / function __init__."""
         # Test
-        self.assertEqual(PATTOO_WEBD_NAME, 'pattoo-webd')
-        self.assertEqual(PATTOO_WEBD_PROXY, 'pattoo-webd-gunicorn')
+        self.assertEqual(PATTOO_WEBD_NAME, 'pattoo_webd')
+        self.assertEqual(PATTOO_WEBD_PROXY, 'pattoo_webd-gunicorn')
         self.assertEqual(FOLDER_WEB_STATIC, 'theme/static')
         self.assertEqual(FOLDER_WEB_TEMPLATE, 'theme/templates')
         self.assertEqual(SECONDS_IN_DAY, 86400)
