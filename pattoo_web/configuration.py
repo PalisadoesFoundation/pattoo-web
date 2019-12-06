@@ -4,7 +4,7 @@
 # Import project libraries
 from pattoo_shared.configuration import Config as ConfigShared
 from pattoo_shared.configuration import search
-from pattoo_web.constants import PATTOO_WEBD_EXECUTABLE
+from pattoo_web.constants import PATTOO_WEBD_NAME
 
 
 class Config(ConfigShared):
@@ -12,7 +12,7 @@ class Config(ConfigShared):
 
     Only processes the following YAML keys in the configuration file:
 
-        The value of the PATTOO_WEBD_EXECUTABLE constant
+        The value of the PATTOO_WEBD_NAME constant
 
     """
 
@@ -40,7 +40,7 @@ class Config(ConfigShared):
 
         """
         # Get result
-        key = PATTOO_WEBD_EXECUTABLE
+        key = PATTOO_WEBD_NAME
         sub_key = 'ip_listen_address'
         result = search(key, sub_key, self._configuration, die=False)
 
@@ -60,7 +60,7 @@ class Config(ConfigShared):
 
         """
         # Initialize key variables
-        key = PATTOO_WEBD_EXECUTABLE
+        key = PATTOO_WEBD_NAME
         sub_key = 'ip_bind_port'
 
         # Get result

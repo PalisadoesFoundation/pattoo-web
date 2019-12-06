@@ -9,9 +9,9 @@ agents to prevent the risk of duplication.
 # Constants for pattoo Web API
 ###############################################################################
 
-PATTOO_WEBD_EXECUTABLE = 'pattoo-webd'
+PATTOO_WEBD_NAME = 'pattoo-webd'
 PATTOO_WEBD_PROXY = '{}-gunicorn'.format(
-    PATTOO_WEBD_EXECUTABLE)
+    PATTOO_WEBD_NAME)
 
 FOLDER_WEB_STATIC = 'theme/static'
 FOLDER_WEB_TEMPLATE = 'theme/templates'
