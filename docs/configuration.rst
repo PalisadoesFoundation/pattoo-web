@@ -47,7 +47,7 @@ The ``config.yaml`` file created from the template will have sections that you w
        cache_directory: PATTOO_CACHE_DIRECTORY
        daemon_directory: PATTOO_DAEMON_DIRECTORY
 
-   pattoo-webd:
+   pattoo_webd:
 
       ip_listen_address: 127.0.0.1
       ip_bind_port: 20200
@@ -83,15 +83,15 @@ This table outlines the purpose of each configuration parameter.
    * -
      - ``daemon_directory``
      - Directory used to store daemon related data that needs to be maintained between reboots
-   * - ``pattoo-webd``
+   * - ``pattoo_webd``
      -
      -
    * -
      - ``ip_listen_address``
-     - IP address used by the ``pattoo-webd`` daemon for accepting data from remote ``pattoo`` agents. Default of '0.0.0.0' which indicates listening on all available network interfaces.
+     - IP address used by the ``pattoo_webd`` daemon for accepting data from remote ``pattoo`` agents. Default of '0.0.0.0' which indicates listening on all available network interfaces.
    * -
      - ``ip_bind_port``
-     - TCP port of used by the ``pattoo-webd`` daemon for accepting data from remote ``pattoo`` agents. Default of 20202.
+     - TCP port of used by the ``pattoo_webd`` daemon for accepting data from remote ``pattoo`` agents. Default of 20202.
    * - ``pattoo``
      -
      -

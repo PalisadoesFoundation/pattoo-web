@@ -43,7 +43,7 @@ def check():
     config = files.read_yaml_files(config_directory)
 
     # Check main keys
-    keys = ['main', 'pattoo-webd']
+    keys = ['main', 'pattoo_webd']
     for key in keys:
         if key not in config:
             log_message = ('''\
@@ -57,7 +57,7 @@ Section "{}" not found in configuration file in directory {}. Please fix.\
         'daemon_directory']
     secondary_key_check(config, 'main', secondaries)
     secondaries = ['ip_listen_address', 'ip_bind_port']
-    secondary_key_check(config, 'pattoo-webd', secondaries)
+    secondary_key_check(config, 'pattoo_webd', secondaries)
     secondaries = ['ip_address', 'ip_bind_port']
     secondary_key_check(config, 'pattoo', secondaries)
 

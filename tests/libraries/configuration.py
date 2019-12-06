@@ -48,7 +48,7 @@ class UnittestConfig(object):
                 'daemon_directory': self._daemon_directory,
                 'polling_interval': 20
             },
-            'pattoo-webd': {
+            'pattoo_webd': {
                 'ip_listen_address': '127.0.0.1',
                 'ip_bind_port': 20200
             }

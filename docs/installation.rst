@@ -21,7 +21,7 @@ Follow these steps.
 
       $ sudo setup/install.py
 
-#. Start the ``bin/pattoo-webd.py`` daemon to accept data sent by `pattoo` agents. :doc:`configuration`
+#. Start the ``bin/pattoo_webd.py`` daemon to accept data sent by `pattoo` agents. :doc:`configuration`
 
 
 Configuring Agents as systemd Daemons
@@ -58,6 +58,6 @@ The script requires you to specify the following parameters. Make sure you have 
 
    SUCCESS! You are now able to start/stop and enable/disable the following systemd services:
 
-   pattoo-webd.service
+   pattoo_webd.service
 
    $
