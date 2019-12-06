@@ -38,8 +38,8 @@ def main():
     # Get configuration
     config = Config()
     aav = AgentAPIVariable(
-        ip_bind_port=config.api_ip_bind_port(),
-        listen_address=config.api_listen_address())
+        ip_bind_port=config.ip_bind_port(),
+        ip_listen_address=config.ip_listen_address())
     agent_api = AgentAPI(
         PATTOO_WEBD_EXECUTABLE,
         PATTOO_WEBD_PROXY,
