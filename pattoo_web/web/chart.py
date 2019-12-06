@@ -1,10 +1,14 @@
 """Pattoo version routes."""
 
+# Standard imports
+import sys
+
 # PIP libraries
 from flask import Blueprint, render_template, request, jsonify
 import requests
 
 # Pattoo imports
+from pattoo_shared import log
 from pattoo_web.configuration import Config
 from pattoo_web.web.tables import chart
 from pattoo_web import uri
@@ -60,7 +64,12 @@ def route_chart_data(idx_datapoint):
 
     """
     # Initialize key variables
+    success = False
+    response = False
+    data = []
     config = Config()
+
+    # Get URL parameters
     secondsago = uri.integerize_arg(request.args.get('secondsago'))
     if bool(secondsago) is False:
         secondsago = SECONDS_IN_DAY
@@ -72,6 +81,28 @@ def route_chart_data(idx_datapoint):
         secondsago))
 
     # Get data
-    response = requests.get(url)
-    data = response.json()
+    try:
+        result = requests.get(url)
+        response = True
+    except:
+        # Most likely no connectivity or the TCP port is unavailable
+        error = sys.exc_info()[:2]
+        log_message = (
+            'Error contacting URL {}: ({} {})'
+            ''.format(url, error[0], error[1]))
+        log.log2info(80010, log_message)
+
+    # Define success
+    if response is True:
+        if result.status_code == 200:
+            success = True
+        else:
+            log_message = ('''\
+HTTP {} error for receiving data from server {}\
+'''.format(result.status_code, url))
+            log.log2warning(80011, log_message)
+
+    # Present the data
+    if success is True:
+        data = result.json()
     return jsonify(data)
