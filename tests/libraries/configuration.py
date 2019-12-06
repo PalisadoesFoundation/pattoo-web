@@ -50,9 +50,7 @@ class UnittestConfig(object):
             },
             'pattoo-webd': {
                 'ip_listen_address': '127.0.0.1',
-                'ip_bind_port': 20200,
-                'web_api_ip_address': '127.0.0.3',
-                'web_ip_bind_port': 20202,
+                'ip_bind_port': 20200
             }
         }
 
