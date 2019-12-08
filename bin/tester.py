@@ -176,7 +176,7 @@ def process(data):
             # Skip entries that will clutter the output
             if key in [
                     'pattoo_agent_hostname', 'pattoo_agent_id',
-                    'pattoo_source', 'pattoo_agent_program']:
+                    'pattoo_agent_id', 'pattoo_agent_program']:
                 continue
 
             if key == 'pattoo_key':
