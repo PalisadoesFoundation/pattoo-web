@@ -36,12 +36,12 @@ class TestBasicFunctions(unittest.TestCase):
         result = uri.chart_link('0', '1', '2', '3', '4')
         self.assertEqual(
             result,
-            '''<a href="/pattoo/web/chart/0?heading=2&device=1\
+            '''<a href="/pattoo/web/chart/0?heading=2&target=1\
 &secondsago=4">3</a>''')
         result = uri.chart_link('0', '1', '2')
         self.assertEqual(
             result,
-            '''<a href="/pattoo/web/chart/0?heading=2&device=1\
+            '''<a href="/pattoo/web/chart/0?heading=2&target=1\
 &secondsago=86400">Chart Data</a>''')
 
     def test_integerize_arg(self):

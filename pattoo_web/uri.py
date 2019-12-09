@@ -6,12 +6,12 @@ from pattoo_web.constants import DEFAULT_CHART_SIZE_SECONDS
 
 
 def chart_link(
-        idx_datapoint, device, heading, label='Chart Data', secondsago=None):
+        idx_datapoint, target, heading, label='Chart Data', secondsago=None):
     """Return customer cabinet data rows.
 
     Args:
         idx_datapoint: DataPoint index
-        device: Device being charted
+        target: Target being charted
         heading: Heading for chart
 
     Returns:
@@ -24,9 +24,9 @@ def chart_link(
 
     # Create link to charts
     link = ('''\
-<a href="{}/chart/{}?heading={}&device={}&secondsago={}">{}</a>\
+<a href="{}/chart/{}?heading={}&target={}&secondsago={}">{}</a>\
 '''.format(
-    PATTOO_WEB_SITE_PREFIX, idx_datapoint, heading, device, secondsago, label))
+    PATTOO_WEB_SITE_PREFIX, idx_datapoint, heading, target, secondsago, label))
 
     # Returns
     return link
