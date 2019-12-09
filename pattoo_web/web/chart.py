@@ -32,7 +32,7 @@ def route_chart(idx_datapoint):
     # Get heading for DataPoint
     args = {}
     args['heading'] = request.args.get('heading')
-    args['device'] = request.args.get('device')
+    args['target'] = request.args.get('target')
     secondsago = uri.integerize_arg(request.args.get('secondsago'))
 
     # Create URL args
@@ -42,14 +42,14 @@ def route_chart(idx_datapoint):
 
     # Get table to present
     table = chart.Table(
-        idx_datapoint, args['heading'], args['device'], secondsago)
+        idx_datapoint, args['heading'], args['target'], secondsago)
     html = table.html()
 
     return render_template(
         'chart.html',
         main_table=html,
         key=args['heading'],
-        device=args['device'])
+        target=args['target'])
 
 
 @PATTOO_WEB_CHART.route('/chart/<int:idx_datapoint>/data')

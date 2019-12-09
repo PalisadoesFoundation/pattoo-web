@@ -53,13 +53,13 @@ class Item(object):
 class Table(object):
     """Class for creating a chart table."""
 
-    def __init__(self, idx_datapoint, heading, device, secondsago):
+    def __init__(self, idx_datapoint, heading, target, secondsago):
         """Initialize the class.
 
         Args:
             idx_datapoint: DataPoint index
             heading: Heading for chart
-            device: Device being charted
+            target: Target being charted
             secondsago: Time in the past from which to plot the chart
 
         Returns:
@@ -69,7 +69,7 @@ class Table(object):
         # Initialize key variables
         self.idx_datapoint = idx_datapoint
         self.heading = heading
-        self.device = device
+        self.target = target
         self.secondsago = secondsago
 
     def html(self):
@@ -127,7 +127,7 @@ class Table(object):
         for label, secondsago in timeframes:
             link = uri.chart_link(
                 self.idx_datapoint,
-                self.device,
+                self.target,
                 self.heading,
                 label=label,
                 secondsago=secondsago)

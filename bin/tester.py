@@ -46,7 +46,7 @@ class ItemTable(Table):
     html_attrs = {'width': '100%', 'cellspacing': '0'}
 
     # Column labels
-    device = Col('Device')
+    target = Col('Target')
     key = Col('DataPoint')
     metadata = RawCol('Metadata')
     link = Col('Chart')
@@ -55,11 +55,11 @@ class ItemTable(Table):
 class Item(object):
     """Table row definition."""
 
-    def __init__(self, device, key, metadata, link):
+    def __init__(self, target, key, metadata, link):
         """Define row contents for table.
 
         Args:
-            device: Device name
+            target: Target name
             key: Key-value pair key
             metadata: Metadata of key
             link: Link to charted data
@@ -68,7 +68,7 @@ class Item(object):
             None
 
         """
-        self.device = device
+        self.target = target
         self.key = key
         self.metadata = metadata
         self.link = link
@@ -181,8 +181,8 @@ def process(data):
 
             if key == 'pattoo_key':
                 data_dict['key'] = value
-            elif key == 'pattoo_agent_polled_device':
-                data_dict['device'] = value
+            elif key == 'pattoo_agent_polled_target':
+                data_dict['target'] = value
             else:
                 meta_row.append('{}: {}'.format(key, value))
         data_dict['metadata'] = meta_row
@@ -210,7 +210,7 @@ def table(rows):
     # Assign
     for row in rows:
         result.append(dict(
-            device=row['device'],
+            target=row['target'],
             key=row['key'],
             metadata='<p>{}</p>'.format('</p><p>'.join(row['metadata'])),
             link='Link'

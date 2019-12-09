@@ -5,7 +5,6 @@
 from flask_table import Table, Col
 
 # Pattoo imports
-from pattoo_shared.constants import PATTOO_WEB_SITE_PREFIX
 from pattoo_web import uri
 
 
@@ -25,7 +24,7 @@ class ItemTable(Table):
     html_attrs = {'width': '100%', 'cellspacing': '0'}
 
     # Column labels
-    device = Col('Device')
+    target = Col('Target')
     key = Col('DataPoint')
     metadata = RawCol('Metadata')
     link = RawCol('Chart')
@@ -34,11 +33,11 @@ class ItemTable(Table):
 class Item(object):
     """Table row definition."""
 
-    def __init__(self, device, key, metadata, link):
+    def __init__(self, target, key, metadata, link):
         """Define row contents for table.
 
         Args:
-            device: Device name
+            target: Target name
             key: Key-value pair key
             metadata: Metadata of key
             link: Link to charted data
@@ -47,7 +46,7 @@ class Item(object):
             None
 
         """
-        self.device = device
+        self.target = target
         self.key = key
         self.metadata = metadata
         self.link = link
@@ -106,8 +105,8 @@ def _process_api_data(data):
 
             if key == 'pattoo_key':
                 data_dict['key'] = value
-            elif key == 'pattoo_agent_polled_device':
-                data_dict['device'] = value
+            elif key == 'pattoo_agent_polled_target':
+                data_dict['target'] = value
             else:
                 meta_row.append('{}: {}'.format(key, value))
         data_dict['metadata'] = meta_row
@@ -136,15 +135,15 @@ def _flask_table_rows(rows):
     for row in rows:
         # Get the key being referenced
         heading = row['key'].split(':')[0]
-        device = row['device']
+        target = row['target']
         metadata = row['metadata']
 
         # Create link to charts
-        link = uri.chart_link(row['idx_datapoint'], device, heading)
+        link = uri.chart_link(row['idx_datapoint'], target, heading)
 
         # Create new HTML row
         result.append(dict(
-            device=device,
+            target=target,
             key=row['key'],
             metadata='<p>{}</p>'.format('</p><p>'.join(metadata)),
             link=link
