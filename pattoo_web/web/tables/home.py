@@ -145,7 +145,7 @@ def _flask_table_rows(rows):
         result.append(dict(
             target=target,
             key=row['key'],
-            metadata='<p>{}</p>'.format('</p><p>'.join(metadata)),
+            metadata='<p>{}</p>'.format('<br>'.join(metadata)),
             link=link
             ))
     return result
