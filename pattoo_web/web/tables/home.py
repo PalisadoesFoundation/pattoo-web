@@ -12,6 +12,7 @@ class RawCol(Col):
     """Class to output whatever it is given without escaping."""
 
     def td_format(self, content):
+        """Override td_format."""
         return content
 
 
