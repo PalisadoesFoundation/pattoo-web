@@ -94,6 +94,7 @@ def _process_api_data(data):
         # Extract the metadata
         metadata = datapoint['node']['glueDatapoint']['edges']
         data_dict = {'idx_datapoint': idx_datapoint}
+        data_dict['target'] = datapoint['node']['agent']['agentPolledTarget']
         for item in metadata:
             key = item['node']['pair']['key']
             value = item['node']['pair']['value']
@@ -106,8 +107,6 @@ def _process_api_data(data):
 
             if key == 'pattoo_key':
                 data_dict['key'] = value
-            elif key == 'pattoo_agent_polled_target':
-                data_dict['target'] = value
             else:
                 meta_row.append('{}: {}'.format(key, value))
         data_dict['metadata'] = meta_row
