@@ -35,6 +35,9 @@ def route_data():
     edges {
       node {
         idxDatapoint
+        agent{
+          agentPolledTarget
+        }
         glueDatapoint {
           edges {
             node {
@@ -49,6 +52,7 @@ def route_data():
     }
   }
 }
+
 """
     # Get the data from the GraphQL API
     url = config.web_api_server_url()
