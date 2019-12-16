@@ -5,14 +5,11 @@ from pattoo_shared.constants import PATTOO_WEB_SITE_PREFIX
 from pattoo_web.constants import DEFAULT_CHART_SIZE_SECONDS
 
 
-def chart_link(
-        idx_datapoint, target, heading, label='Chart Data', secondsago=None):
+def chart_link(_id, label='Chart Data', secondsago=None):
     """Return customer cabinet data rows.
 
     Args:
-        idx_datapoint: DataPoint index
-        target: Target being charted
-        heading: Heading for chart
+        _id: GraphQL ID for the datapoint
 
     Returns:
         links: <a> links for various cabinet timeframes
@@ -24,9 +21,8 @@ def chart_link(
 
     # Create link to charts
     link = ('''\
-<a href="{}/chart/{}?heading={}&target={}&secondsago={}">{}</a>\
-'''.format(
-    PATTOO_WEB_SITE_PREFIX, idx_datapoint, heading, target, secondsago, label))
+<a href="{}/chart/datapoint/{}&secondsago={}">{}</a>\
+'''.format(PATTOO_WEB_SITE_PREFIX, _id, secondsago, label))
 
     # Returns
     return link

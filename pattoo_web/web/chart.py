@@ -12,44 +12,67 @@ from pattoo_shared import log
 from pattoo_web.configuration import Config
 from pattoo_web.web.tables import chart
 from pattoo_web import uri
+from pattoo_web.phttp import get
 from pattoo_web.constants import SECONDS_IN_DAY
+from pattoo_web.web.query.datapoint import DataPoint
 
 # Define the various global variables
 PATTOO_WEB_CHART = Blueprint('PATTOO_WEB_CHART', __name__)
 
 
-@PATTOO_WEB_CHART.route('/chart/<int:idx_datapoint>')
-def route_chart(idx_datapoint):
+@PATTOO_WEB_CHART.route('/chart/datapoint/<identifier>')
+def route_chart(identifier):
     """Provide data from the Data table.
 
     Args:
-        idx_datapoint: Datapoint index value to chart
+        identifier: GraphQL identifier for the datapoint
 
     Returns:
         None
 
     """
     # Get heading for DataPoint
-    args = {}
-    args['heading'] = request.args.get('heading')
-    args['target'] = request.args.get('target')
     secondsago = uri.integerize_arg(request.args.get('secondsago'))
+    query = '''\
+{
+  datapoint(id: "IDENTIFIER") {
+    id
+    idxDatapoint
+    agent {
+      agentPolledTarget
+      agentGroup {
+        pairXlateGroup {
+          idxPairXlateGroup
+        }
+      }
+    }
+    glueDatapoint {
+      edges {
+        node {
+          pair {
+            key
+            value
+          }
+        }
+      }
+    }
+  }
+}
+'''.replace('IDENTIFIER', identifier)
 
-    # Create URL args
-    for key, value in args.items():
-        if bool(value) is False:
-            args[key] = 'Unknown {}'.format(key)
+    # Get data from API server
+    data = get(query)
+    datapoint = DataPoint(data)
 
     # Get table to present
-    table = chart.Table(
-        idx_datapoint, args['heading'], args['target'], secondsago)
+    table = chart.Table(datapoint, secondsago)
     html = table.html()
 
     return render_template(
         'chart.html',
         main_table=html,
-        key=args['heading'],
-        target=args['target'])
+        key=datapoint.pattoo_key(),
+        target=datapoint.agent_polled_target())
 
 
 @PATTOO_WEB_CHART.route('/chart/<int:idx_datapoint>/data')
