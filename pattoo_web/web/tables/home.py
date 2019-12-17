@@ -6,6 +6,12 @@ from flask_table import Table, Col
 
 # Pattoo imports
 from pattoo_web import uri
+from pattoo_web.configuration import Config
+from pattoo_web.web.query.datapoint import DataPoints
+from pattoo_web.web.query.pair_xlate import PairXlates
+from pattoo_web.phttp import get
+from pattoo_web.translate import KeyPair
+from pattoo_shared import log
 
 
 class RawCol(Col):
@@ -64,61 +70,11 @@ def table(data):
 
     """
     # Process API data
-    rows = _process_api_data(data)
-    html = ItemTable(_flask_table_rows(rows))
+    html = ItemTable(_flask_table_rows(data))
     return html.__html__()
 
 
-def _process_api_data(data):
-    """Process GraphQL data for parsing to tables.
-
-    Args:
-        data: GraphQL dict
-
-    Returns:
-        rows: List of dicts of data to present
-
-    """
-    # Initialize key variables
-    rows = []
-
-    # Extract each datapoint
-    datapoints = data['data']['allDatapoints']['edges']
-    for datapoint in datapoints:
-        # Initialize loop variables
-        meta_row = []
-
-        # Get the idx_datapoint
-        idx_datapoint = datapoint['node']['idxDatapoint']
-
-        # Extract the metadata
-        metadata = datapoint['node']['glueDatapoint']['edges']
-        data_dict = {'idx_datapoint': idx_datapoint}
-        data_dict['target'] = datapoint['node']['agent']['agentPolledTarget']
-        for item in metadata:
-            key = item['node']['pair']['key']
-            value = item['node']['pair']['value']
-
-            # Skip entries that will clutter the output
-            if key in [
-                    'pattoo_agent_hostname', 'pattoo_agent_id',
-                    'pattoo_agent_id', 'pattoo_agent_program']:
-                continue
-
-            if key == 'pattoo_key':
-                data_dict['key'] = value
-            else:
-                meta_row.append('{}: {}'.format(key, value))
-        data_dict['metadata'] = meta_row
-
-        # Convert to list of tuples
-        rows.append(data_dict)
-
-    # Print
-    return rows
-
-
-def _flask_table_rows(rows):
+def _flask_table_rows(data):
     """Create HTML table from data.
 
     Args:
@@ -130,21 +86,57 @@ def _flask_table_rows(rows):
     """
     # Initialize key varialbes
     result = []
+    query = '''\
+{
+  allPairXlateGroup {
+    edges {
+      node {
+        idxPairXlateGroup
+        pairXlatePairXlateGroup {
+          edges {
+            node {
+              key
+              description
+              language {
+                code
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
-    # Assign
-    for row in rows:
-        # Get the key being referenced
-        heading = row['key'].split(':')[0]
-        target = row['target']
-        metadata = row['metadata']
+'''
+    # Get translations from API server
+    query_result = get(query)
+    translate = KeyPair(PairXlates(query_result).datapoints())
+
+    # Process the DataPoints
+    datapoints = DataPoints(data)
+    for datapoint in datapoints.datapoints():
+        _id = datapoint.id()
+        target = datapoint.agent_polled_target()
+        key = datapoint.pattoo_key()
+
+        # Get key_value_pairs and translate if possible
+        idx_pair_xlate_group = datapoint.idx_pair_xlate_group()
+        key_value_pairs = datapoint.key_value_pairs()
+        metadata = ['''\
+{}: {}'''.format(translate.key(
+    key, idx_pair_xlate_group), value) for key, value in key_value_pairs]
+
+        # Translate the key too
+        translated_key = translate.key(key, idx_pair_xlate_group)
 
         # Create link to charts
-        link = uri.chart_link(row['idx_datapoint'], target, heading)
+        link = uri.chart_link(_id)
 
         # Create new HTML row
         result.append(dict(
             target=target,
-            key=row['key'],
+            key=translated_key,
             metadata='<p>{}</p>'.format('<br>'.join(metadata)),
             link=link
             ))

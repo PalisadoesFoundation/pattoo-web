@@ -2,7 +2,8 @@
 """Create homepage table."""
 
 # PIP libraries
-from flask_table import Table, Col
+from flask_table import Table as _Table
+from flask_table import Col
 
 # Pattoo imports
 from pattoo_shared.constants import PATTOO_WEB_SITE_PREFIX
@@ -19,7 +20,7 @@ class RawCol(Col):
         return content
 
 
-class ItemTable(Table):
+class ItemTable(_Table):
     """Table definition."""
 
     # Add attributes
@@ -53,13 +54,11 @@ class Item(object):
 class Table(object):
     """Class for creating a chart table."""
 
-    def __init__(self, idx_datapoint, heading, target, secondsago):
+    def __init__(self, datapoint, secondsago):
         """Initialize the class.
 
         Args:
-            idx_datapoint: DataPoint index
-            heading: Heading for chart
-            target: Target being charted
+            datapoint: DataPoint object
             secondsago: Time in the past from which to plot the chart
 
         Returns:
@@ -67,10 +66,8 @@ class Table(object):
 
         """
         # Initialize key variables
-        self.idx_datapoint = idx_datapoint
-        self.heading = heading
-        self.target = target
-        self.secondsago = secondsago
+        self._datapoint = datapoint
+        self._secondsago = secondsago
 
     def html(self):
         """Create HTML table from data.
@@ -84,13 +81,14 @@ class Table(object):
         """
         # Initialize chart varialbes
         result = []
+        idx_datapoint = self._datapoint.idx_datapoint()
         restful_api_url = ('''{}/chart/{}/data?secondsago={}\
-'''.format(PATTOO_WEB_SITE_PREFIX, self.idx_datapoint, self.secondsago))
+'''.format(PATTOO_WEB_SITE_PREFIX, idx_datapoint, self._secondsago))
         chart = ('''\
-    <div id="pattoo_simple_line_chart"></div>
-    <script type="text/javascript">
-      SimpleLineChart("{}", "{}");
-    </script>'''.format(restful_api_url, self.heading))
+<div id="pattoo_simple_line_chart"></div>
+<script type="text/javascript">
+  SimpleLineChart("{}", "{}");
+</script>'''.format(restful_api_url, self._datapoint.agent_polled_target()))
         timeframe = self._timeframe_links()
 
         # Create new HTML row
@@ -126,9 +124,7 @@ class Table(object):
         # Create links
         for label, secondsago in timeframes:
             link = uri.chart_link(
-                self.idx_datapoint,
-                self.target,
-                self.heading,
+                self._datapoint.id(),
                 label=label,
                 secondsago=secondsago)
             result = '{}\n<p>{}</p>\n'.format(result, link)
