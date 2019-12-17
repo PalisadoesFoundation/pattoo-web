@@ -21,7 +21,7 @@ def chart_link(_id, label='Chart Data', secondsago=None):
 
     # Create link to charts
     link = ('''\
-<a href="{}/chart/datapoint/{}&secondsago={}">{}</a>\
+<a href="{}/chart/datapoint/{}?secondsago={}">{}</a>\
 '''.format(PATTOO_WEB_SITE_PREFIX, _id, secondsago, label))
 
     # Returns
