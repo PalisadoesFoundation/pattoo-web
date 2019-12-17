@@ -33,16 +33,15 @@ class TestBasicFunctions(unittest.TestCase):
     def test_chart_link(self):
         """Testing method / function chart_link."""
         # Test
-        result = uri.chart_link('0', '1', '2', '3', '4')
+        result = uri.chart_link('0', '3', '4')
         self.assertEqual(
             result,
-            '''<a href="/pattoo/web/chart/0?heading=2&target=1\
-&secondsago=4">3</a>''')
-        result = uri.chart_link('0', '1', '2')
+            '''<a href="/pattoo/web/chart/datapoint/0?secondsago=4">3</a>''')
+        result = uri.chart_link('0')
         self.assertEqual(
             result,
-            '''<a href="/pattoo/web/chart/0?heading=2&target=1\
-&secondsago=86400">Chart Data</a>''')
+            '''<a href="/pattoo/web/chart/datapoint/0?\
+secondsago=86400">Chart Data</a>''')
 
     def test_integerize_arg(self):
         """Testing method / function integerize_arg."""
