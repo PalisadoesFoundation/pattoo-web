@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Pattoo classes that manage GraphQL datapoint related queries."""
 
+from pattoo_web.phttp import get
+
 
 class DataPoints(object):
     """Class to process the results of the GraphQL query below.
@@ -16,6 +18,7 @@ class DataPoints(object):
               agentGroup {
                 pairXlateGroup {
                   idxPairXlateGroup
+                  id
                 }
               }
             }
@@ -47,7 +50,11 @@ class DataPoints(object):
 
         """
         # Initialize the class
-        self._nodes = data['data']['allDatapoints']['edges']
+        if bool(data) is True:
+            self._nodes = data['data']['allDatapoints']['edges']
+        else:
+            self._nodes = []
+        self.valid = bool(self._nodes)
 
     def datapoints(self):
         """Return a list of DataPoint objects.
@@ -78,6 +85,7 @@ class DataPoint(object):
           agentGroup {
             pairXlateGroup {
               idxPairXlateGroup
+              id
             }
           }
         }
@@ -115,9 +123,11 @@ class DataPoint(object):
             # Result of 'datapoint' GraphQL query
             data = _data.get('node')
 
-        self._nodes = data['glueDatapoint']['edges']
-        self._datapoint = data
-        self._kvps = self._key_value_pairs()
+        self.valid = bool(data)
+        if self.valid is True:
+            self._nodes = data['glueDatapoint']['edges']
+            self._datapoint = data
+            self._kvps = self._key_value_pairs()
 
     def id(self):
         """Get GraphQL query datapoint 'id'.
@@ -172,6 +182,20 @@ class DataPoint(object):
             'agent']['agentGroup']['pairXlateGroup'].get('idxPairXlateGroup')
         return result
 
+    def id_pair_xlate_group(self):
+        """Get GraphQL query datapoint 'idxPairXlateGroup:id'.
+
+        Args:
+            None
+
+        Returns:
+            result: 'idxPairXlateGroup:id' value
+
+        """
+        result = self._datapoint[
+            'agent']['agentGroup']['pairXlateGroup'].get('id')
+        return result
+
     def pattoo_key(self):
         """Get the pattoo_key.
 
@@ -219,3 +243,96 @@ class DataPoint(object):
             value = node['node']['pair'].get('value')
             result[key] = value
         return result
+
+
+def datapoints():
+    """Get DataPoints entry for all database datapoints.
+
+    Args:
+        None
+
+    Returns:
+        result: DataPoints object
+
+    """
+    # Initialize key variables
+    query = """\
+{
+  allDatapoints {
+    edges {
+      node {
+        id
+        idxDatapoint
+        agent {
+          agentPolledTarget
+          agentGroup {
+            pairXlateGroup {
+              idxPairXlateGroup
+            }
+          }
+        }
+        glueDatapoint {
+          edges {
+            node {
+              pair {
+                key
+                value
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+"""
+
+    # Get data from API server
+    data = get(query)
+    result = DataPoints(data)
+    return result
+
+
+def datapoint(graphql_id):
+    """Get translations for the GraphQL ID of a id_pair_xlate_group.
+
+    Args:
+        graphql_id: GraphQL ID
+
+    Returns:
+        result: DataPoint object
+
+    """
+    # Initialize key variables
+    query = '''\
+{
+  datapoint(id: "IDENTIFIER") {
+    id
+    idxDatapoint
+    agent {
+      agentPolledTarget
+      agentGroup {
+        pairXlateGroup {
+          idxPairXlateGroup
+          id
+        }
+      }
+    }
+    glueDatapoint {
+      edges {
+        node {
+          pair {
+            key
+            value
+          }
+        }
+      }
+    }
+  }
+}
+'''.replace('IDENTIFIER', graphql_id)
+
+    # Get data from API server
+    data = get(query)
+    result = DataPoint(data)
+    return result

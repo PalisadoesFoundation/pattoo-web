@@ -4,7 +4,7 @@
 import sys
 
 # PIP libraries
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, abort
 import requests
 
 # Pattoo imports
@@ -12,9 +12,10 @@ from pattoo_shared import log
 from pattoo_web.configuration import Config
 from pattoo_web.web.tables import chart
 from pattoo_web import uri
-from pattoo_web.phttp import get
 from pattoo_web.constants import SECONDS_IN_DAY
-from pattoo_web.web.query.datapoint import DataPoint
+from pattoo_web.web.query.pair_xlate import translation
+from pattoo_web.web.query.datapoint import datapoint
+
 
 # Define the various global variables
 PATTOO_WEB_CHART = Blueprint('PATTOO_WEB_CHART', __name__)
@@ -33,46 +34,30 @@ def route_chart(identifier):
     """
     # Get heading for DataPoint
     secondsago = uri.integerize_arg(request.args.get('secondsago'))
-    query = '''\
-{
-  datapoint(id: "IDENTIFIER") {
-    id
-    idxDatapoint
-    agent {
-      agentPolledTarget
-      agentGroup {
-        pairXlateGroup {
-          idxPairXlateGroup
-        }
-      }
-    }
-    glueDatapoint {
-      edges {
-        node {
-          pair {
-            key
-            value
-          }
-        }
-      }
-    }
-  }
-}
-'''.replace('IDENTIFIER', identifier)
 
     # Get data from API server
-    data = get(query)
-    datapoint = DataPoint(data)
+    point = datapoint(identifier)
 
-    # Get table to present
-    table = chart.Table(datapoint, secondsago)
-    html = table.html()
+    if point.valid is True:
+        # Get translations from API server
+        translate = translation(point.id_pair_xlate_group())
 
-    return render_template(
-        'chart.html',
-        main_table=html,
-        key=datapoint.pattoo_key(),
-        target=datapoint.agent_polled_target())
+        # Translate key
+        pattoo_key = translate.key(
+            point.pattoo_key(), point.idx_pair_xlate_group())
+
+        # Get table to present
+        table = chart.Table(point, secondsago)
+        html = table.html()
+
+        return render_template(
+            'chart.html',
+            main_table=html,
+            key=pattoo_key,
+            target=point.agent_polled_target())
+
+    # Otherwise abort
+    abort(404)
 
 
 @PATTOO_WEB_CHART.route('/chart/<int:idx_datapoint>/data')
