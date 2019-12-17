@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Pattoo classes that manage GraphQL datapoint related queries."""
 
-from collections import defaultdict
 from pattoo_web.configuration import Config
+from pattoo_web.translate import KeyPair
+from pattoo_web.phttp import get
 
 
 class PairXlates(object):
@@ -75,6 +76,9 @@ class PairXlate(object):
             node {
               key
               description
+              language {
+                code
+              }
             }
           }
         }
@@ -154,3 +158,79 @@ class PairXlate(object):
                 continue
             result[key] = value
         return result
+
+
+def translations():
+    """Get translations for all id_pair_xlate_group GraphQL IDs.
+
+    Args:
+        None
+
+    Returns:
+        result: KeyPair object
+
+    """
+    # Initialize key variables
+    query = '''\
+{
+  allPairXlateGroup {
+    edges {
+      node {
+        idxPairXlateGroup
+        pairXlatePairXlateGroup {
+          edges {
+            node {
+              key
+              description
+              language {
+                code
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+'''
+    # Get translations from API server
+    query_result = get(query)
+    result = KeyPair(PairXlates(query_result).datapoints())
+    return result
+
+
+def translation(graphql_id):
+    """Get translations for the GraphQL ID of a id_pair_xlate_group.
+
+    Args:
+        None
+
+    Returns:
+        result: KeyPair object
+
+    """
+    # Initialize key variables
+    xlate_query = '''\
+{
+  pairXlateGroup(id: "IDENTIFIER") {
+    idxPairXlateGroup
+    pairXlatePairXlateGroup {
+      edges {
+        node {
+          key
+          description
+            language {
+              code
+            }
+        }
+      }
+    }
+  }
+}
+'''.replace('IDENTIFIER', graphql_id)
+
+    # Get data from API server
+    xlate_data = get(xlate_query)
+    result = KeyPair([PairXlate(xlate_data)])
+    return result

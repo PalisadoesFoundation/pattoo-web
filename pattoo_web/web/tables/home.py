@@ -8,7 +8,7 @@ from flask_table import Table, Col
 from pattoo_web import uri
 from pattoo_web.configuration import Config
 from pattoo_web.web.query.datapoint import DataPoints
-from pattoo_web.web.query.pair_xlate import PairXlates
+from pattoo_web.web.query.pair_xlate import translations
 from pattoo_web.phttp import get
 from pattoo_web.translate import KeyPair
 from pattoo_shared import log
@@ -59,26 +59,26 @@ class Item(object):
         self.link = link
 
 
-def table(data):
+def table(datapoints):
     """Process GraphQL data for parsing to tables.
 
     Args:
-        data: GraphQL dict
+        datapoints: GraphQL query DataPoints object
 
     Returns:
         html: FlaskTable Table object
 
     """
     # Process API data
-    html = ItemTable(_flask_table_rows(data))
+    html = ItemTable(_flask_table_rows(datapoints))
     return html.__html__()
 
 
-def _flask_table_rows(data):
+def _flask_table_rows(datapoints):
     """Create HTML table from data.
 
     Args:
-        rows: List of dicts to put in HTML form
+        datapoints: GraphQL query DataPoints object
 
     Returns:
         result: List of FlaskTable table row objects
@@ -86,35 +86,11 @@ def _flask_table_rows(data):
     """
     # Initialize key varialbes
     result = []
-    query = '''\
-{
-  allPairXlateGroup {
-    edges {
-      node {
-        idxPairXlateGroup
-        pairXlatePairXlateGroup {
-          edges {
-            node {
-              key
-              description
-              language {
-                code
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
 
-'''
     # Get translations from API server
-    query_result = get(query)
-    translate = KeyPair(PairXlates(query_result).datapoints())
+    translate = translations()
 
     # Process the DataPoints
-    datapoints = DataPoints(data)
     for datapoint in datapoints.datapoints():
         _id = datapoint.id()
         target = datapoint.agent_polled_target()

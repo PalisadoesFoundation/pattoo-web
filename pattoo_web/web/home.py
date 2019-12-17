@@ -4,8 +4,8 @@
 from flask import Blueprint, render_template, abort
 
 # Pattoo imports
-from pattoo_web.phttp import get
 from pattoo_web.web.tables import home
+from pattoo_web.web.query.datapoint import datapoints
 
 # Define the various global variables
 PATTOO_WEB_HOME = Blueprint('PATTOO_WEB_HOME', __name__)
@@ -22,45 +22,13 @@ def route_data():
         None
 
     """
-    # Initialize key variables
-    query = """\
-{
-  allDatapoints {
-    edges {
-      node {
-        id
-        idxDatapoint
-        agent {
-          agentPolledTarget
-          agentGroup {
-            pairXlateGroup {
-              idxPairXlateGroup
-            }
-          }
-        }
-        glueDatapoint {
-          edges {
-            node {
-              pair {
-                key
-                value
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-"""
-
     # Get data from API server
-    data = get(query)
+    points = datapoints()
 
     # Process the data
-    if data is not None:
+    if points.valid is True:
         # Initialize key variables
-        table = home.table(data)
+        table = home.table(points)
         return render_template('home.html', main_table=table)
 
     # Otherwise abort
