@@ -5,34 +5,34 @@
 class DataPoints(object):
     """Class to process the results of the GraphQL query below.
 
-        {
-          allDatapoints {
-            edges {
-              node {
-                id
-                idxDatapoint
-                agent {
-                  agentPolledTarget
-                  agentGroup {
-                    pairXlateGroup {
-                      idxPairXlateGroup
-                    }
-                  }
+    {
+      allDatapoints {
+        edges {
+          node {
+            id
+            idxDatapoint
+            agent {
+              agentPolledTarget
+              agentGroup {
+                pairXlateGroup {
+                  idxPairXlateGroup
                 }
-                glueDatapoint {
-                  edges {
-                    node {
-                      pair {
-                        key
-                        value
-                      }
-                    }
+              }
+            }
+            glueDatapoint {
+              edges {
+                node {
+                  pair {
+                    key
+                    value
                   }
                 }
               }
             }
           }
         }
+      }
+    }
 
     """
 
@@ -69,31 +69,30 @@ class DataPoints(object):
 class DataPoint(object):
     """Class to process the results of the GraphQL query below.
 
-        {
-          datapoint(id: "XXXXXXXXXXXXXXXX") {
-            id
-            idxDatapoint
-            agent {
-              agentPolledTarget
-              agentGroup {
-                pairXlateGroup {
-                  idxPairXlateGroup
-                }
-              }
+    {
+      datapoint(id: "XXXXXXXXXXXXXXXX") {
+        id
+        idxDatapoint
+        agent {
+          agentPolledTarget
+          agentGroup {
+            pairXlateGroup {
+              idxPairXlateGroup
             }
-            glueDatapoint {
-              edges {
-                node {
-                  pair {
-                    key
-                    value
-                  }
-                }
+          }
+        }
+        glueDatapoint {
+          edges {
+            node {
+              pair {
+                key
+                value
               }
             }
           }
         }
-
+      }
+    }
 
     """
 
@@ -170,7 +169,7 @@ class DataPoint(object):
 
         """
         result = self._datapoint[
-            'agentGroup']['pairXlateGroup'].get('idxPairXlateGroup')
+            'agent']['agentGroup']['pairXlateGroup'].get('idxPairXlateGroup')
         return result
 
     def pattoo_key(self):
