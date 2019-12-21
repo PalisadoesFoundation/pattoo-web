@@ -16,7 +16,7 @@ Below is the workflow for having your contribution accepted into the ``pattoo-we
 #. Run ``make setup`` to install dependencies to virtualenv (information about virtualenv found further below in this doc)
 #. Add the original project as a remote (git remote add upstream https://github.com/PalisadoesFoundation/pattoo-web, check with: git remote -v)
 #. Create a topic branch for your change (git checkout -b ``BranchName``\ )
-#. you may create additional branches if modifying multiple parts of the code
+#. You may create additional branches if modifying multiple parts of the code
 #. Write code and Commit your changes locally. Example proper git commit message below:
 
 .. code-block::
