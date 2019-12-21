@@ -2,9 +2,13 @@ How To Contribute
 =================
 
 PLACEHOLDER THIS DOES NOT WORK YET
+
 PLACEHOLDER THIS DOES NOT WORK YET
+
 PLACEHOLDER THIS DOES NOT WORK YET
+
 PLACEHOLDER THIS DOES NOT WORK YET
+
 PLACEHOLDER THIS DOES NOT WORK YET
 
 Below is the workflow for having your contribution accepted into the ``pattoo-web`` repository.
