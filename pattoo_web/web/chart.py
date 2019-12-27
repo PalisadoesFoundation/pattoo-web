@@ -50,10 +50,14 @@ def route_chart(identifier):
         table = chart.Table(point, secondsago)
         html = table.html()
 
+        # Get footer
+        footer = _footer(point)
+
         return render_template(
             'chart.html',
             main_table=html,
             key=pattoo_key,
+            footer=footer,
             target=point.agent_polled_target())
 
     # Otherwise abort
@@ -114,3 +118,30 @@ HTTP {} error for receiving data from server {}\
     if success is True:
         data = result.json()
     return jsonify(data)
+
+
+def _footer(point):
+    """Create a footer to use for the chart.
+
+    Args:
+        point: DataPoint object
+
+    Returns:
+        result: Footer
+
+    """
+    # Initialize key variables
+    translate = translation(point.id_pair_xlate_group())
+    kvps = point.key_value_pairs()
+    index = point.idx_pair_xlate_group()
+    result = ''
+
+    # Process
+    for (key, value) in kvps:
+        # Translate key
+        description = translate.key(key, index)
+        result = '{}{}: {}<br>'.format(result, description, value)
+
+    # Return
+    result = '<p>{}</p>'.format(result)
+    return result
