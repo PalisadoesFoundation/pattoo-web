@@ -14,7 +14,7 @@ You must set the location of the configuration directory by using the ``PATTOO_C
 
 ``pattoo`` will read any ``.yaml`` files found in this directory for configuration parameters.
 
-Beginners should use a single file. For the purposes of this document we will assume this file is called ``etc/config.yaml``.
+Beginners should use a single file. For the purposes of this document we will assume this file is called ``etc/pattoo.yaml``.
 
 Make sure that files in this directory are editable by the user that will be running ``pattoo`` daemons.
 
@@ -25,17 +25,17 @@ Copy the template file in the ``examples/etc`` directory to the ``PATTOO_CONFIGD
 
 .. code-block:: bash
 
-    $ cp examples/etc/config.yaml.template \
-      /path/to/configuration/directory/config.yaml
+    $ cp examples/etc/pattoo.yaml.template \
+      /path/to/configuration/directory/pattoo.yaml
 
-The next step is to edit the contents of ``config.yaml``
+The next step is to edit the contents of ``pattoo.yaml``
 
 Edit Your Configuration
 -----------------------
 
 Take some time to read up on ``YAML`` formatted files if you are not familiar with them. A background knowledge is always helpful.
 
-The ``config.yaml`` file created from the template will have sections that you will need to edit with custom values. Don't worry, these sections are easily identifiable as they all start with ``PATTOO_``
+The ``pattoo.yaml`` file created from the template will have sections that you will need to edit with custom values. Don't worry, these sections are easily identifiable as they all start with ``PATTOO_``
 
 **NOTE:** The indentations in the YAML configuration are important. Make sure indentations line up. Dashes '-' indicate one item in a list of items (if applicable).
 
