@@ -4,7 +4,6 @@
 # Main python libraries
 import sys
 import os
-import locale
 import subprocess
 import traceback
 
