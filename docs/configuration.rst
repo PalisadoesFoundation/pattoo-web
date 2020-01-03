@@ -12,11 +12,9 @@ You must set the location of the configuration directory by using the ``PATTOO_C
 
     $ export PATTOO_CONFIGDIR=/path/to/configuration/directory
 
-``pattoo`` will read any ``.yaml`` files found in this directory for configuration parameters.
+``pattoo`` will only read the configuration placed in a file named ``pattoo.yaml`` in this directory.
 
-Beginners should use a single file. For the purposes of this document we will assume this file is called ``etc/pattoo.yaml``.
-
-Make sure that files in this directory are editable by the user that will be running ``pattoo`` daemons.
+Make sure that files in this directory are readable by the user that will be running ``pattoo`` daemons or scripts.
 
 Copy the Template to Your Configuration Directory
 -------------------------------------------------
@@ -101,11 +99,3 @@ This table outlines the purpose of each configuration parameter.
    * -
      - ``ip_bind_port``
      - The TCP port that the ``pattoo`` server is using to provide data for ``pattoo-web``.
-
-
-Notes
------
-
-Here are some additional tips.
-
-#. You can create a separate configuration file for each section. If you are doing this, make sure there is only one file per agent section. Keep the mandtatory configurations sections in a separate file for simplicity. Practice on a test system before doing this. *Start with a single file first to gain confidence.*
