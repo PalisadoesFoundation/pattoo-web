@@ -41,7 +41,7 @@ class UnittestConfig(object):
             os.makedirs(self._config_directory, mode=0o750, exist_ok=True)
 
         self._config = {
-            'main': {
+            'pattoo': {
                 'log_directory': self._log_directory,
                 'log_level': 'debug',
                 'cache_directory': self._cache_directory,
