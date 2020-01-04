@@ -9,27 +9,48 @@ Installation
 
 Follow these steps.
 
-#. Make sure you have a fully configured ``pattoo`` server as this is a ``pattoo-web`` pre-requisite.
-#. Install `git` on your system.
-#. Select the parent directory in which you want to install `pattoo`
-#. Clone the repository to the parent directory using the `git clone` command. You can also choose to download and unzip the file in the parent directory. The repository can be found at: https://github.com/PalisadoesFoundation/pattoo
-#. Enter the directory with the `pattoo` files.
-#. Install the required packages using the ``pip_requirements`` document in the `pattoo` root directory
+#. Make sure you have a fully configured ```pattoo``` server as this is a ``pattoo-web`` pre-requisite.
+
+Follow these steps.
+
+#. Install ``git`` on your system.
+#. Select and create the parent directory in which you want to install ``pattoo-web``.
+
+    .. code-block:: bash
+
+       $ mkdir -p /installation/parent/directory
+       $ cd /installation/parent/directory
+
+#. Clone the repository to the parent directory using the ``git clone`` command. You can also choose to downloading and unzip the file in the parent directory. The repository can be found at: https://github.com/PalisadoesFoundation/pattoo-web
+
+    .. code-block:: bash
+
+       $ mkdir -p /installation/parent/directory
+       $ cd /installation/parent/directory
+       $ git clone https://github.com/PalisadoesFoundation/pattoo-web.git
+
+#. Enter the ``/installation/parent/directory/pattoo-web`` directory with the ``pattoo-web`` files.
+#. Install the required packages using the ``pip_requirements`` document in the ``pattoo-web`` root directory
+
+   .. code-block:: bash
+
+      $ pip3 install -r pip_requirements.txt
+
 #. Run the installation script
 
    .. code-block:: bash
 
       $ sudo setup/install.py
 
-#. Start the ``bin/pattoo_webd.py`` daemon to accept data sent by `pattoo` agents. :doc:`configuration`
+#. Start the ``bin/pattoo_webd.py`` daemon to accept data sent by ``pattoo-agents``. :doc:`configuration`
 
 
 Configuring Agents as systemd Daemons
 -------------------------------------
 
-You can also setup all the ``patoo`` daemons as system daemons by executing the ``setup/systemd/bin/install_systemd.py`` script.
+You can also setup all the ``pattoo-web`` daemons as system daemons by executing the ``setup/systemd/bin/install_systemd.py`` script.
 
-The script requires you to specify the following parameters. Make sure you have a username and group created for running your ``patoo`` services.
+The script requires you to specify the following parameters. Make sure you have a username and group created for running your ``pattoo-web`` services.
 
 .. code-block:: bash
 

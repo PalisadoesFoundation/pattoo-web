@@ -24,3 +24,4 @@ General information about the project, including the the prerequisite steps to g
    introduction
    installation
    configuration
+   cron
