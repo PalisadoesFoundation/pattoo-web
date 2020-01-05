@@ -19,7 +19,7 @@ else:
 
 
 # Pattoo imports
-from pattoo_shared import files
+from pattoo_shared import files, configuration
 from pattoo_shared import log
 
 
@@ -40,10 +40,11 @@ def check():
     print('??: Checking configuration parameters.')
 
     # Check config
-    config = files.read_yaml_files(config_directory)
+    config_file = configuration.agent_config_filename('pattoo')
+    config = files.read_yaml_file(config_file)
 
     # Check main keys
-    keys = ['pattoo', 'pattoo_webd']
+    keys = ['pattoo', 'pattoo_webd', 'pattoo_web_api']
     for key in keys:
         if key not in config:
             log_message = ('''\
@@ -59,7 +60,7 @@ Section "{}" not found in configuration file in directory {}. Please fix.\
     secondaries = ['ip_listen_address', 'ip_bind_port']
     secondary_key_check(config, 'pattoo_webd', secondaries)
     secondaries = ['ip_address', 'ip_bind_port']
-    secondary_key_check(config, 'pattoo', secondaries)
+    secondary_key_check(config, 'pattoo_web_api', secondaries)
 
     # Print Status
     print('OK: Configuration parameter check passed.')
