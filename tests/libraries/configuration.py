@@ -64,12 +64,15 @@ class UnittestConfig(object):
             self.config_directory: Directory where the config is placed
 
         """
-        # Initialize key variables
-        config_file = '{}/pattoo.yaml'.format(self._config_directory)
-
         # Write good_config to file
-        with open(config_file, 'w') as f_handle:
-            yaml.dump(self._config, f_handle, default_flow_style=False)
+        for key, value in sorted(self._config.items()):
+            config_file = '{}/{}.yaml'.format(self._config_directory, key)
+            if key != 'pattoo':
+                _data = {key: value}
+            else:
+                _data = value
+            with open(config_file, 'w') as f_handle:
+                yaml.dump(_data, f_handle, default_flow_style=False)
 
         # Return
         return self._config_directory

@@ -2,12 +2,12 @@
 """Pattoo classes that manage various configurations."""
 
 # Import project libraries
-from pattoo_shared.configuration import Config as ConfigShared
+from pattoo_shared import configuration, files
 from pattoo_shared.configuration import search
 from pattoo_web.constants import PATTOO_WEBD_NAME
 
 
-class Config(ConfigShared):
+class Config(object):
     """Class gathers all configuration information.
 
     Only processes the following YAML keys in the configuration file:
@@ -26,8 +26,10 @@ class Config(ConfigShared):
             None
 
         """
-        # Instantiate the Config parent
-        ConfigShared.__init__(self)
+        # Get the configuration directory
+        config_file = configuration.agent_config_filename(
+            PATTOO_WEBD_NAME)
+        self._configuration = files.read_yaml_file(config_file)
 
     def ip_listen_address(self):
         """Get ip_listen_address.
