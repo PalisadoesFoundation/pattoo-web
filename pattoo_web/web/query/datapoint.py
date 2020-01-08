@@ -16,6 +16,7 @@ class DataPoints(object):
             id
             idxDatapoint
             agent {
+              agentProgram
               agentPolledTarget
               agentGroup {
                 pairXlateGroup {
@@ -88,6 +89,7 @@ class DataPoint(object):
         id
         idxDatapoint
         agent {
+          agentProgram
           agentPolledTarget
           agentGroup {
             pairXlateGroup {
@@ -173,6 +175,19 @@ class DataPoint(object):
 
         """
         result = self._datapoint['agent'].get('agentPolledTarget')
+        return result
+
+    def agent_program(self):
+        """Get GraphQL query datapoint 'agentProgram'.
+
+        Args:
+            None
+
+        Returns:
+            result: 'agentProgram' value
+
+        """
+        result = self._datapoint['agent'].get('agentProgram')
         return result
 
     def idx_pair_xlate_group(self):
@@ -271,6 +286,7 @@ def datapoints():
         id
         idxDatapoint
         agent {
+          agentProgram
           agentPolledTarget
           agentGroup {
             pairXlateGroup {
@@ -317,6 +333,7 @@ def datapoint(graphql_id):
     id
     idxDatapoint
     agent {
+      agentProgram
       agentPolledTarget
       agentGroup {
         pairXlateGroup {
