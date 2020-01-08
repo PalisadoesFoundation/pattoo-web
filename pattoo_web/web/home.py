@@ -27,12 +27,12 @@ def route_data():
 
     # Process the data
     if points.valid is True:
-        # Initialize key variables
+        # Render data from database
         table = home.table(points)
         return render_template('home.html', main_table=table)
 
-    # Otherwise abort
-    abort(404)
+    # No database
+    return render_template('no-api.html')
 
 
 @PATTOO_WEB_HOME.route('/status')

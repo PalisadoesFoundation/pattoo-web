@@ -2,12 +2,13 @@
 """Pattoo classes that manage various configurations."""
 
 # Import project libraries
-from pattoo_shared import configuration, files
-from pattoo_shared.configuration import search
+from pattoo_shared import files
+from pattoo_shared.configuration import search, agent_config_filename
+from pattoo_shared.configuration import Config as _Config
 from pattoo_web.constants import PATTOO_WEBD_NAME
 
 
-class Config(object):
+class Config(_Config):
     """Class gathers all configuration information.
 
     Only processes the following YAML keys in the configuration file:
@@ -26,10 +27,12 @@ class Config(object):
             None
 
         """
+        # Instantiate inheritance
+        _Config.__init__(self)
+
         # Get the configuration directory
-        config_file = configuration.agent_config_filename(
-            PATTOO_WEBD_NAME)
-        self._configuration = files.read_yaml_file(config_file)
+        config_file = agent_config_filename(PATTOO_WEBD_NAME)
+        self._daemon_configuration = files.read_yaml_file(config_file)
 
     def ip_listen_address(self):
         """Get ip_listen_address.
@@ -44,7 +47,7 @@ class Config(object):
         # Get result
         key = PATTOO_WEBD_NAME
         sub_key = 'ip_listen_address'
-        result = search(key, sub_key, self._configuration, die=False)
+        result = search(key, sub_key, self._daemon_configuration, die=False)
 
         # Default to 0.0.0.0
         if result is None:
@@ -66,7 +69,8 @@ class Config(object):
         sub_key = 'ip_bind_port'
 
         # Get result
-        intermediate = search(key, sub_key, self._configuration, die=False)
+        intermediate = search(
+            key, sub_key, self._daemon_configuration, die=False)
         if intermediate is None:
             result = 20200
         else:
