@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Pattoo classes that manage GraphQL datapoint related queries."""
 
+import sys
+from pattoo_shared import log
 from pattoo_web.phttp import get
 
 
@@ -14,6 +16,7 @@ class DataPoints(object):
             id
             idxDatapoint
             agent {
+              agentProgram
               agentPolledTarget
               agentGroup {
                 pairXlateGroup {
@@ -50,10 +53,15 @@ class DataPoints(object):
 
         """
         # Initialize the class
+        self._nodes = []
+
+        # Check for validity
         if bool(data) is True:
-            self._nodes = data['data']['allDatapoints']['edges']
-        else:
-            self._nodes = []
+            try:
+                self._nodes = data['data']['allDatapoints']['edges']
+            except:
+                log_message = ('Invalid datapoint data to process.')
+                log.log2warning(80012, log_message)
         self.valid = bool(self._nodes)
 
     def datapoints(self):
@@ -81,6 +89,7 @@ class DataPoint(object):
         id
         idxDatapoint
         agent {
+          agentProgram
           agentPolledTarget
           agentGroup {
             pairXlateGroup {
@@ -166,6 +175,19 @@ class DataPoint(object):
 
         """
         result = self._datapoint['agent'].get('agentPolledTarget')
+        return result
+
+    def agent_program(self):
+        """Get GraphQL query datapoint 'agentProgram'.
+
+        Args:
+            None
+
+        Returns:
+            result: 'agentProgram' value
+
+        """
+        result = self._datapoint['agent'].get('agentProgram')
         return result
 
     def idx_pair_xlate_group(self):
@@ -264,6 +286,7 @@ def datapoints():
         id
         idxDatapoint
         agent {
+          agentProgram
           agentPolledTarget
           agentGroup {
             pairXlateGroup {
@@ -310,6 +333,7 @@ def datapoint(graphql_id):
     id
     idxDatapoint
     agent {
+      agentProgram
       agentPolledTarget
       agentGroup {
         pairXlateGroup {
@@ -333,6 +357,16 @@ def datapoint(graphql_id):
 '''.replace('IDENTIFIER', graphql_id)
 
     # Get data from API server
-    data = get(query)
+    data = None
+
+    # Get data from remote system
+    try:
+        data = get(query)
+    except:
+        _exception = sys.exc_info()
+        log_message = ('Cannot connect to pattoo web API')
+        log.log2exception(80013, _exception, message=log_message)
+
+    # Return
     result = DataPoint(data)
     return result
