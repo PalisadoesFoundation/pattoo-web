@@ -4,33 +4,36 @@
 import sys
 from pattoo_shared import log
 from pattoo_web.phttp import get
+from .datapoint import DataPoint
 
 
-class DataPoints(object):
+class DataPointsAgent(object):
     """Class to process the results of the GraphQL query below.
 
     {
-      allDatapoints {
-        edges {
-          node {
-            id
-            idxDatapoint
-            agent {
-              agentProgram
-              agentPolledTarget
-              agentGroup {
-                pairXlateGroup {
-                  idxPairXlateGroup
-                  id
+      agent(id: "XXXXXXXXXXXXXXXX") {
+        datapointAgent {
+          edges {
+            node {
+              id
+              idxDatapoint
+              agent {
+                agentProgram
+                agentPolledTarget
+                agentGroup {
+                  pairXlateGroup {
+                    idxPairXlateGroup
+                    id
+                  }
                 }
               }
-            }
-            glueDatapoint {
-              edges {
-                node {
-                  pair {
-                    key
-                    value
+              glueDatapoint {
+                edges {
+                  node {
+                    pair {
+                      key
+                      value
+                    }
                   }
                 }
               }
@@ -58,10 +61,10 @@ class DataPoints(object):
         # Check for validity
         if bool(data) is True:
             try:
-                self._nodes = data['data']['allDatapoints']['edges']
+                self._nodes = data['data']['agent']['datapointAgent']['edges']
             except:
                 log_message = ('Invalid datapoint data to process.')
-                log.log2warning(80012, log_message)
+                log.log2warning(80015, log_message)
         self.valid = bool(self._nodes)
 
     def datapoints(self):
@@ -81,35 +84,99 @@ class DataPoints(object):
         return result
 
 
-class DataPoint(object):
+class Agents(object):
     """Class to process the results of the GraphQL query below.
 
     {
-      datapoint(id: "XXXXXXXXXXXXXXXX") {
-        id
-        idxDatapoint
-        agent {
-          agentProgram
-          agentPolledTarget
-          agentGroup {
-            pairXlateGroup {
-              idxPairXlateGroup
-              id
-            }
+      allAgent {
+        edges {
+          node {
+            id
+            idxAgent
+            agentPolledTarget
+            agentProgram
           }
         }
-        glueDatapoint {
+      }
+    }
+
+    """
+
+    def __init__(self, data):
+        """Initialize the class.
+
+        Args:
+            data: Dict of results from the GraphQL query
+
+        Returns:
+            None
+
+        """
+        # Initialize the class
+        self._nodes = []
+
+        # Check for validity
+        if bool(data) is True:
+            try:
+                self._nodes = data['data']['allAgent']['edges']
+            except:
+                log_message = ('Invalid datapoint data to process.')
+                log.log2warning(80012, log_message)
+        self.valid = bool(self._nodes)
+
+    def agents(self):
+        """Return a list of Agent objects.
+
+        Args:
+            None
+
+        Returns:
+            result: List of DataPoint objects
+
+        """
+        # Return a list of DataPoint objects
+        result = []
+        for item in self._nodes:
+            result.append(Agent(item))
+        return result
+
+
+class Agent(object):
+    """Class to process the results of the GraphQL query below.
+
+    {
+      agent(id: "XXXXXXXXXXXXXXXX") {
+        datapointAgent {
           edges {
             node {
-              pair {
-                key
-                value
+              id
+              idxDatapoint
+              agent {
+                agentProgram
+                agentPolledTarget
+                agentGroup {
+                  pairXlateGroup {
+                    idxPairXlateGroup
+                    id
+                  }
+                }
+              }
+              glueDatapoint {
+                edges {
+                  node {
+                    pair {
+                      key
+                      value
+                    }
+                  }
+                }
               }
             }
           }
         }
       }
     }
+
 
     """
 
@@ -267,8 +334,8 @@ class DataPoint(object):
         return result
 
 
-def datapoints():
-    """Get DataPoints entry for all database datapoints.
+def agents():
+    """Process an allAgent query.
 
     Args:
         None
@@ -279,35 +346,18 @@ def datapoints():
     """
     # Initialize key variables
     query = """\
-{
-  allDatapoints {
-    edges {
-      node {
-        id
-        idxDatapoint
-        agent {
-          agentProgram
-          agentPolledTarget
-          agentGroup {
-            pairXlateGroup {
-              idxPairXlateGroup
-            }
-          }
-        }
-        glueDatapoint {
-          edges {
-            node {
-              pair {
-                key
-                value
+        {
+          allAgent {
+            edges {
+              node {
+                id
+                idxAgent
+                agentPolledTarget
+                agentProgram
               }
             }
           }
         }
-      }
-    }
-  }
-}
 """
 
     # Get data from API server
@@ -316,8 +366,8 @@ def datapoints():
     return result
 
 
-def datapoint(graphql_id):
-    """Get translations for the GraphQL ID of a datapoint query.
+def datapoints_agent(graphql_id):
+    """Get translations for the GraphQL ID of a datapointAgent query.
 
     Args:
         graphql_id: GraphQL ID
@@ -329,25 +379,31 @@ def datapoint(graphql_id):
     # Initialize key variables
     query = '''\
 {
-  datapoint(id: "IDENTIFIER") {
-    id
-    idxDatapoint
-    agent {
-      agentProgram
-      agentPolledTarget
-      agentGroup {
-        pairXlateGroup {
-          idxPairXlateGroup
-          id
-        }
-      }
-    }
-    glueDatapoint {
+  agent(id: "IDENTIFIER") {
+    datapointAgent {
       edges {
         node {
-          pair {
-            key
-            value
+          id
+          idxDatapoint
+          agent {
+            agentProgram
+            agentPolledTarget
+            agentGroup {
+              pairXlateGroup {
+                idxPairXlateGroup
+                id
+              }
+            }
+          }
+          glueDatapoint {
+            edges {
+              node {
+                pair {
+                  key
+                  value
+                }
+              }
+            }
           }
         }
       }
@@ -365,8 +421,8 @@ def datapoint(graphql_id):
     except:
         _exception = sys.exc_info()
         log_message = ('Cannot connect to pattoo web API')
-        log.log2exception(80014, _exception, message=log_message)
+        log.log2exception(80013, _exception, message=log_message)
 
     # Return
-    result = DataPoint(data)
+    result = DataPointsAgent(data)
     return result

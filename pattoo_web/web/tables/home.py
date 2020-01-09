@@ -6,12 +6,7 @@ from flask_table import Table, Col
 
 # Pattoo imports
 from pattoo_web import uri
-from pattoo_web.configuration import Config
-from pattoo_web.web.query.datapoint import DataPoints
 from pattoo_web.web.query.pair_xlate import translations
-from pattoo_web.phttp import get
-from pattoo_web.translate import KeyPair
-from pattoo_shared import log
 
 
 class RawCol(Col):
