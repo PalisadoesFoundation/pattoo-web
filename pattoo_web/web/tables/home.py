@@ -6,7 +6,6 @@ from flask_table import Table, Col
 
 # Pattoo imports
 from pattoo_web import uri
-from pattoo_web.web.query.pair_xlate import translations
 
 
 class RawCol(Col):
@@ -26,54 +25,51 @@ class ItemTable(Table):
     html_attrs = {'width': '100%', 'cellspacing': '0'}
 
     # Column labels
-    target = Col('Target')
-    key = Col('DataPoint')
-    metadata = RawCol('Metadata')
-    link = RawCol('Chart')
+    index = Col('#')
+    agent_program = Col('Agent Program')
+    agent_polled_target = RawCol('Target')
 
 
 class Item(object):
     """Table row definition."""
 
-    def __init__(self, target, key, metadata, link):
+    def __init__(self, index, agent_program, agent_polled_target):
         """Define row contents for table.
 
         Args:
-            target: Target name
-            key: Key-value pair key
-            metadata: Metadata of key
-            link: Link to charted data
+            index: Agent table idx_agent
+            agent_program: Key-value pair key
+            agent_polled_target: Target polled by agent
 
         Returns:
             None
 
         """
-        self.target = target
-        self.key = key
-        self.metadata = metadata
-        self.link = link
+        self.index = index
+        self.agent_program = agent_program
+        self.agent_polled_target = agent_polled_target
 
 
-def table(datapoints):
+def table(_agents):
     """Process GraphQL data for parsing to tables.
 
     Args:
-        datapoints: GraphQL query DataPoints object
+        _agents: GraphQL query DataPoints object
 
     Returns:
         html: FlaskTable Table object
 
     """
     # Process API data
-    html = ItemTable(_flask_table_rows(datapoints))
+    html = ItemTable(_flask_table_rows(_agents))
     return html.__html__()
 
 
-def _flask_table_rows(datapoints):
+def _flask_table_rows(_agents):
     """Create HTML table from data.
 
     Args:
-        datapoints: GraphQL query DataPoints object
+        _agents: GraphQL query DataPoints object
 
     Returns:
         result: List of FlaskTable table row objects
@@ -82,38 +78,21 @@ def _flask_table_rows(datapoints):
     # Initialize key varialbes
     result = []
 
-    # Get translations from API server
-    translate = translations()
-
     # Process the DataPoints
-    for datapoint in datapoints.datapoints():
-        _id = datapoint.id()
-        target = datapoint.agent_polled_target()
-        key = datapoint.pattoo_key()
-
-        # Get key_value_pairs and translate if possible
-        idx_pair_xlate_group = datapoint.idx_pair_xlate_group()
-        key_value_pairs = datapoint.key_value_pairs()
-        metadata = ['''\
-{}: {}'''.format(translate.key(
-    key, idx_pair_xlate_group), value) for key, value in key_value_pairs]
-
-        # Prepend the name of the agent_program
-        extended_metadata = [
-            'Pattoo Agent: {}'.format(datapoint.agent_program())]
-        extended_metadata.extend(metadata)
-
-        # Translate the key too
-        translated_key = translate.key(key, idx_pair_xlate_group)
+    for _agent in _agents.agents():
+        _id = _agent.id()
+        index = _agent.idx_agent()
+        agent_polled_target = _agent.agent_polled_target()
+        agent_program = _agent.agent_program()
 
         # Create link to charts
-        link = uri.chart_link(_id)
+        link = uri.agent_link(_id, label=agent_polled_target)
 
         # Create new HTML row
         result.append(dict(
-            target=target,
-            key=translated_key,
-            metadata='<p>{}</p>'.format('<br>'.join(extended_metadata)),
-            link=link
+            index=index,
+            agent_program=agent_program,
+            agent_polled_target=link
             ))
+
     return result

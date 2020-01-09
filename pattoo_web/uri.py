@@ -6,13 +6,13 @@ from pattoo_web.constants import DEFAULT_CHART_SIZE_SECONDS
 
 
 def chart_link(_id, label='Chart Data', secondsago=None):
-    """Return customer cabinet data rows.
+    """Return link to chart page.
 
     Args:
         _id: GraphQL ID for the datapoint
 
     Returns:
-        links: <a> links for various cabinet timeframes
+        links: Link
 
     """
     #
@@ -23,6 +23,25 @@ def chart_link(_id, label='Chart Data', secondsago=None):
     link = ('''\
 <a href="{}/chart/datapoint/{}?secondsago={}">{}</a>\
 '''.format(PATTOO_WEB_SITE_PREFIX, _id, secondsago, label))
+
+    # Returns
+    return link
+
+
+def agent_link(_id, label='Agent Data'):
+    """Return link to agent page.
+
+    Args:
+        _id: GraphQL ID for the agent
+
+    Returns:
+        link: Link
+
+    """
+    # Create link to agent
+    link = ('''\
+<a href="{}/agent/{}">{}</a>\
+'''.format(PATTOO_WEB_SITE_PREFIX, _id, label))
 
     # Returns
     return link

@@ -5,7 +5,7 @@ from flask import Blueprint, render_template, abort
 
 # Pattoo imports
 from pattoo_web.web.tables import home
-from pattoo_web.web.query.datapoint import datapoints
+from pattoo_web.web.query.agent import agents
 
 # Define the various global variables
 PATTOO_WEB_HOME = Blueprint('PATTOO_WEB_HOME', __name__)
@@ -23,28 +23,13 @@ def route_data():
 
     """
     # Get data from API server
-    points = datapoints()
+    _agents = agents()
 
     # Process the data
-    if points.valid is True:
+    if _agents.valid is True:
         # Render data from database
-        table = home.table(points)
+        table = home.table(_agents)
         return render_template('home.html', main_table=table)
 
     # No database
     return render_template('no-api.html')
-
-
-@PATTOO_WEB_HOME.route('/status')
-def index():
-    """Provide the status page.
-
-    Args:
-        None
-
-    Returns:
-        Home Page
-
-    """
-    # Return
-    return 'The Pattoo Web is Operational.\n'

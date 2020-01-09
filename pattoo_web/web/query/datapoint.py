@@ -126,10 +126,10 @@ class DataPoint(object):
         """
         # Initialize the class
         if 'data' in _data:
-            # Result of 'allDatapoints' GraphQL query
+            # Result of 'datapoint' GraphQL query
             data = _data['data'].get('datapoint')
         else:
-            # Result of 'datapoint' GraphQL query
+            # Result of 'allDatapoints' GraphQL query
             data = _data.get('node')
 
         self.valid = bool(data)

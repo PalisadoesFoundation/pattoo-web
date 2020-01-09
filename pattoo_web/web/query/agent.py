@@ -16,7 +16,7 @@ class DataPointsAgent(object):
           edges {
             node {
               id
-              idxDatapoint
+              idxAgent
               agent {
                 agentProgram
                 agentPolledTarget
@@ -63,7 +63,7 @@ class DataPointsAgent(object):
             try:
                 self._nodes = data['data']['agent']['datapointAgent']['edges']
             except:
-                log_message = ('Invalid datapoint data to process.')
+                log_message = ('Invalid agent data to process.')
                 log.log2warning(80015, log_message)
         self.valid = bool(self._nodes)
 
@@ -115,13 +115,16 @@ class Agents(object):
         # Initialize the class
         self._nodes = []
 
+        from pprint import pprint
+        pprint(data)
+
         # Check for validity
         if bool(data) is True:
             try:
                 self._nodes = data['data']['allAgent']['edges']
             except:
-                log_message = ('Invalid datapoint data to process.')
-                log.log2warning(80012, log_message)
+                log_message = ('Invalid agent data to process.')
+                log.log2warning(80017, log_message)
         self.valid = bool(self._nodes)
 
     def agents(self):
@@ -134,7 +137,7 @@ class Agents(object):
             result: List of DataPoint objects
 
         """
-        # Return a list of DataPoint objects
+        # Return a list of Agent objects
         result = []
         for item in self._nodes:
             result.append(Agent(item))
@@ -142,41 +145,20 @@ class Agents(object):
 
 
 class Agent(object):
-    """Class to process the results of the GraphQL query below.
+    """Class to process the nodes of the GraphQL query below.
 
     {
-      agent(id: "XXXXXXXXXXXXXXXX") {
-        datapointAgent {
-          edges {
-            node {
-              id
-              idxDatapoint
-              agent {
-                agentProgram
-                agentPolledTarget
-                agentGroup {
-                  pairXlateGroup {
-                    idxPairXlateGroup
-                    id
-                  }
-                }
-              }
-              glueDatapoint {
-                edges {
-                  node {
-                    pair {
-                      key
-                      value
-                    }
-                  }
-                }
-              }
-            }
+      allAgent {
+        edges {
+          node {
+            id
+            idxAgent
+            agentPolledTarget
+            agentProgram
           }
         }
       }
     }
-
 
     """
 
@@ -193,17 +175,11 @@ class Agent(object):
         """
         # Initialize the class
         if 'data' in _data:
-            # Result of 'allDatapoints' GraphQL query
-            data = _data['data'].get('datapoint')
+            # Result of 'agent' GraphQL query
+            self._data = _data['data'].get('agent')
         else:
-            # Result of 'datapoint' GraphQL query
-            data = _data.get('node')
-
-        self.valid = bool(data)
-        if self.valid is True:
-            self._nodes = data['glueDatapoint']['edges']
-            self._datapoint = data
-            self._kvps = self._key_value_pairs()
+            # Result of 'allAgents' GraphQL query
+            self._data = _data.get('node')
 
     def id(self):
         """Get GraphQL query datapoint 'id'.
@@ -215,20 +191,20 @@ class Agent(object):
             result: 'id' value
 
         """
-        result = self._datapoint.get('id')
+        result = self._data.get('id')
         return result
 
-    def idx_datapoint(self):
-        """Get GraphQL query datapoint 'idxDatapoint'.
+    def idx_agent(self):
+        """Get GraphQL query datapoint 'idxAgent'.
 
         Args:
             None
 
         Returns:
-            result: 'idxDatapoint' value
+            result: 'idxAgent' value
 
         """
-        result = self._datapoint.get('idxDatapoint')
+        result = self._data.get('idxAgent')
         return result
 
     def agent_polled_target(self):
@@ -241,7 +217,7 @@ class Agent(object):
             result: 'agentPolledTarget' value
 
         """
-        result = self._datapoint['agent'].get('agentPolledTarget')
+        result = self._data.get('agentPolledTarget')
         return result
 
     def agent_program(self):
@@ -254,83 +230,7 @@ class Agent(object):
             result: 'agentProgram' value
 
         """
-        result = self._datapoint['agent'].get('agentProgram')
-        return result
-
-    def idx_pair_xlate_group(self):
-        """Get GraphQL query datapoint 'idxPairXlateGroup'.
-
-        Args:
-            None
-
-        Returns:
-            result: 'idxPairXlateGroup' value
-
-        """
-        result = self._datapoint[
-            'agent']['agentGroup']['pairXlateGroup'].get('idxPairXlateGroup')
-        return result
-
-    def id_pair_xlate_group(self):
-        """Get GraphQL query datapoint 'idxPairXlateGroup:id'.
-
-        Args:
-            None
-
-        Returns:
-            result: 'idxPairXlateGroup:id' value
-
-        """
-        result = self._datapoint[
-            'agent']['agentGroup']['pairXlateGroup'].get('id')
-        return result
-
-    def pattoo_key(self):
-        """Get the pattoo_key.
-
-        Args:
-            None
-
-        Returns:
-            result: pattoo_key
-
-        """
-        # Return result
-        result = self._kvps['pattoo_key']
-        return result
-
-    def key_value_pairs(self):
-        """Get GraphQL query datapoint key-value pairs.
-
-        Args:
-            None
-
-        Returns:
-            result: List of tuples [(key, value), (key, value), ...]
-
-        """
-        # Return result
-        result = [(key, value) for key, value in self._kvps.items() if (
-            key != 'pattoo_key')]
-        result.sort()
-        return result
-
-    def _key_value_pairs(self):
-        """Get GraphQL query datapoint key-value pairs.
-
-        Args:
-            None
-
-        Returns:
-            result: Dict keyed by key
-
-        """
-        # Return result
-        result = {}
-        for node in self._nodes:
-            key = node['node']['pair'].get('key')
-            value = node['node']['pair'].get('value')
-            result[key] = value
+        result = self._data.get('agentProgram')
         return result
 
 
@@ -362,7 +262,7 @@ def agents():
 
     # Get data from API server
     data = get(query)
-    result = DataPoints(data)
+    result = Agents(data)
     return result
 
 
@@ -384,7 +284,7 @@ def datapoints_agent(graphql_id):
       edges {
         node {
           id
-          idxDatapoint
+          idxAgent
           agent {
             agentProgram
             agentPolledTarget
@@ -421,7 +321,7 @@ def datapoints_agent(graphql_id):
     except:
         _exception = sys.exc_info()
         log_message = ('Cannot connect to pattoo web API')
-        log.log2exception(80013, _exception, message=log_message)
+        log.log2exception(80016, _exception, message=log_message)
 
     # Return
     result = DataPointsAgent(data)

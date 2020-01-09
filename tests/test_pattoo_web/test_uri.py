@@ -20,6 +20,7 @@ This script is not installed in the "pattoo-web/tests/test_pattoo_web" directory
     sys.exit(2)
 
 from tests.libraries.configuration import UnittestConfig
+from pattoo_shared.constants import PATTOO_WEB_SITE_PREFIX
 from pattoo_web import uri
 
 
@@ -34,14 +35,20 @@ class TestBasicFunctions(unittest.TestCase):
         """Testing method / function chart_link."""
         # Test
         result = uri.chart_link('0', '3', '4')
-        self.assertEqual(
-            result,
-            '''<a href="/pattoo/web/chart/datapoint/0?secondsago=4">3</a>''')
+        self.assertEqual(result, '''\
+<a href="{}/chart/datapoint/0?secondsago=4">3</a>\
+'''.format(PATTOO_WEB_SITE_PREFIX))
         result = uri.chart_link('0')
-        self.assertEqual(
-            result,
-            '''<a href="/pattoo/web/chart/datapoint/0?\
-secondsago=86400">Chart Data</a>''')
+        self.assertEqual(result, '''\
+<a href="{}/chart/datapoint/0?secondsago=86400">Chart Data</a>\
+'''.format(PATTOO_WEB_SITE_PREFIX))
+
+    def test_agent_link(self):
+        """Testing method / function agent_link."""
+        # Test
+        result = uri.agent_link('0', '3')
+        self.assertEqual(result, '''\
+<a href="{}/agent/0">3</a>'''.format(PATTOO_WEB_SITE_PREFIX))
 
     def test_integerize_arg(self):
         """Testing method / function integerize_arg."""
