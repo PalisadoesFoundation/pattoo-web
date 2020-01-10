@@ -6,6 +6,7 @@ from flask_table import Table, Col
 
 # Pattoo imports
 from pattoo_web import uri
+from pattoo_web.web.query.agent_xlate import translations
 
 
 class RawCol(Col):
@@ -78,12 +79,15 @@ def _flask_table_rows(_agents):
     # Initialize key varialbes
     result = []
 
+    # Get agent_program translations
+    translate = translations()
+
     # Process the DataPoints
     for _agent in _agents.agents():
         _id = _agent.id()
         index = _agent.idx_agent()
         agent_polled_target = _agent.agent_polled_target()
-        agent_program = _agent.agent_program()
+        agent_program = translate.agent_program(_agent.agent_program())
 
         # Create link to charts
         link = uri.agent_link(_id, label=agent_polled_target)
