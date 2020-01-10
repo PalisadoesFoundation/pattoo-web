@@ -126,10 +126,10 @@ class DataPoint(object):
         """
         # Initialize the class
         if 'data' in _data:
-            # Result of 'allDatapoints' GraphQL query
+            # Result of 'datapoint' GraphQL query
             data = _data['data'].get('datapoint')
         else:
-            # Result of 'datapoint' GraphQL query
+            # Result of 'allDatapoints' GraphQL query
             data = _data.get('node')
 
         self.valid = bool(data)
@@ -317,7 +317,7 @@ def datapoints():
 
 
 def datapoint(graphql_id):
-    """Get translations for the GraphQL ID of a id_pair_xlate_group.
+    """Get translations for the GraphQL ID of a datapoint query.
 
     Args:
         graphql_id: GraphQL ID
@@ -365,7 +365,7 @@ def datapoint(graphql_id):
     except:
         _exception = sys.exc_info()
         log_message = ('Cannot connect to pattoo web API')
-        log.log2exception(80013, _exception, message=log_message)
+        log.log2exception(80014, _exception, message=log_message)
 
     # Return
     result = DataPoint(data)

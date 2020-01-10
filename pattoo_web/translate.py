@@ -1,8 +1,6 @@
 """Module that does translations."""
 
-# Pattoo imports
-from pattoo_shared import log
-
+from pprint import pprint
 
 class KeyPair(object):
     """Class to process the results of a PairXlates object."""
@@ -42,4 +40,42 @@ class KeyPair(object):
                     table = translations[idx_pair_xlate_group]
                     result = table.get(key, key)
                     break
+        return result
+
+
+class AgentPair(object):
+    """Class to process the results of a PairXlates object."""
+
+    def __init__(self, data):
+        """Initialize the class.
+
+        Args:
+            data: PairXlates object
+
+        Returns:
+            None
+
+        """
+        # Initialize key variables
+        self._lookup = {}
+
+        # Process data
+        if bool(data) is True:
+            for entry in data:
+                translation = entry.translation()
+                for key, value in translation.items():
+                    self._lookup[key] = value
+
+    def agent_program(self, agent_program):
+        """Translate a key.
+
+        Args:
+            agent_program: value to translate
+
+        Returns:
+            result: Result of the translation
+
+        """
+        # Initialize the class
+        result = self._lookup.get(agent_program, agent_program)
         return result

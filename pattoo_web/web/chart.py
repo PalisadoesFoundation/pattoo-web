@@ -21,7 +21,7 @@ from pattoo_web.web.query.datapoint import datapoint
 PATTOO_WEB_CHART = Blueprint('PATTOO_WEB_CHART', __name__)
 
 
-@PATTOO_WEB_CHART.route('/chart/datapoint/<identifier>')
+@PATTOO_WEB_CHART.route('/datapoint/<identifier>')
 def route_chart(identifier):
     """Provide data from the Data table.
 
@@ -64,7 +64,7 @@ def route_chart(identifier):
     abort(404)
 
 
-@PATTOO_WEB_CHART.route('/chart/<int:idx_datapoint>/data')
+@PATTOO_WEB_CHART.route('/<int:idx_datapoint>/data')
 def route_chart_data(idx_datapoint):
     """Get API data from remote host.
 
