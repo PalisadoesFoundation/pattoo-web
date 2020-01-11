@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pattoo classes that manage GraphQL datapoint related queries."""
+"""Pattoo classes that manage GraphQL pair translation related queries."""
 
 from pattoo_web.configuration import Config
 from pattoo_web.translate import KeyPair
@@ -106,8 +106,9 @@ class PairXlate(object):
             # Result of 'datapoint' GraphQL query
             data = _data.get('node')
 
-        self._idx_pair_xlate_group = data['idxPairXlateGroup']
-        self._nodes = data['pairXlatePairXlateGroup']['edges']
+        self._idx_pair_xlate_group = data.get('idxPairXlateGroup')
+        self._id = data.get('id')
+        self._nodes = data['pairXlatePairXlateGroup'].get('edges')
         self._translations = self._lookup()
 
     def idx_pair_xlate_group(self):
@@ -121,6 +122,19 @@ class PairXlate(object):
 
         """
         result = self._idx_pair_xlate_group
+        return result
+
+    def id(self):
+        """Get the id of the query.
+
+        Args:
+            None
+
+        Returns:
+            result: result
+
+        """
+        result = self._id
         return result
 
     def translations(self):
@@ -151,11 +165,14 @@ class PairXlate(object):
         result = {}
         system_language_code = Config().language()
         for node in self._nodes:
-            key = node['node'].get('key')
-            value = node['node'].get('description')
+            # Ignore entries from unconfigured languages
             code = node['node']['language'].get('code')
             if code != system_language_code:
                 continue
+
+            # Update    
+            key = node['node'].get('key')
+            value = node['node'].get('description')
             result[key] = value
         return result
 
@@ -177,6 +194,7 @@ def translations():
     edges {
       node {
         idxPairXlateGroup
+        id
         pairXlatePairXlateGroup {
           edges {
             node {
@@ -215,6 +233,7 @@ def translation(graphql_id):
 {
   pairXlateGroup(id: "IDENTIFIER") {
     idxPairXlateGroup
+    id
     pairXlatePairXlateGroup {
       edges {
         node {

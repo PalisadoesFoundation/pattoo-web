@@ -21,8 +21,8 @@ if EXEC_DIR.endswith(
     sys.path.insert(0, ROOT_DIR)
 else:
     print('''\
-This script is not installed in the "pattoo-web/tests/test_pattoo_web/web/query" \
-directory. Please fix.''')
+This script is not installed in the "pattoo-web/tests/test_pattoo_web\
+/web/query" directory. Please fix.''')
     sys.exit(2)
 
 from tests.libraries.configuration import UnittestConfig
