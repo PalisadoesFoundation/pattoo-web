@@ -105,13 +105,15 @@ class TestAgentXlate(unittest.TestCase):
             self.other_tester.id(), 'QWdlbnRYbGF0ZTo0')
 
     def test_language_code(self):
-        """Testing method / function language_code_xlate."""
+        """Testing method / function language_code."""
         # Test
         ids = ['en', 'en']
         for index, item in enumerate(self.tester):
             self.assertEqual(item.language_code(), ids[index])
         self.assertEqual(
             self.other_tester.language_code(), 'en')
+        self.assertEqual(
+            self.other_tester2.language_code(), _LANGUAGE)
 
     def test_translation(self):
         """Testing method / function translation."""
@@ -135,11 +137,11 @@ class TestBasicFunctions(unittest.TestCase):
     #########################################################################
 
     def test_translations(self):
-        """Testing method / function agents."""
+        """Testing method / function translations."""
         pass
 
     def test_translation(self):
-        """Testing method / function datapoints_agent_xlate."""
+        """Testing method / function translation."""
         pass
 
 
