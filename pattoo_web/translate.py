@@ -1,6 +1,5 @@
 """Module that does translations."""
 
-from pprint import pprint
 
 class KeyPair(object):
     """Class to process the results of a PairXlates object."""
