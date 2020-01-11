@@ -2,6 +2,7 @@
 """Pattoo classes that manage GraphQL datapoint related queries."""
 
 import sys
+
 from pattoo_shared import log
 from pattoo_web.phttp import get
 from .datapoint import DataPoint
@@ -16,6 +17,7 @@ class DataPointsAgent(object):
           edges {
             node {
               id
+              idxDatapoint
               idxAgent
               agent {
                 agentProgram
@@ -115,9 +117,6 @@ class Agents(object):
         # Initialize the class
         self._nodes = []
 
-        from pprint import pprint
-        pprint(data)
-
         # Check for validity
         if bool(data) is True:
             try:
@@ -148,15 +147,11 @@ class Agent(object):
     """Class to process the nodes of the GraphQL query below.
 
     {
-      allAgent {
-        edges {
-          node {
-            id
-            idxAgent
-            agentPolledTarget
-            agentProgram
-          }
-        }
+      agent(id: "XXXXXXXXXXXXXXXX") {
+        id
+        idxAgent
+        agentPolledTarget
+        agentProgram
       }
     }
 
@@ -246,18 +241,18 @@ def agents():
     """
     # Initialize key variables
     query = """\
-        {
-          allAgent {
-            edges {
-              node {
-                id
-                idxAgent
-                agentPolledTarget
-                agentProgram
-              }
-            }
-          }
-        }
+{
+  allAgent {
+    edges {
+      node {
+        id
+        idxAgent
+        agentPolledTarget
+        agentProgram
+      }
+    }
+  }
+}
 """
 
     # Get data from API server
@@ -284,6 +279,7 @@ def datapoints_agent(graphql_id):
       edges {
         node {
           id
+          idxDatapoint
           idxAgent
           agent {
             agentProgram

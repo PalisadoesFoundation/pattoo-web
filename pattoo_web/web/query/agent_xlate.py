@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-"""Pattoo classes that manage GraphQL datapoint related queries."""
-
-from pprint import pprint
+"""Pattoo classes that manage GraphQL agent translation related queries."""
 
 from pattoo_web.configuration import Config
 from pattoo_web.translate import AgentPair
@@ -15,6 +13,7 @@ class AgentXlates(object):
       allAgentXlate {
         edges {
           node {
+            id
             agentProgram
             description
             language {
@@ -65,6 +64,7 @@ class AgentXlate(object):
 
     {
       agentXlate(id: "XXXXXXXXXXXXXXXXXX") {
+        id
         agentProgram
         description
         language {
@@ -94,8 +94,8 @@ class AgentXlate(object):
             # Result of 'datapoint' GraphQL query
             self._data = _data.get('node')
 
-    def language_code(self):
-        """Get the idx_language of the query.
+    def id(self):
+        """Get the id of the query.
 
         Args:
             None
@@ -104,7 +104,20 @@ class AgentXlate(object):
             result: result
 
         """
-        result = self._data['language']['code']
+        result = self._data.get('id')
+        return result
+
+    def language_code(self):
+        """Get the language_code of the query.
+
+        Args:
+            None
+
+        Returns:
+            result: result
+
+        """
+        result = self._data['language'].get('code')
         return result
 
     def translation(self):
@@ -121,8 +134,8 @@ class AgentXlate(object):
         result = {}
         language_code = Config().language()
         if self.language_code() == language_code:
-            description = self._data['description']
-            agent_program = self._data['agentProgram']
+            description = self._data.get('description')
+            agent_program = self._data.get('agentProgram')
             result[agent_program] = description
         return result
 
@@ -143,6 +156,7 @@ def translations():
   allAgentXlate {
     edges {
       node {
+        id
         agentProgram
         description
         language {
@@ -173,6 +187,7 @@ def translation(graphql_id):
     xlate_query = '''\
 {
   agentXlate(id: "IDENTIFIER") {
+    id
     agentProgram
     description
     language {
