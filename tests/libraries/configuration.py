@@ -42,15 +42,22 @@ class UnittestConfig(object):
 
         self._config = {
             'pattoo': {
-                'log_directory': self._log_directory,
-                'log_level': 'debug',
-                'cache_directory': self._cache_directory,
-                'daemon_directory': self._daemon_directory,
-                'polling_interval': 20
+                'pattoo': {
+                    'log_directory': self._log_directory,
+                    'log_level': 'debug',
+                    'cache_directory': self._cache_directory,
+                    'daemon_directory': self._daemon_directory,
+                    'polling_interval': 20
+                },
+                'pattoo_web_api': {
+                    'ip_address': '127.0.0.1',
+                    'ip_bind_port': 40202
+                }
             },
             'pattoo_webd': {
-                'ip_listen_address': '127.0.0.1',
-                'ip_bind_port': 20200
+                'pattoo_webd': {
+                    'ip_listen_address': '127.0.0.1',
+                    'ip_bind_port': 40200}
             }
         }
 
@@ -67,12 +74,8 @@ class UnittestConfig(object):
         # Write good_config to file
         for key, value in sorted(self._config.items()):
             config_file = '{}/{}.yaml'.format(self._config_directory, key)
-            if key != 'pattoo':
-                _data = {key: value}
-            else:
-                _data = value
             with open(config_file, 'w') as f_handle:
-                yaml.dump(_data, f_handle, default_flow_style=False)
+                yaml.dump(value, f_handle, default_flow_style=False)
 
         # Return
         return self._config_directory

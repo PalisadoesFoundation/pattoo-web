@@ -16,37 +16,25 @@ if EXEC_DIR.endswith(
     sys.path.insert(0, ROOT_DIR)
 else:
     print('''\
-This script is not installed in the "pattoo-web/tests/test_pattoo_web" directory. Please fix.''')
+This script is not installed in the "pattoo-web/tests/test_pattoo_web" \
+directory. Please fix.''')
     sys.exit(2)
 
 from tests.libraries.configuration import UnittestConfig
-from pattoo_web import configuration
+from pattoo_web import phttp
 
 
-class TestConfiguration(unittest.TestCase):
+class TestBasicFunctions(unittest.TestCase):
     """Checks all functions and methods."""
 
     #########################################################################
     # General object setup
     #########################################################################
 
-    config = configuration.Config()
-
-    def test___init__(self):
-        """Testing method / function __init__."""
+    def test_get(self):
+        """Testing method / function get."""
+        # Test
         pass
-
-    def test_ip_listen_address(self):
-        """Testing method / function ip_listen_address."""
-        # Test
-        result = self.config.ip_listen_address()
-        self.assertEqual(result, '127.0.0.1')
-
-    def test_ip_bind_port(self):
-        """Testing method / function ip_bind_port."""
-        # Test
-        result = self.config.ip_bind_port()
-        self.assertEqual(result, 40200)
 
 
 if __name__ == '__main__':
