@@ -127,7 +127,8 @@ class Table(object):
                 self._datapoint.id(),
                 label=label,
                 secondsago=secondsago)
-            result = '{}\n<p>{}</p>\n'.format(result, link)
+            result = '{}\n<p>{}</p>'.format(result, link)
+        result = '{}\n'.format(result)
 
         # Returns
         return result
