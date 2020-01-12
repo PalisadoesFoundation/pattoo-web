@@ -46,7 +46,7 @@ class TestConfiguration(unittest.TestCase):
         """Testing method / function ip_bind_port."""
         # Test
         result = self.config.ip_bind_port()
-        self.assertEqual(result, 20200)
+        self.assertEqual(result, 40200)
 
 
 if __name__ == '__main__':
