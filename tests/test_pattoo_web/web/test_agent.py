@@ -28,25 +28,6 @@ from pattoo_web.web.query import agent as agent_query
 from pattoo_web.web.tables import agent as agent_table
 
 
-
-# Create a common dataset for testing
-AGENTS = {'data': {'allAgent': {'edges': [
-    {'node': {'agentPolledTarget': 'localhost',
-              'agentProgram': 'pattoo_agent_snmpd',
-              'id': 'QWdlbnQ6MQ==',
-              'idxAgent': '1'}},
-    {'node': {'agentPolledTarget': 'that_host',
-              'agentProgram': 'pattoo_agent_snmp_ifmibd',
-              'id': 'QWdlbnQ6Mg==',
-              'idxAgent': '2'}}]}}}
-
-AGENT = {'data': {
-    'agent': {'id': 'polar_bear',
-              'idxAgent': '7',
-              'agentPolledTarget': 'teddy_bear',
-              'agentProgram': 'koala_bear'}}}
-
-
 DATAPOINT_AGENT = {'data': {'agent': {'datapointAgent': {'edges': [
     {'node': {'agent': {'agentGroup': {
         'pairXlateGroup': {'id': 'UGFpclhsYXRlR3JvdXA6MQ==',
