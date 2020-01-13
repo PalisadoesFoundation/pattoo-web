@@ -54,11 +54,11 @@ class Item(object):
 class Table(object):
     """Class for creating a chart table."""
 
-    def __init__(self, datapoint, secondsago):
+    def __init__(self, point_xlate, secondsago):
         """Initialize the class.
 
         Args:
-            datapoint: DataPoint object
+            point_xlate: pattoo_web.constants.DataPointTranslations object
             secondsago: Time in the past from which to plot the chart
 
         Returns:
@@ -66,7 +66,7 @@ class Table(object):
 
         """
         # Initialize key variables
-        self._datapoint = datapoint
+        self._point_xlate = point_xlate
         self._secondsago = secondsago
 
     def html(self):
@@ -80,15 +80,19 @@ class Table(object):
 
         """
         # Initialize chart varialbes
+        datapoint = self._point_xlate.datapoint
         result = []
-        idx_datapoint = self._datapoint.idx_datapoint()
+        idx_datapoint = datapoint.idx_datapoint()
         restful_api_url = ('''{}/chart/{}/data?secondsago={}\
 '''.format(PATTOO_WEB_SITE_PREFIX, idx_datapoint, self._secondsago))
         chart = ('''\
 <div id="pattoo_simple_line_chart"></div>
 <script type="text/javascript">
-  SimpleLineChart("{}", "{}");
-</script>'''.format(restful_api_url, self._datapoint.agent_polled_target()))
+  SimpleLineChart("{}", "{}", "{}");
+</script>\
+'''.format(restful_api_url,
+           datapoint.agent_polled_target(),
+           self._point_xlate.pattoo_key_translation.units))
         timeframe = self._timeframe_links()
 
         # Create new HTML row
@@ -112,6 +116,7 @@ class Table(object):
 
         """
         # Initialize key variables
+        datapoint = self._point_xlate.datapoint
         result = ''
         timeframes = [
             ('Default', DEFAULT_CHART_SIZE_SECONDS),
@@ -124,7 +129,7 @@ class Table(object):
         # Create links
         for label, secondsago in timeframes:
             link = uri.chart_link(
-                self._datapoint.id(),
+                datapoint.id(),
                 label=label,
                 secondsago=secondsago)
             result = '{}\n<p>{}</p>'.format(result, link)

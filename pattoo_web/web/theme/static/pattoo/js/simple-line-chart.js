@@ -1,5 +1,9 @@
 
-function SimpleLineChart( url, heading ) {
+function SimpleLineChart( url, heading, y_label ) {
+    //  url: URL from which to retrieve data.tsv file
+    //  heading: Heading for chart
+    //  y_label: Label to use for y axis
+
     // set the dimensions and margins of the graph
     var margin = {top: 20, right: 50, bottom: 50, left: 75};
     var headingVOffset = 0;
@@ -85,10 +89,11 @@ function SimpleLineChart( url, heading ) {
           .attr('class', 'axisChart')
           .call(d3.axisLeft(y))
           .append('text')
-          .style('font', '20px Nunito')
           .attr('transform', 'rotate(-90)')
           .attr('y', 6)
-          .attr('dy', '0.71em');
+          .attr('dy', '0.71em')
+          .attr('fill', '#000000')
+          .text(y_label);
 
     });
 

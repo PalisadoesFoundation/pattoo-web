@@ -4,6 +4,7 @@
 import os
 import unittest
 import sys
+from random import random
 
 # Try to create a working PYTHONPATH
 EXEC_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -20,9 +21,11 @@ This script is not installed in the "pattoo-web/tests/test_pattoo_web" directory
     sys.exit(2)
 
 from tests.libraries.configuration import UnittestConfig
-from pattoo_web.translate import AgentPair, KeyPair
+from pattoo_web.translate import AgentPair, KeyPair, datapoint_translations
 from pattoo_web.web.query.agent_xlate import AgentXlates
 from pattoo_web.web.query.pair_xlate import PairXlates
+from pattoo_web.constants import Translation
+from pattoo_web.web.query import datapoint as lib_datapoint
 
 
 # Create a common dataset for testing
@@ -47,11 +50,13 @@ PAIRS = {'data': {'allPairXlateGroup': {'edges': [
                       'description': (
                           'Interface Broadcast Packets (HC inbound)'),
                       'key': 'pattoo_agent_snmpd_.1.3.6.1.2.1.31.1.1.1.9',
+                      'units': 'teddy_bear',
                       'language': {'code': 'en'}}},
                   {'node': {
                       'description': (
                           'Interface Multicast Packets (HC inbound)'),
                       'key': 'pattoo_agent_snmpd_.1.3.6.1.2.1.31.1.1.1.8',
+                      'units': 'koala_bear',
                       'language': {'code': 'en'}}}]}}},
     {'node': {'id': 'UGFpclhsYXRlR3JvdXA6NA==',
               'idxPairXlateGroup': '4',
@@ -59,11 +64,27 @@ PAIRS = {'data': {'allPairXlateGroup': {'edges': [
                   {'node': {
                       'description': 'Supply Air Temperature (F)',
                       'key': 'pattoo_agent_modbustcpd_input_register_30486',
+                      'units': 'grizzly_bear',
                       'language': {'code': 'en'}}},
                   {'node': {
                       'description': 'Return Air Temperature (F)',
                       'key': 'pattoo_agent_modbustcpd_input_register_30488',
                       'language': {'code': 'en'}}}]}}}]}}}
+
+DATAPOINT = {'data': {'datapoint': {
+    'agent': {'agentGroup': {'pairXlateGroup': {
+        'id': 'UGFpclhsYXRlR3JvdXA6MQ==',
+        'idxPairXlateGroup': '2'}},
+              'agentPolledTarget': 'this_pc',
+              'agentProgram': 'pattoo_test_snmpd'},
+    'glueDatapoint': {'edges': [
+        {'node': {'pair': {'key': 'pattoo_agent_snmpd_oid',
+                           'value': '.1.3.6.1.2.1.2.2.1.10.345'}}},
+        {'node': {'pair': {
+            'key': 'pattoo_key',
+            'value': 'pattoo_agent_snmpd_.1.3.6.1.2.1.31.1.1.1.8'}}}]},
+    'id': 'RGF0YVBvaW50OjM=',
+    'idxDatapoint': '3'}}}
 
 
 class TestKeyPair(unittest.TestCase):
@@ -79,13 +100,23 @@ class TestKeyPair(unittest.TestCase):
 
     def test_key(self):
         """Testing method / function key."""
+        # Test with values that have translations from the pattoo server
         translator = KeyPair(PairXlates(PAIRS).datapoints())
         for item in PAIRS['data']['allPairXlateGroup']['edges']:
             ipxg = item['node'].get('idxPairXlateGroup')
             for next_item in item['node']['pairXlatePairXlateGroup']['edges']:
                 key = next_item['node'].get('key')
-                expected = next_item['node'].get('description')
-                self.assertEqual(translator.key(key, ipxg), expected)
+                _description = next_item['node'].get('description')
+                _units = next_item['node'].get('units')
+                self.assertEqual(
+                    translator.key(key, ipxg),
+                    Translation(description=_description, units=_units))
+
+        # Test with values that have no translations
+        for key in [
+                str(random()), str(random()), str(random()), str(random())]:
+            result = translator.key(key, ipxg)
+            self.assertEqual(result, Translation(description=key, units=''))
 
 
 class TestAgentPair(unittest.TestCase):
@@ -106,6 +137,30 @@ class TestAgentPair(unittest.TestCase):
             agent_program = item['node'].get('agentProgram')
             expected = item['node'].get('description')
             self.assertEqual(translator.agent_program(agent_program), expected)
+
+
+class TestBasicFunctions(unittest.TestCase):
+    """Checks all functions and methods."""
+
+    #########################################################################
+    # General object setup
+    #########################################################################
+
+    def test_datapoint_translations(self):
+        """Testing method / function datapoint_translations."""
+        _dp = lib_datapoint.DataPoint(DATAPOINT)
+        translator = KeyPair(PairXlates(PAIRS).datapoints())
+        result = datapoint_translations(_dp, translator)
+        self.assertEqual(result.datapoint, _dp)
+        self.assertEqual(
+            result.pattoo_key_translation,
+            Translation(
+                description='Interface Multicast Packets (HC inbound)',
+                units='koala_bear'))
+        self.assertEqual(
+            result.metadata_translations,
+            [(Translation(description='pattoo_agent_snmpd_oid', units=''),
+              '.1.3.6.1.2.1.2.2.1.10.345')])
 
 
 if __name__ == '__main__':

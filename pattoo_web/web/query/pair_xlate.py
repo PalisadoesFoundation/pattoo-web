@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
 """Pattoo classes that manage GraphQL pair translation related queries."""
 
-from collections import namedtuple
-
 from pattoo_web.configuration import Config
 from pattoo_web.translate import KeyPair
 from pattoo_web.phttp import get
-
+from pattoo_web.constants import Translation
 
 class PairXlates(object):
     """Class to process the results of the GraphQL query below.
@@ -167,7 +165,6 @@ class PairXlate(object):
         """
         # Return result
         result = {}
-        Translation = namedtuple('Translation', 'description units')
 
         system_language_code = Config().language()
         for node in self._nodes:
@@ -180,7 +177,8 @@ class PairXlate(object):
             key = node['node'].get('key')
             description = node['node'].get('description')
             units = node['node'].get('units')
-            result[key] = Translation(description=description, units=units)
+            result[key] = Translation(
+                description=description, units=units)
         return result
 
 

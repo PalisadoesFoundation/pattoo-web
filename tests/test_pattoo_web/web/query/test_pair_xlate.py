@@ -30,6 +30,7 @@ This script is not installed in the "pattoo-web/tests/test_pattoo_web\
 from tests.libraries.configuration import UnittestConfig
 from pattoo_web.web.query import pair_xlate
 from pattoo_shared import data
+from pattoo_web.constants import Translation
 
 _LANGUAGE = data.hashstring(str(random()))
 
@@ -147,47 +148,51 @@ class TestPairXlate(unittest.TestCase):
 
     def test_translations(self):
         """Testing method / function translation."""
-        # Initialize key variables
-        Translation = namedtuple('Translation', 'description units')
-
         # Test
         ids = [
             {'1': {}},
             {'2': {
-                'pattoo_agent_snmpd_.1.3.6.1.2.1.31.1.1.1.8': Translation(
-                    description='Interface Multicast Packets (HC inbound)',
-                    units='p/s'),
-                'pattoo_agent_snmpd_.1.3.6.1.2.1.31.1.1.1.9': Translation(
-                    description='Interface Broadcast Packets (HC inbound)',
-                    units='p/s')}},
+                'pattoo_agent_snmpd_.1.3.6.1.2.1.31.1.1.1.8': (
+                    Translation(
+                        description='Interface Multicast Packets (HC inbound)',
+                        units='p/s')),
+                'pattoo_agent_snmpd_.1.3.6.1.2.1.31.1.1.1.9': (
+                    Translation(
+                        description='Interface Broadcast Packets (HC inbound)',
+                        units='p/s'))}},
             {'4': {
-                'pattoo_agent_modbustcpd_input_register_30486': Translation(
-                    description='Supply Air Temperature (F)',
-                    units='Degrees (F)'),
-                'pattoo_agent_modbustcpd_input_register_30488': Translation(
-                    description='Return Air Temperature (F)',
-                    units='Degrees (F)')}}
+                'pattoo_agent_modbustcpd_input_register_30486': (
+                    Translation(
+                        description='Supply Air Temperature (F)',
+                        units='Degrees (F)')),
+                'pattoo_agent_modbustcpd_input_register_30488': (
+                    Translation(
+                        description='Return Air Temperature (F)',
+                        units='Degrees (F)'))}}
         ]
         for index, item in enumerate(self.tester):
             self.assertEqual(item.translations(), ids[index])
         self.assertEqual(
             self.other_tester.translations(),
             {'5': {
-                'pattoo_agent_bacnetipd_analog_value_point_27': Translation(
-                    description='Output KVA (Main Panel)',
-                    units='KVA'),
-                'pattoo_agent_bacnetipd_analog_value_point_34': Translation(
-                    description='Percentage Load (Main Panel)',
-                    units='Percent')}})
+                'pattoo_agent_bacnetipd_analog_value_point_27': (
+                    Translation(
+                        description='Output KVA (Main Panel)',
+                        units='KVA')),
+                'pattoo_agent_bacnetipd_analog_value_point_34': (
+                    Translation(
+                        description='Percentage Load (Main Panel)',
+                        units='Percent'))}})
 
         # Only one of two possible entries should be translated as the other
         # is of an unconfigured language code
         self.assertEqual(
             self.other_tester2.translations(),
             {'5': {
-                'pattoo_agent_bacnetipd_analog_value_point_19': Translation(
-                    description='Output KVA (Main Panel)',
-                    units='KVA')}})
+                'pattoo_agent_bacnetipd_analog_value_point_19': (
+                    Translation(
+                        description='Output KVA (Main Panel)',
+                        units='KVA'))}})
 
     def test__lookup(self):
         """Testing method / function __lookup."""

@@ -15,7 +15,7 @@ from pattoo_web import uri
 from pattoo_web.constants import SECONDS_IN_DAY
 from pattoo_web.web.query.pair_xlate import translation
 from pattoo_web.web.query.datapoint import datapoint
-
+from pattoo_web.translate import datapoint_translations
 
 # Define the various global variables
 PATTOO_WEB_CHART = Blueprint('PATTOO_WEB_CHART', __name__)
@@ -40,23 +40,20 @@ def route_chart(identifier):
 
     if point.valid is True:
         # Get translations from API server
-        translate = translation(point.id_pair_xlate_group())
-
-        # Translate key
-        xlate_units = translate.key(
-            point.pattoo_key(), point.idx_pair_xlate_group())
+        key_pair_translator = translation(point.id_pair_xlate_group())
+        point_xlate = datapoint_translations(point, key_pair_translator)
 
         # Get table to present
-        table = chart.Table(point, secondsago)
+        table = chart.Table(point_xlate, secondsago)
         html = table.html()
 
         # Get footer
-        footer = _footer(point)
+        footer = _footer(point_xlate)
 
         return render_template(
             'chart.html',
             main_table=html,
-            key=xlate_units.description,
+            key=point_xlate.pattoo_key_translation.description,
             footer=footer,
             target=point.agent_polled_target())
 
@@ -120,7 +117,7 @@ HTTP {} error for receiving data from server {}\
     return jsonify(data)
 
 
-def _footer(point):
+def _footer(point_xlate):
     """Create a footer to use for the chart.
 
     Args:
@@ -131,15 +128,12 @@ def _footer(point):
 
     """
     # Initialize key variables
-    translate = translation(point.id_pair_xlate_group())
-    kvps = point.key_value_pairs()
-    index = point.idx_pair_xlate_group()
     result = ''
 
     # Process
-    for (key, value) in kvps:
+    for (meta, value) in point_xlate.metadata_translations:
         # Translate key
-        description = translate.key(key, index)
+        description = meta.description
         result = '{}{}: {}<br>'.format(result, description, value)
 
     # Return
