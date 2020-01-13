@@ -43,7 +43,7 @@ def route_chart(identifier):
         translate = translation(point.id_pair_xlate_group())
 
         # Translate key
-        pattoo_key = translate.key(
+        xlate_units = translate.key(
             point.pattoo_key(), point.idx_pair_xlate_group())
 
         # Get table to present
@@ -56,7 +56,7 @@ def route_chart(identifier):
         return render_template(
             'chart.html',
             main_table=html,
-            key=pattoo_key,
+            key=xlate_units.description,
             footer=footer,
             target=point.agent_polled_target())
 
