@@ -1,5 +1,40 @@
 """Module that does translations."""
 
+from pattoo_web.constants import DataPointTranslations, Translation
+
+
+def datapoint_translations(datapoint, keypair):
+    """Create a DataPointTranslations object from a DataPoint.
+
+    Args:
+        datapoint: pattoo_web.web.query.datapoint DataPoint object
+        keypair: KeyPair object
+
+    Returns:
+        result: DataPointTranslations object
+
+    """
+    # Initialize key variables
+    metadata_translations = []
+    idx_pair_xlate_group = datapoint.idx_pair_xlate_group()
+
+    # Translate the DataPoint pattoo_key
+    pattoo_key_translation = keypair.key(
+        datapoint.pattoo_key(), idx_pair_xlate_group)
+
+    # Translate the DataPoint metadata
+    kvps = datapoint.key_value_pairs()
+    for key, value in kvps:
+        meta_xlate = keypair.key(key, idx_pair_xlate_group)
+        metadata_translations.append((meta_xlate, value))
+
+    # Return
+    result = DataPointTranslations(
+        metadata_translations=metadata_translations,
+        pattoo_key_translation=pattoo_key_translation,
+        datapoint=datapoint)
+    return result
+
 
 class KeyPair(object):
     """Class to process the results of a PairXlates object."""
@@ -8,7 +43,7 @@ class KeyPair(object):
         """Initialize the class.
 
         Args:
-            data: PairXlates object
+            data: pattoo_web.web.query.datapoint PairXlates object
 
         Returns:
             None
@@ -31,13 +66,14 @@ class KeyPair(object):
 
         """
         # Initialize the class
-        result = None
+        result = Translation(description=key, units='')
         if self._data is not None:
             for item in self._data:
                 if item.idx_pair_xlate_group() == idx_pair_xlate_group:
                     translations = item.translations()
                     table = translations[idx_pair_xlate_group]
-                    result = table.get(key, key)
+                    result = table.get(
+                        key, Translation(description=key, units=''))
                     break
         return result
 

@@ -10,23 +10,27 @@ EXEC_DIR = os.path.dirname(os.path.realpath(__file__))
 ROOT_DIR = os.path.abspath(os.path.join(
     os.path.abspath(os.path.join(
         os.path.abspath(os.path.join(
-            EXEC_DIR, os.pardir)), os.pardir)), os.pardir))
+            os.path.abspath(os.path.join(
+                EXEC_DIR, os.pardir)), os.pardir)), os.pardir)), os.pardir))
 
 if EXEC_DIR.endswith(
-        '/pattoo-web/tests/test_pattoo_web/web') is True:
+        '/pattoo-web/tests/test_pattoo_web/web/tables') is True:
     # We need to prepend the path in case PattooShared has been installed
     # elsewhere on the system using PIP. This could corrupt expected results
     sys.path.insert(0, ROOT_DIR)
 else:
     print('''\
 This script is not installed in the "pattoo-web/tests/test_pattoo_web\
-/web" directory. Please fix.''')
+/tables/web" directory. Please fix.''')
     sys.exit(2)
+
 
 from tests.libraries.configuration import UnittestConfig
 from pattoo_web.web.query import agent as agent_query
 from pattoo_web.web.tables import chart
 from pattoo_web.web.query.datapoint import DataPoint
+from pattoo_web.translate import KeyPair, datapoint_translations
+from pattoo_web.web.query.pair_xlate import PairXlates
 
 
 # Create a common dataset for testing
@@ -44,6 +48,23 @@ DATAPOINT = {'data': {'datapoint': {
             'value': '123'}}}]},
     'id': 'RGF0YVBvaW50OjM=',
     'idxDatapoint': '3'}}}
+
+PAIRS = {'data': {'allPairXlateGroup': {'edges': [
+    {'node': {'id': 'UGFpclhsYXRlR3JvdXA6Mg==',
+              'idxPairXlateGroup': '10',
+              'pairXlatePairXlateGroup': {'edges': [
+                  {'node': {
+                      'description': (
+                          'Interface Broadcast Packets (HC inbound)'),
+                      'key': 'pattoo_agent_snmpd_oid',
+                      'units': 'teddy_bear',
+                      'language': {'code': 'en'}}},
+                  {'node': {
+                      'description': (
+                          'Interface Multicast Packets (HC inbound)'),
+                      'key': 'pattoo_key',
+                      'units': 'koala_bear',
+                      'language': {'code': 'en'}}}]}}}]}}}
 
 
 class TestRawCol(unittest.TestCase):
@@ -88,6 +109,10 @@ class TestTable(unittest.TestCase):
     #########################################################################
     # General object setup
     #########################################################################
+    point = DataPoint(DATAPOINT)
+    translator = KeyPair(PairXlates(PAIRS).datapoints())
+    dpt = datapoint_translations(point, translator)
+    tester = chart.Table(dpt, 501)
 
     def test___init__(self):
         """Testing method / function __init__."""
@@ -95,12 +120,8 @@ class TestTable(unittest.TestCase):
 
     def test_html(self):
         """Testing method / function html."""
-        secondsago = 500
-        point = DataPoint(DATAPOINT)
-        tester = chart.Table(point, secondsago)
-
         # Test
-        result = tester.html()
+        result = self.tester.html()
         expected = '''\
 <table cellspacing="0" class="table table-bordered" id="dataTable" \
 width="100%">
@@ -119,7 +140,7 @@ width="100%">
 =31536000">Year</a></p>
 </td><td><div id="pattoo_simple_line_chart"></div>
 <script type="text/javascript">
-  SimpleLineChart("/pattoo/web/chart/3/data?secondsago=500", "this_pc");
+  SimpleLineChart("/pattoo/web/chart/3/data?secondsago=501", "this_pc", "");
 </script></td></tr>
 </tbody>
 </table>\
@@ -128,12 +149,8 @@ width="100%">
 
     def test__timeframe_links(self):
         """Testing method / function _timeframe_links."""
-        secondsago = 500
-        point = DataPoint(DATAPOINT)
-        tester = chart.Table(point, secondsago)
-
         # Test
-        result = tester._timeframe_links()
+        result = self.tester._timeframe_links()
         expected = '''
 <p><a href="/pattoo/web/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
 =86400">Default</a></p>
