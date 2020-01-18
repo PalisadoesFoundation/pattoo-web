@@ -14,7 +14,7 @@ PATTOO_WEBD_NAME = 'pattoo_webd'
 PATTOO_WEBD_PROXY = '{}-gunicorn'.format(
     PATTOO_WEBD_NAME)
 
-Translation = namedtuple('Translation', 'description units')
+Translation = namedtuple('Translation', 'text units')
 DataPointTranslations = namedtuple(
     'DataPointTranslations',
     'datapoint metadata_translations pattoo_key_translation')

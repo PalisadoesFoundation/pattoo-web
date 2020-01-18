@@ -96,7 +96,7 @@ def _flask_table_rows(datapoints):
         key_value_pairs = datapoint.key_value_pairs()
         metadata = ['''\
 {}: {}'''.format(translate.key(
-    key, ipxg).description, value) for key, value in key_value_pairs]
+    key, ipxg).text, value) for key, value in key_value_pairs]
 
         # Prepend the name of the agent_program
         extended_metadata = [
@@ -104,7 +104,7 @@ def _flask_table_rows(datapoints):
         extended_metadata.extend(metadata)
 
         # Translate the key too
-        translated_key = translate.key(key, ipxg).description
+        translated_key = translate.key(key, ipxg).text
 
         # Create link to charts
         link = uri.chart_link(_id)

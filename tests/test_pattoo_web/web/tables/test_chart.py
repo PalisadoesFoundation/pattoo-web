@@ -54,13 +54,13 @@ PAIRS = {'data': {'allPairXlateGroup': {'edges': [
               'idxPairXlateGroup': '10',
               'pairXlatePairXlateGroup': {'edges': [
                   {'node': {
-                      'description': (
+                      'translation': (
                           'Interface Broadcast Packets (HC inbound)'),
                       'key': 'pattoo_agent_snmpd_oid',
                       'units': 'teddy_bear',
                       'language': {'code': 'en'}}},
                   {'node': {
-                      'description': (
+                      'translation': (
                           'Interface Multicast Packets (HC inbound)'),
                       'key': 'pattoo_key',
                       'units': 'koala_bear',
