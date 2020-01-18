@@ -18,7 +18,7 @@ class PairXlates(object):
               edges {
                 node {
                   key
-                  description
+                  translation
                   units
                   language {
                     code
@@ -76,7 +76,7 @@ class PairXlate(object):
           edges {
             node {
               key
-              description
+              translation
               units
               language {
                 code
@@ -175,10 +175,10 @@ class PairXlate(object):
 
             # Update
             key = node['node'].get('key')
-            description = node['node'].get('description')
+            translation = node['node'].get('translation')
             units = node['node'].get('units')
             result[key] = Translation(
-                description=description, units=units)
+                text=translation, units=units)
         return result
 
 
@@ -204,7 +204,7 @@ def translations():
           edges {
             node {
               key
-              description
+              translation
               units
               language {
                 code
@@ -244,7 +244,7 @@ def translation(graphql_id):
       edges {
         node {
           key
-          description
+          translation
           units
             language {
               code

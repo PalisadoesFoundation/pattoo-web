@@ -53,7 +53,7 @@ def route_chart(identifier):
         return render_template(
             'chart.html',
             main_table=html,
-            key=point_xlate.pattoo_key_translation.description,
+            key=point_xlate.pattoo_key_translation.translation,
             footer=footer,
             target=point.agent_polled_target())
 
@@ -133,8 +133,8 @@ def _footer(point_xlate):
     # Process
     for (meta, value) in point_xlate.metadata_translations:
         # Translate key
-        description = meta.description
-        result = '{}{}: {}<br>'.format(result, description, value)
+        translation = meta.translation
+        result = '{}{}: {}<br>'.format(result, translation, value)
 
     # Return
     result = '<p>{}</p>'.format(result)

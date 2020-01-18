@@ -66,14 +66,14 @@ class KeyPair(object):
 
         """
         # Initialize the class
-        result = Translation(description=key, units='')
+        result = Translation(text=key, units='')
         if self._data is not None:
             for item in self._data:
                 if item.idx_pair_xlate_group() == idx_pair_xlate_group:
                     translations = item.translations()
                     table = translations[idx_pair_xlate_group]
                     result = table.get(
-                        key, Translation(description=key, units=''))
+                        key, Translation(text=key, units=''))
                     break
         return result
 

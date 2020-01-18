@@ -43,13 +43,13 @@ PAIRS = {'data': {'allPairXlateGroup': {'edges': [
               'idxPairXlateGroup': '2',
               'pairXlatePairXlateGroup': {'edges': [
                   {'node': {
-                      'description': (
+                      'translation': (
                           'Interface Broadcast Packets (HC inbound)'),
                       'key': 'pattoo_agent_snmpd_.1.3.6.1.2.1.31.1.1.1.9',
                       'units': 'p/s',
                       'language': {'code': 'en'}}},
                   {'node': {
-                      'description': (
+                      'translation': (
                           'Interface Multicast Packets (HC inbound)'),
                       'key': 'pattoo_agent_snmpd_.1.3.6.1.2.1.31.1.1.1.8',
                       'units': 'p/s',
@@ -58,12 +58,12 @@ PAIRS = {'data': {'allPairXlateGroup': {'edges': [
               'idxPairXlateGroup': '4',
               'pairXlatePairXlateGroup': {'edges': [
                   {'node': {
-                      'description': 'Supply Air Temperature (F)',
+                      'translation': 'Supply Air Temperature (F)',
                       'key': 'pattoo_agent_modbustcpd_input_register_30486',
                       'units': 'Degrees (F)',
                       'language': {'code': 'en'}}},
                   {'node': {
-                      'description': 'Return Air Temperature (F)',
+                      'translation': 'Return Air Temperature (F)',
                       'key': 'pattoo_agent_modbustcpd_input_register_30488',
                       'units': 'Degrees (F)',
                       'language': {'code': 'en'}}}]}}}]}}}
@@ -72,11 +72,11 @@ PAIR = {'data': {'pairXlateGroup': {
     'id': 'UGFpclhsYXRlR3JvdXA6NQ==',
     'idxPairXlateGroup': '5',
     'pairXlatePairXlateGroup': {'edges': [
-        {'node': {'description': 'Output KVA (Main Panel)',
+        {'node': {'translation': 'Output KVA (Main Panel)',
                   'key': 'pattoo_agent_bacnetipd_analog_value_point_27',
                   'units': 'KVA',
                   'language': {'code': 'en'}}},
-        {'node': {'description': 'Percentage Load (Main Panel)',
+        {'node': {'translation': 'Percentage Load (Main Panel)',
                   'key': 'pattoo_agent_bacnetipd_analog_value_point_34',
                   'units': 'Percent',
                   'language': {'code': 'en'}}}]}}}}
@@ -85,11 +85,11 @@ PAIR2 = {'data': {'pairXlateGroup': {
     'id': 'UGFpclhsYXRlR3JvdXA6NQ==',
     'idxPairXlateGroup': '5',
     'pairXlatePairXlateGroup': {'edges': [
-        {'node': {'description': 'Output KVA (Main Panel)',
+        {'node': {'translation': 'Output KVA (Main Panel)',
                   'key': 'pattoo_agent_bacnetipd_analog_value_point_19',
                   'units': 'KVA',
                   'language': {'code': 'en'}}},
-        {'node': {'description': 'Percentage Load (Main Panel)',
+        {'node': {'translation': 'Percentage Load (Main Panel)',
                   'key': 'pattoo_agent_bacnetipd_analog_value_point_78',
                   'units': 'Percent',
                   'language': {'code': _LANGUAGE}}}]}}}}
@@ -154,20 +154,20 @@ class TestPairXlate(unittest.TestCase):
             {'2': {
                 'pattoo_agent_snmpd_.1.3.6.1.2.1.31.1.1.1.8': (
                     Translation(
-                        description='Interface Multicast Packets (HC inbound)',
+                        text='Interface Multicast Packets (HC inbound)',
                         units='p/s')),
                 'pattoo_agent_snmpd_.1.3.6.1.2.1.31.1.1.1.9': (
                     Translation(
-                        description='Interface Broadcast Packets (HC inbound)',
+                        text='Interface Broadcast Packets (HC inbound)',
                         units='p/s'))}},
             {'4': {
                 'pattoo_agent_modbustcpd_input_register_30486': (
                     Translation(
-                        description='Supply Air Temperature (F)',
+                        text='Supply Air Temperature (F)',
                         units='Degrees (F)')),
                 'pattoo_agent_modbustcpd_input_register_30488': (
                     Translation(
-                        description='Return Air Temperature (F)',
+                        text='Return Air Temperature (F)',
                         units='Degrees (F)'))}}
         ]
         for index, item in enumerate(self.tester):
@@ -177,11 +177,11 @@ class TestPairXlate(unittest.TestCase):
             {'5': {
                 'pattoo_agent_bacnetipd_analog_value_point_27': (
                     Translation(
-                        description='Output KVA (Main Panel)',
+                        text='Output KVA (Main Panel)',
                         units='KVA')),
                 'pattoo_agent_bacnetipd_analog_value_point_34': (
                     Translation(
-                        description='Percentage Load (Main Panel)',
+                        text='Percentage Load (Main Panel)',
                         units='Percent'))}})
 
         # Only one of two possible entries should be translated as the other
@@ -191,7 +191,7 @@ class TestPairXlate(unittest.TestCase):
             {'5': {
                 'pattoo_agent_bacnetipd_analog_value_point_19': (
                     Translation(
-                        description='Output KVA (Main Panel)',
+                        text='Output KVA (Main Panel)',
                         units='KVA'))}})
 
     def test__lookup(self):

@@ -35,23 +35,23 @@ _LANGUAGE = data.hashstring(str(random()))
 # Create a common dataset for testing
 AGENTS = {'data': {'allAgentXlate': {'edges': [
     {'node': {'agentProgram': 'pattoo_agent_os_autonomousd',
-              'description': 'Pattoo Standard OS Autonomous AgentXlate',
+              'translation': 'Pattoo Standard OS Autonomous AgentXlate',
               'id': 'QWdlbnRYbGF0ZTox',
               'language': {'code': 'en'}}},
     {'node': {'agentProgram': 'pattoo_agent_snmpd',
-              'description': 'Pattoo Standard SNMP AgentXlate',
+              'translation': 'Pattoo Standard SNMP AgentXlate',
               'id': 'QWdlbnRYbGF0ZToz',
               'language': {'code': 'en'}}}]}}}
 
 AGENT = {'data': {'agentXlate': {
     'agentProgram': 'pattoo_agent_snmp_ifmibd',
-    'description': 'Pattoo Standard IfMIB SNMP AgentXlate',
+    'translation': 'Pattoo Standard IfMIB SNMP AgentXlate',
     'id': 'QWdlbnRYbGF0ZTo0',
     'language': {'code': 'en'}}}}
 
 AGENT2 = {'data': {'agentXlate': {
     'agentProgram': 'pattoo_agent_snmp_ifmibd',
-    'description': 'Pattoo Standard IfMIB SNMP AgentXlate',
+    'translation': 'Pattoo Standard IfMIB SNMP AgentXlate',
     'id': 'QWdlbnRYbGF0ZTo0',
     'language': {'code': _LANGUAGE}}}}
 

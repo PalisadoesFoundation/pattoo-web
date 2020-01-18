@@ -31,11 +31,11 @@ from pattoo_web.web.query import datapoint as lib_datapoint
 # Create a common dataset for testing
 AGENTS = {'data': {'allAgentXlate': {'edges': [
     {'node': {'agentProgram': 'pattoo_agent_os_autonomousd',
-              'description': 'Pattoo Standard OS Autonomous AgentXlate',
+              'translation': 'Pattoo Standard OS Autonomous AgentXlate',
               'id': 'QWdlbnRYbGF0ZTox',
               'language': {'code': 'en'}}},
     {'node': {'agentProgram': 'pattoo_agent_snmpd',
-              'description': 'Pattoo Standard SNMP AgentXlate',
+              'translation': 'Pattoo Standard SNMP AgentXlate',
               'id': 'QWdlbnRYbGF0ZToz',
               'language': {'code': 'en'}}}]}}}
 
@@ -47,13 +47,13 @@ PAIRS = {'data': {'allPairXlateGroup': {'edges': [
               'idxPairXlateGroup': '2',
               'pairXlatePairXlateGroup': {'edges': [
                   {'node': {
-                      'description': (
+                      'translation': (
                           'Interface Broadcast Packets (HC inbound)'),
                       'key': 'pattoo_agent_snmpd_.1.3.6.1.2.1.31.1.1.1.9',
                       'units': 'teddy_bear',
                       'language': {'code': 'en'}}},
                   {'node': {
-                      'description': (
+                      'translation': (
                           'Interface Multicast Packets (HC inbound)'),
                       'key': 'pattoo_agent_snmpd_.1.3.6.1.2.1.31.1.1.1.8',
                       'units': 'koala_bear',
@@ -62,12 +62,12 @@ PAIRS = {'data': {'allPairXlateGroup': {'edges': [
               'idxPairXlateGroup': '4',
               'pairXlatePairXlateGroup': {'edges': [
                   {'node': {
-                      'description': 'Supply Air Temperature (F)',
+                      'translation': 'Supply Air Temperature (F)',
                       'key': 'pattoo_agent_modbustcpd_input_register_30486',
                       'units': 'grizzly_bear',
                       'language': {'code': 'en'}}},
                   {'node': {
-                      'description': 'Return Air Temperature (F)',
+                      'translation': 'Return Air Temperature (F)',
                       'key': 'pattoo_agent_modbustcpd_input_register_30488',
                       'language': {'code': 'en'}}}]}}}]}}}
 
@@ -106,17 +106,17 @@ class TestKeyPair(unittest.TestCase):
             ipxg = item['node'].get('idxPairXlateGroup')
             for next_item in item['node']['pairXlatePairXlateGroup']['edges']:
                 key = next_item['node'].get('key')
-                _description = next_item['node'].get('description')
+                _translation = next_item['node'].get('translation')
                 _units = next_item['node'].get('units')
                 self.assertEqual(
                     translator.key(key, ipxg),
-                    Translation(description=_description, units=_units))
+                    Translation(text=_translation, units=_units))
 
         # Test with values that have no translations
         for key in [
                 str(random()), str(random()), str(random()), str(random())]:
             result = translator.key(key, ipxg)
-            self.assertEqual(result, Translation(description=key, units=''))
+            self.assertEqual(result, Translation(text=key, units=''))
 
 
 class TestAgentPair(unittest.TestCase):
@@ -135,7 +135,7 @@ class TestAgentPair(unittest.TestCase):
         translator = AgentPair(AgentXlates(AGENTS).agents())
         for item in AGENTS['data']['allAgentXlate']['edges']:
             agent_program = item['node'].get('agentProgram')
-            expected = item['node'].get('description')
+            expected = item['node'].get('translation')
             self.assertEqual(translator.agent_program(agent_program), expected)
 
 
@@ -155,11 +155,11 @@ class TestBasicFunctions(unittest.TestCase):
         self.assertEqual(
             result.pattoo_key_translation,
             Translation(
-                description='Interface Multicast Packets (HC inbound)',
+                text='Interface Multicast Packets (HC inbound)',
                 units='koala_bear'))
         self.assertEqual(
             result.metadata_translations,
-            [(Translation(description='pattoo_agent_snmpd_oid', units=''),
+            [(Translation(text='pattoo_agent_snmpd_oid', units=''),
               '.1.3.6.1.2.1.2.2.1.10.345')])
 
 

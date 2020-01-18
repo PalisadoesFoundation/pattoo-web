@@ -15,7 +15,7 @@ class AgentXlates(object):
           node {
             id
             agentProgram
-            description
+            translation
             language {
               code
             }
@@ -66,7 +66,7 @@ class AgentXlate(object):
       agentXlate(id: "XXXXXXXXXXXXXXXXXX") {
         id
         agentProgram
-        description
+        translation
         language {
           code
         }
@@ -134,9 +134,9 @@ class AgentXlate(object):
         result = {}
         language_code = Config().language()
         if self.language_code() == language_code:
-            description = self._data.get('description')
+            translation = self._data.get('translation')
             agent_program = self._data.get('agentProgram')
-            result[agent_program] = description
+            result[agent_program] = translation
         return result
 
 
@@ -158,7 +158,7 @@ def translations():
       node {
         id
         agentProgram
-        description
+        translation
         language {
           code
         }
@@ -189,7 +189,7 @@ def translation(graphql_id):
   agentXlate(id: "IDENTIFIER") {
     id
     agentProgram
-    description
+    translation
     language {
       code
     }
