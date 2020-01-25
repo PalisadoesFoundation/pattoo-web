@@ -11,7 +11,7 @@ It is strongly advised that you backup your agents to protect you in the event o
 The following directories need to be saved periodically.
 
 #. The ``PATTOO_CONFIGDIR`` directory which contains your configuration
-#. The ``daemon_directory`` location defined in your configuration. This area stores information used to authenticate your ``pattoo-web`` environment and the ``pattoo`` server.
+#. The ``daemon_directory`` location defined in your configuration. This area stores important authentication information.
 #. The ``pattoo-agents`` directory which contains your source code.
 
 We'll discuss data restoration next.
@@ -22,7 +22,7 @@ Restoration
 It's important to follow these steps in this order when restoring ``pattoo-agents`` after a disaster.
 
 #. FIRST make sure all the ``pattoo`` agents are stopped.
-#. SECOND restore the contents of the ``daemon_directory`` location defined in your configuration. This area stores information used to authenticate your ``pattoo-web`` environment and the ``pattoo`` server.
+#. SECOND restore the contents of the ``daemon_directory`` location defined in your configuration. This area stores important authentication information.
 #. Restore the ``PATTOO_CONFIGDIR`` directory which contains your configuration
 #. Restore ``pattoo-agents`` directory which contains your source code.
 
