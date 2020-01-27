@@ -25,7 +25,6 @@ Follow these steps.
 
     .. code-block:: bash
 
-       $ mkdir -p /installation/parent/directory
        $ cd /installation/parent/directory
        $ git clone https://github.com/PalisadoesFoundation/pattoo-web.git
 
