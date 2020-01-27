@@ -44,8 +44,8 @@ Follow these steps.
 #. Start the ``bin/pattoo_webd.py`` daemon to accept data sent by ``pattoo-agents``. :doc:`configuration`
 
 
-Configuring Agents as systemd Daemons
--------------------------------------
+Configuring systemd Daemons
+---------------------------
 
 You can also setup all the ``pattoo-web`` daemons as system daemons by executing the ``setup/systemd/bin/install_systemd.py`` script.
 
