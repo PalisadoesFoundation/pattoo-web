@@ -13,3 +13,4 @@ pyYAML
 Flask
 Flask-Table
 requests
+gunicorn
