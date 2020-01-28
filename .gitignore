@@ -9,6 +9,8 @@ etc/**
 !etc/.gitkeep
 log/**
 !log/.gitkeep
+cache/**
+!cache/.gitkeep
 daemon/**
 !daemon/.gitkeep
 
