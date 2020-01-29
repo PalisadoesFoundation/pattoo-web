@@ -81,3 +81,10 @@ The script requires you to specify the following parameters. Make sure you have 
    pattoo_webd.service
 
    $
+
+Testing
+-------
+
+You can test whether your ``pattoo-web`` site is operational by visiting http://pattoo.example.com:20200/pattoo where you substitute ``pattoo.example.com`` with the IP address or hostname of your server.
+
+Use the :doc:`troubleshooting` for further steps to take if you have difficulties.

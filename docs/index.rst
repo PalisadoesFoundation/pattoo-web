@@ -23,5 +23,6 @@ General information about the project, including the the prerequisite steps to g
    contributing
    installation
    configuration
+   troubleshooting
    backup
    cron
