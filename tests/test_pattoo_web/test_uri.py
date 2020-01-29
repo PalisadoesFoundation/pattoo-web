@@ -20,7 +20,8 @@ This script is not installed in the "pattoo-web/tests/test_pattoo_web" directory
     sys.exit(2)
 
 from tests.libraries.configuration import UnittestConfig
-from pattoo_shared.constants import PATTOO_WEB_SITE_PREFIX
+from pattoo_shared.constants import (
+    PATTOO_WEB_SITE_PREFIX, PATTOO_API_AGENT_PREFIX)
 from pattoo_web import uri
 
 
