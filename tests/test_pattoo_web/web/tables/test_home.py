@@ -96,10 +96,10 @@ class TestBasicFunctions(unittest.TestCase):
 width="100%">
 <thead><tr><th>#</th><th>Agent Program</th><th>Target</th></tr></thead>
 <tbody>
-<tr><td>1</td><td>pattoo_agent_snmpd</td><td><a href="/pattoo/web/\
-agent/QWdlbnQ6MQ==">localhost</a></td></tr>
-<tr><td>2</td><td>pattoo_agent_snmp_ifmibd</td><td><a href="/pattoo/web/\
-agent/QWdlbnQ6Mg==">that_host</a></td></tr>
+<tr><td>1</td><td>pattoo_agent_snmpd</td><td><a href="/pattoo/agent/\
+QWdlbnQ6MQ==">localhost</a></td></tr>
+<tr><td>2</td><td>pattoo_agent_snmp_ifmibd</td><td><a href="/pattoo/agent/\
+QWdlbnQ6Mg==">that_host</a></td></tr>
 </tbody>
 </table>\
 '''
@@ -114,11 +114,11 @@ agent/QWdlbnQ6Mg==">that_host</a></td></tr>
             {'index': '1',
              'agent_program': 'pattoo_agent_snmpd',
              'agent_polled_target': '''\
-<a href="/pattoo/web/agent/QWdlbnQ6MQ==">localhost</a>'''},
+<a href="/pattoo/agent/QWdlbnQ6MQ==">localhost</a>'''},
             {'index': '2',
              'agent_program': 'pattoo_agent_snmp_ifmibd',
              'agent_polled_target': '''\
-<a href="/pattoo/web/agent/QWdlbnQ6Mg==">that_host</a>'''}]
+<a href="/pattoo/agent/QWdlbnQ6Mg==">that_host</a>'''}]
         self.assertEqual(result, expected)
 
 

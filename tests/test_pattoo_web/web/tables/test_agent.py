@@ -105,7 +105,7 @@ Metadata</th><th>Chart</th></tr></thead>
 <tbody>
 <tr><td>localhost</td><td>pattoo_agent_snmpd_.1.3.6.1.2.1.2.2.1.16\
 </td><td><p>Pattoo Agent: pattoo_agent_snmpd<br>pattoo_agent_snmpd_oid: \
-.1.3.6.1.2.1.2.2.1.16.3</p></td><td><a href="/pattoo/web/chart/datapoint/\
+.1.3.6.1.2.1.2.2.1.16.3</p></td><td><a href="/pattoo/chart/datapoint/\
 RGF0YVBvaW50OjY=?secondsago=86400">Chart Data</a></td></tr>
 </tbody>
 </table>\
@@ -125,7 +125,7 @@ RGF0YVBvaW50OjY=?secondsago=86400">Chart Data</a></td></tr>
 <p>Pattoo Agent: pattoo_agent_snmpd<br>pattoo_agent_snmpd_oid: \
 .1.3.6.1.2.1.2.2.1.16.3</p>''',
             'link': '''\
-<a href="/pattoo/web/chart/datapoint/RGF0YVBvaW50OjY=?secondsago=86400">\
+<a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjY=?secondsago=86400">\
 Chart Data</a>'''}]
         self.assertEqual(result, expected)
 

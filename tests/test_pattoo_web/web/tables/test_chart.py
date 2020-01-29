@@ -128,19 +128,19 @@ width="100%">
 <thead><tr><th>Timeframe</th><th>Chart</th></tr></thead>
 <tbody>
 <tr><td>
-<p><a href="/pattoo/web/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
+<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
 =86400">Default</a></p>
-<p><a href="/pattoo/web/chart/datapoint/RGF0YVBvaW50OjM=?secondsago=\
+<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago=\
 604800">Week</a></p>
-<p><a href="/pattoo/web/chart/datapoint/RGF0YVBvaW50OjM=?secondsago=\
+<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago=\
 2592000">Month</a></p>
-<p><a href="/pattoo/web/chart/datapoint/RGF0YVBvaW50OjM=?secondsago=\
+<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago=\
 7776000">Quarter</a></p>
-<p><a href="/pattoo/web/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
+<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
 =31536000">Year</a></p>
 </td><td><div id="pattoo_simple_line_chart"></div>
 <script type="text/javascript">
-  SimpleLineChart("/pattoo/web/chart/3/data?secondsago=501", "this_pc", "");
+  SimpleLineChart("/pattoo/chart/3/data?secondsago=501", "this_pc", "");
 </script></td></tr>
 </tbody>
 </table>\
@@ -152,15 +152,15 @@ width="100%">
         # Test
         result = self.tester._timeframe_links()
         expected = '''
-<p><a href="/pattoo/web/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
+<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
 =86400">Default</a></p>
-<p><a href="/pattoo/web/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
+<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
 =604800">Week</a></p>
-<p><a href="/pattoo/web/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
+<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
 =2592000">Month</a></p>
-<p><a href="/pattoo/web/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
+<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
 =7776000">Quarter</a></p>
-<p><a href="/pattoo/web/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
+<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
 =31536000">Year</a></p>
 '''
         self.assertEqual(result, expected)
