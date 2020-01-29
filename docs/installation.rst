@@ -4,6 +4,15 @@ Basic Installation
 
 This section covers some key steps to get you started.
 
+Prerequisites
+-------------
+
+There are some software components that need to be installed prior to starting.
+
+#. ``pattoo`` only runs on Python 3.6 or higher
+
+Let's install the software.
+
 Installation
 ------------
 
