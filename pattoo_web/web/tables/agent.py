@@ -121,6 +121,5 @@ def _flask_table_rows(datapoints):
             ))
 
     # Return sorted result
-    result = sorted(
-        result, key=itemgetter('target', 'key'))            
+    result = sorted(result, key=itemgetter('target', 'key'))            
     return result
