@@ -2,7 +2,7 @@
 """Create homepage table."""
 
 # Standard imports
-from operator import attrgetter
+from operator import itemgetter
 
 # PIP libraries
 from flask_table import Table, Col
@@ -104,5 +104,5 @@ def _flask_table_rows(_agents):
 
     # Return sorted result
     result = sorted(
-        result, key=attrgetter('agent_program', 'agent_polled_target'))
+        result, key=itemgetter('agent_program', 'agent_polled_target'))
     return result
