@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Create homepage table."""
 
+# Standard imports
+from operator import itemgetter
+
 # PIP libraries
 from flask_table import Table, Col
 
@@ -116,4 +119,8 @@ def _flask_table_rows(datapoints):
             metadata='<p>{}</p>'.format('<br>'.join(extended_metadata)),
             link=link
             ))
+
+    # Return sorted result
+    result = sorted(
+        result, key=itemgetter('target', 'key'))            
     return result
