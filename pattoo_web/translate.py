@@ -75,6 +75,9 @@ class KeyPair(object):
                     result = table.get(
                         key, Translation(text=key, units=''))
                     break
+
+        if result is None:
+            result = 'No translation for key {} in database'.format(key)
         return result
 
 

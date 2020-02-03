@@ -6,6 +6,7 @@ from pattoo_web.translate import KeyPair
 from pattoo_web.phttp import get
 from pattoo_web.constants import Translation
 
+
 class PairXlates(object):
     """Class to process the results of the GraphQL query below.
 
@@ -175,10 +176,10 @@ class PairXlate(object):
 
             # Update
             key = node['node'].get('key')
-            translation = node['node'].get('translation')
+            _translation = node['node'].get('translation')
             units = node['node'].get('units')
             result[key] = Translation(
-                text=translation, units=units)
+                text=_translation, units=units)
         return result
 
 
@@ -216,7 +217,6 @@ def translations():
     }
   }
 }
-
 '''
     # Get translations from API server
     query_result = get(query)
