@@ -108,6 +108,8 @@ def _flask_table_rows(datapoints):
 
         # Translate the key too
         translated_key = translate.key(key, ipxg).text
+        if translated_key == 'nan':
+            translated_key = key
 
         # Create link to charts
         link = uri.chart_link(_id)
@@ -121,5 +123,5 @@ def _flask_table_rows(datapoints):
             ))
 
     # Return sorted result
-    result = sorted(result, key=itemgetter('target', 'key'))            
+    result = sorted(result, key=itemgetter('target', 'key'))
     return result
