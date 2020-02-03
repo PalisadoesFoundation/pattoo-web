@@ -1,6 +1,7 @@
 """Module that does translations."""
 
 from pattoo_web.constants import DataPointTranslations, Translation
+from pattoo_shared import log
 
 
 def datapoint_translations(datapoint, keypair):
@@ -65,19 +66,24 @@ class KeyPair(object):
             result: Result of the translation
 
         """
-        # Initialize the class
+        # Initialize key variables
         result = Translation(text=key, units='')
+
+        # Process data for key
         if self._data is not None:
             for item in self._data:
+                # Identify translation table for idx_pair_xlate_group
                 if item.idx_pair_xlate_group() == idx_pair_xlate_group:
                     translations = item.translations()
-                    table = translations[idx_pair_xlate_group]
-                    result = table.get(
-                        key, Translation(text=key, units=''))
+                    table = translations.get(idx_pair_xlate_group)
+
+                    # Get translation for key from table
+                    if isinstance(table, dict) is True:
+                        result = table.get(
+                            key, Translation(text=key, units=''))
                     break
 
-        if result is None:
-            result = 'No translation for key {} in database'.format(key)
+        # Return
         return result
 
 
