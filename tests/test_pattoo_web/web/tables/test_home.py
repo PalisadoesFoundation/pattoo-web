@@ -92,14 +92,14 @@ class TestBasicFunctions(unittest.TestCase):
 
         # Test
         expected = '''\
-<table cellspacing="0" class="table table-bordered" \
-id="dataTable" width="100%">
-<thead><tr><th>#</th><th>Agent Program</th><th>Target</th></tr></thead>
+<table cellspacing="0" class="table table-bordered" id="dataTable" \
+width="100%">
+<thead><tr><th>Agent Program</th><th>Target</th></tr></thead>
 <tbody>
-<tr><td>2</td><td>pattoo_agent_snmp_ifmibd</td><td><a \
-href="/pattoo/agent/QWdlbnQ6Mg==">that_host</a></td></tr>
-<tr><td>1</td><td>pattoo_agent_snmpd</td><td><a \
-href="/pattoo/agent/QWdlbnQ6MQ==">localhost</a></td></tr>
+<tr><td>pattoo_agent_snmp_ifmibd</td><td><a href="/pattoo/agent/\
+QWdlbnQ6Mg==">that_host</a></td></tr>
+<tr><td>pattoo_agent_snmpd</td><td><a href="/pattoo/agent/QWdlbnQ6MQ==">\
+localhost</a></td></tr>
 </tbody>
 </table>\
 '''
@@ -108,15 +108,13 @@ href="/pattoo/agent/QWdlbnQ6MQ==">localhost</a></td></tr>
     def test__flask_table_rows(self):
         """Testing method / function _flask_table_rows."""
         result = home._flask_table_rows(self.data)
-
+        
         # Test
         expected = [
-            {'index': '2',
-             'agent_program': 'pattoo_agent_snmp_ifmibd',
+            {'agent_program': 'pattoo_agent_snmp_ifmibd',
              'agent_polled_target': '''\
 <a href="/pattoo/agent/QWdlbnQ6Mg==">that_host</a>'''},
-            {'index': '1',
-             'agent_program': 'pattoo_agent_snmpd',
+            {'agent_program': 'pattoo_agent_snmpd',
              'agent_polled_target': '''\
 <a href="/pattoo/agent/QWdlbnQ6MQ==">localhost</a>'''}]
         self.assertEqual(result, expected)

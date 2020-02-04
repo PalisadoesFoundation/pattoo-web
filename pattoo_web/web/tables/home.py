@@ -29,7 +29,6 @@ class ItemTable(Table):
     html_attrs = {'width': '100%', 'cellspacing': '0'}
 
     # Column labels
-    index = Col('#')
     agent_program = Col('Agent Program')
     agent_polled_target = RawCol('Target')
 
@@ -37,11 +36,10 @@ class ItemTable(Table):
 class Item(object):
     """Table row definition."""
 
-    def __init__(self, index, agent_program, agent_polled_target):
+    def __init__(self, agent_program, agent_polled_target):
         """Define row contents for table.
 
         Args:
-            index: Agent table idx_agent
             agent_program: Key-value pair key
             agent_polled_target: Target polled by agent
 
@@ -49,7 +47,6 @@ class Item(object):
             None
 
         """
-        self.index = index
         self.agent_program = agent_program
         self.agent_polled_target = agent_polled_target
 
@@ -81,6 +78,7 @@ def _flask_table_rows(_agents):
     """
     # Initialize key varialbes
     result = []
+    rows = []
 
     # Get agent_program translations
     translate = translations()
@@ -88,21 +86,26 @@ def _flask_table_rows(_agents):
     # Process the DataPoints
     for _agent in _agents.agents():
         _id = _agent.id()
-        index = _agent.idx_agent()
         agent_polled_target = _agent.agent_polled_target()
         agent_program = translate.agent_program(_agent.agent_program())
+        rows.append(
+            dict(
+                _id=_id,
+                agent_polled_target=agent_polled_target,
+                agent_program=agent_program))
 
+    # Sort by agent_program then target
+    for row in sorted(
+            rows, key=itemgetter('agent_program', 'agent_polled_target')):
         # Create link to charts
-        link = uri.agent_link(_id, label=agent_polled_target)
+        link = uri.agent_link(
+            row.get('_id'), label=row.get('agent_polled_target'))
 
         # Create new HTML row
         result.append(dict(
-            index=index,
-            agent_program=agent_program,
+            agent_program=row.get('agent_program'),
             agent_polled_target=link
             ))
 
     # Return sorted result
-    result = sorted(
-        result, key=itemgetter('agent_program', 'agent_polled_target'))
     return result
