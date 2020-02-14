@@ -67,6 +67,7 @@ class DataPointsAgent(object):
             except:
                 log_message = ('Invalid agent data to process.')
                 log.log2warning(80015, log_message)
+
         self.valid = bool(self._nodes)
 
     def datapoints(self):
@@ -99,6 +100,12 @@ class Agents(object):
             agentProgram
           }
         }
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+          hasPreviousPage
+        }
       }
     }
 
@@ -116,6 +123,7 @@ class Agents(object):
         """
         # Initialize the class
         self._nodes = []
+        self._page_info = {}
 
         # Check for validity
         if bool(data) is True:
@@ -124,7 +132,70 @@ class Agents(object):
             except:
                 log_message = ('Invalid agent data to process.')
                 log.log2warning(80017, log_message)
+            try:
+                self._page_info = data[
+                    'data']['allAgent'].get('pageInfo')
+            except:
+                log_message = ('Invalid pageInfo data to process.')
+                log.log2warning(80018, log_message)
+
         self.valid = bool(self._nodes)
+
+    def start_cursor(self):
+        """Return startCursor value.
+
+        Args:
+            None
+
+        Returns:
+            result: startCursor value
+
+        """
+        # Return
+        result = self._page_info.get('startCursor')
+        return result
+
+    def end_cursor(self):
+        """Return endCursor value.
+
+        Args:
+            None
+
+        Returns:
+            result: endCursor value
+
+        """
+        # Return
+        result = self._page_info.get('endCursor')
+        return result
+
+    def has_next_page(self):
+        """Return hasNextPage value.
+
+        Args:
+            None
+
+        Returns:
+            result: hasNextPage value
+
+        """
+        # Return
+        result = self._page_info.get('hasNextPage')
+        return result
+
+    def has_previous_page(self):
+        """Return hasPreviousPage value.
+
+        Args:
+            None
+
+        Returns:
+            result: hasPreviousPage value
+
+        """
+        # Return
+        result = self._page_info.get('hasPreviousPage')
+        return result
 
     def agents(self):
         """Return a list of Agent objects.
@@ -250,6 +321,12 @@ def agents():
         agentPolledTarget
         agentProgram
       }
+    }
+    pageInfo {
+      startCursor
+      endCursor
+      hasNextPage
+      hasPreviousPage
     }
   }
 }

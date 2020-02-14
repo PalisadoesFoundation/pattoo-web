@@ -30,15 +30,22 @@ from pattoo_web.web.query import agent
 
 
 # Create a common dataset for testing
-AGENTS = {'data': {'allAgent': {'edges': [
-    {'node': {'agentPolledTarget': 'localhost',
-              'agentProgram': 'pattoo_agent_snmpd',
-              'id': 'QWdlbnQ6MQ==',
-              'idxAgent': '1'}},
-    {'node': {'agentPolledTarget': 'that_host',
-              'agentProgram': 'pattoo_agent_snmp_ifmibd',
-              'id': 'QWdlbnQ6Mg==',
-              'idxAgent': '2'}}]}}}
+AGENTS = {'data': {'allAgent': {
+    'pageInfo': {
+        'endCursor': 'YXJyYXljb25uZWN0aW9uOjM1NTQ=',
+        'hasNextPage': False,
+        'hasPreviousPage': False,
+        'startCursor': 'YXJyYXljb25uZWN0aW9uOjA='
+    },
+    'edges': [
+        {'node': {'agentPolledTarget': 'localhost',
+                  'agentProgram': 'pattoo_agent_snmpd',
+                  'id': 'QWdlbnQ6MQ==',
+                  'idxAgent': '1'}},
+        {'node': {'agentPolledTarget': 'that_host',
+                  'agentProgram': 'pattoo_agent_snmp_ifmibd',
+                  'id': 'QWdlbnQ6Mg==',
+                  'idxAgent': '2'}}]}}}
 
 AGENT = {'data': {
     'agent': {'id': 'polar_bear',
@@ -76,6 +83,16 @@ class TestDataPointsAgent(unittest.TestCase):
         """Testing method / function __init__."""
         pass
 
+    def test_start_cursor(self):
+        """Testing method / function start_cursor."""
+        # Setup test object
+        expected = 'YXJyYXljb25uZWN0aW9uOjA='
+        tester = agent.Agents(AGENTS)
+        result = tester.start_cursor()
+
+        # Test
+        self.assertEqual(result, expected)
+
     def test_datapoints(self):
         """Testing method / function datapoints."""
         _ = agent.DataPointsAgent(DATAPOINT_AGENT)
@@ -109,6 +126,36 @@ class TestAgents(unittest.TestCase):
     def test___init__(self):
         """Testing method / function __init__."""
         pass
+
+    def test_end_cursor(self):
+        """Testing method / function end_cursor."""
+        # Setup test object
+        expected = 'YXJyYXljb25uZWN0aW9uOjM1NTQ='
+        tester = agent.Agents(AGENTS)
+        result = tester.end_cursor()
+
+        # Test
+        self.assertEqual(result, expected)
+
+    def test_has_next_page(self):
+        """Testing method / function has_next_page."""
+        # Setup test object
+        expected = False
+        tester = agent.Agents(AGENTS)
+        result = tester.has_next_page()
+
+        # Test
+        self.assertEqual(result, expected)
+
+    def test_has_previous_page(self):
+        """Testing method / function has_previous_page."""
+        # Setup test object
+        expected = False
+        tester = agent.Agents(AGENTS)
+        result = tester.has_previous_page()
+
+        # Test
+        self.assertEqual(result, expected)
 
     def test_agents(self):
         """Testing method / function agents."""
