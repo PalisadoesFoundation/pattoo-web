@@ -4,6 +4,8 @@
 import os
 import unittest
 import sys
+from collections import namedtuple
+from copy import deepcopy
 
 # Try to create a working PYTHONPATH
 EXEC_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -16,13 +18,15 @@ if EXEC_DIR.endswith(
     sys.path.insert(0, ROOT_DIR)
 else:
     print('''\
-This script is not installed in the "pattoo-web/tests/test_pattoo_web" directory. Please fix.''')
+This script is not installed in the "pattoo-web/tests/test_pattoo_web" \
+directory. Please fix.''')
     sys.exit(2)
 
 from tests.libraries.configuration import UnittestConfig
 from pattoo_shared.constants import (
     PATTOO_WEB_SITE_PREFIX, PATTOO_API_AGENT_PREFIX)
 from pattoo_web import uri
+from pattoo_web.constants import PageInfo
 
 
 class TestBasicFunctions(unittest.TestCase):
@@ -65,6 +69,143 @@ class TestBasicFunctions(unittest.TestCase):
         self.assertEqual(result, None)
         result = uri.integerize_arg(False)
         self.assertEqual(result, None)
+
+    def test_prev_next(self):
+        """Testing method / function prev_next."""
+        # Initialize key variables
+        Seed = namedtuple(
+            'Seed', 'script_root path args')
+        args_list = [
+            {'first': 100, 'last': 20},
+            {'first': 100},
+            {'last': 20},
+            {}
+        ]
+
+        # Test (hasNextPage=False, hasNextPage=False)
+        status = PageInfo(
+            endCursor='',
+            startCursor='',
+            hasNextPage=False,
+            hasPreviousPage=False
+        )
+        expecteds = [
+            ('', ''),
+            ('', ''),
+            ('', ''),
+            ('', '')
+        ]
+        for index, args in enumerate(args_list):
+            request = Seed(
+                script_root='abc',
+                path='xyz',
+                args=args
+            )
+            result = uri.prev_next(request, status)
+            expected = expecteds[index]
+            self.assertEqual(result, expected)
+
+        # Test (hasNextPage=True, hasNextPage=False)
+        status = PageInfo(
+            endCursor='',
+            startCursor='',
+            hasNextPage=True,
+            hasPreviousPage=False
+        )
+        expecteds = [
+            ('', '<a href="abcxyz?first=120&last=20">Next &gt;</a>'),
+            ('', '<a href="abcxyz?first=120&last=100">Next &gt;</a>'),
+            ('', '<a href="abcxyz?first=40&last=20">Next &gt;</a>'),
+            ('', '<a href="abcxyz?first=40&last=20">Next &gt;</a>')
+        ]
+        for index, args in enumerate(args_list):
+            request = Seed(
+                script_root='abc',
+                path='xyz',
+                args=args
+            )
+            result = uri.prev_next(request, status)
+            expected = expecteds[index]
+            self.assertEqual(result, expected)
+
+        # Test (hasNextPage=False, hasNextPage=True)
+        status = PageInfo(
+            endCursor='',
+            startCursor='',
+            hasNextPage=False,
+            hasPreviousPage=True
+        )
+        expecteds = [
+            ('<a href="abcxyz?first=80&last=20">&lt; Prev</a>', ''),
+            ('<a href="abcxyz?first=80&last=100">&lt; Prev</a>', ''),
+            ('<a href="abcxyz?first=0&last=20">&lt; Prev</a>', ''),
+            ('<a href="abcxyz?first=0&last=20">&lt; Prev</a>', '')
+        ]
+        for index, args in enumerate(args_list):
+            request = Seed(
+                script_root='abc',
+                path='xyz',
+                args=args
+            )
+            result = uri.prev_next(request, status)
+            expected = expecteds[index]
+            self.assertEqual(result, expected)
+
+        # Test (hasNextPage=True, hasNextPage=True)
+        status = PageInfo(
+            endCursor='',
+            startCursor='',
+            hasNextPage=True,
+            hasPreviousPage=True
+        )
+        expecteds = [
+            ('<a href="abcxyz?first=80&last=20">&lt; Prev</a>',
+             '<a href="abcxyz?first=120&last=20">Next &gt;</a>'),
+            ('<a href="abcxyz?first=80&last=100">&lt; Prev</a>',
+             '<a href="abcxyz?first=120&last=100">Next &gt;</a>'),
+            ('<a href="abcxyz?first=0&last=20">&lt; Prev</a>',
+             '<a href="abcxyz?first=40&last=20">Next &gt;</a>'),
+            ('<a href="abcxyz?first=0&last=20">&lt; Prev</a>',
+             '<a href="abcxyz?first=40&last=20">Next &gt;</a>')
+        ]
+        for index, args in enumerate(args_list):
+            request = Seed(
+                script_root='abc',
+                path='xyz',
+                args=args
+            )
+            result = uri.prev_next(request, status)
+            expected = expecteds[index]
+            self.assertEqual(result, expected)
+
+    def test_graphql_filter(self):
+        """Testing method / function graphql_filter."""
+        # Initialize key variables
+        Seed = namedtuple(
+            'Seed', 'script_root path args')
+        args_list = [
+            {'first': 100, 'last': 20},
+            {'first': 100},
+            {'last': 20},
+            {}
+        ]
+
+        # Test
+        expecteds = [
+            '(first: 100 last: 20)',
+            '(first: 100 last: 20)',
+            '(first: 20 last: 20)',
+            '(first: 20 last: 20)'
+        ]
+        for index, args in enumerate(args_list):
+            request = Seed(
+                script_root='abc',
+                path='xyz',
+                args=args
+            )
+            result = uri.graphql_filter(request)
+            expected = expecteds[index]
+            self.assertEqual(result, expected)
 
 
 if __name__ == '__main__':

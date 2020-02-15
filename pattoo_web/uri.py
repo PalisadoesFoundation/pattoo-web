@@ -90,15 +90,21 @@ def prev_next(request, status, count=20):
     pointer = integerize_arg(request.args.get('first'))
     item_count = integerize_arg(request.args.get('last'))
 
+    # Determine where to end the selection
     if pointer is None:
         stop = count
     else:
         stop = pointer
 
+    # Determine the length of the selection's tail
     if item_count is None:
         last = stop
     else:
         last = item_count
+
+    # Make sure the tail isn't longer than the selection
+    if last > stop:
+        last = stop
 
     # Create links
     if status.hasPreviousPage is False:
