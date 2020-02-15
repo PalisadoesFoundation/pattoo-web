@@ -4,11 +4,13 @@
 from flask import Blueprint, render_template, request
 
 # Pattoo imports
-from pattoo_web.web.tables import agent
 from pattoo_web.web.query.agent import datapoints_agent
-from pattoo_web.web.query.agent_xlate import translations
+from pattoo_web.web.query.agent_xlate import translations as agent_translations
+from pattoo_web.web.query.pair_xlate import translation as pair_translation
 from pattoo_web import uri
 from pattoo_web.constants import PageInfo
+from pattoo_web.translate import datapoint_translations
+from pattoo_web.web.tables import chart
 
 from pattoo_shared import log
 
@@ -28,11 +30,12 @@ def route_agent(identifier):
 
     """
     # Initialize key variables
+    rows = []
     screen = uri.graphql_filter(request)
 
     # Get data from API server
     points = datapoints_agent(identifier, screen=screen)
-    xlate = translations()
+    agent_xlate = agent_translations()
 
     # Get URLs
     page_info = PageInfo(
@@ -43,15 +46,25 @@ def route_agent(identifier):
     )
     (_next, _prev) = uri.prev_next(request, page_info)
 
-    # Process the data
     if points.valid is True:
         # Get translation for agent_program
         first_point = points.datapoints()[0]
-        agent_program = xlate.agent_program(first_point.agent_program())
+        agent_program = agent_xlate.agent_program(first_point.agent_program())
         agent_polled_target = first_point.agent_polled_target()
 
+        for point in points.datapoints():
+            # Get translations from API server
+            key_pair_translator = pair_translation(point.id_pair_xlate_group())
+            point_xlate = datapoint_translations(point, key_pair_translator)
+
+            # Get table to present
+            table = chart.Table(point_xlate)
+            rows.append(table.html())
+
+        # Create the body of tables
+        table = '\n'.join(rows)
+
         # Render data from database
-        table = agent.table(points)
         return render_template(
             'agent.html',
             main_table=table,

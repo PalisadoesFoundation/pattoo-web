@@ -91,18 +91,6 @@ class TestItemTable(unittest.TestCase):
         pass
 
 
-class TestItem(unittest.TestCase):
-    """Checks all functions and methods."""
-
-    #########################################################################
-    # General object setup
-    #########################################################################
-
-    def test___init__(self):
-        """Testing method / function __init__."""
-        pass
-
-
 class TestTable(unittest.TestCase):
     """Checks all functions and methods."""
 
@@ -123,27 +111,36 @@ class TestTable(unittest.TestCase):
         # Test
         result = self.tester.html()
         expected = '''\
-<table cellspacing="0" class="table table-bordered" id="dataTable" \
-width="100%">
+<!-- Table -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">123</h6>
+  </div>
+  <div class="card-body">
+    <p>Interface Broadcast Packets (HC inbound): .1.3.6.1.2.1.2.2.1.10.345<br></p>
+    <hr>
+    <div class="table-responsive">
+        <table cellspacing="0" class="table table-bordered" id="dataTable" width="100%">
 <thead><tr><th>Timeframe</th><th>Chart</th></tr></thead>
 <tbody>
 <tr><td>
-<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
-=86400">Default</a></p>
-<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago=\
-604800">Week</a></p>
-<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago=\
-2592000">Month</a></p>
-<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago=\
-7776000">Quarter</a></p>
-<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
-=31536000">Year</a></p>
-</td><td><div id="pattoo_simple_line_chart"></div>
+<ul>
+<li><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago=86400">Default</a></li>
+<li><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago=604800">Week</a></li>
+<li><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago=2592000">Month</a></li>
+<li><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago=7776000">Quarter</a></li>
+<li><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago=31536000">Year</a></li>
+</ul>
+</td><td><div id="pattoo_simple_line_chart_3"></div>
 <script type="text/javascript">
-  SimpleLineChart("/pattoo/chart/3/data?secondsago=501", "this_pc", "");
+  SimpleLineChart("/pattoo/chart/3/data?secondsago=501", "this_pc", "", "#pattoo_simple_line_chart_3");
 </script></td></tr>
 </tbody>
-</table>\
+</table>
+    </div>
+  </div>
+</div>
+<!-- End Table -->\
 '''
         self.assertEqual(result, expected)
 
@@ -152,16 +149,13 @@ width="100%">
         # Test
         result = self.tester._timeframe_links()
         expected = '''
-<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
-=86400">Default</a></p>
-<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
-=604800">Week</a></p>
-<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
-=2592000">Month</a></p>
-<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
-=7776000">Quarter</a></p>
-<p><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago\
-=31536000">Year</a></p>
+<ul>
+<li><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago=86400">Default</a></li>
+<li><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago=604800">Week</a></li>
+<li><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago=2592000">Month</a></li>
+<li><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago=7776000">Quarter</a></li>
+<li><a href="/pattoo/chart/datapoint/RGF0YVBvaW50OjM=?secondsago=31536000">Year</a></li>
+</ul>
 '''
         self.assertEqual(result, expected)
 
