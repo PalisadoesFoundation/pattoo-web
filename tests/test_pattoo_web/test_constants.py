@@ -30,6 +30,9 @@ from pattoo_web.constants import SECONDS_IN_MONTH
 from pattoo_web.constants import SECONDS_IN_QUARTER
 from pattoo_web.constants import SECONDS_IN_YEAR
 from pattoo_web.constants import DEFAULT_CHART_SIZE_SECONDS
+from pattoo_web.constants import Translation
+from pattoo_web.constants import DataPointTranslations
+from pattoo_web.constants import PageInfo
 
 
 class TestBasicFunctions(unittest.TestCase):
@@ -52,6 +55,23 @@ class TestBasicFunctions(unittest.TestCase):
         self.assertEqual(SECONDS_IN_QUARTER, 7776000)
         self.assertEqual(SECONDS_IN_YEAR, 31536000)
         self.assertEqual(DEFAULT_CHART_SIZE_SECONDS, 86400)
+
+        # Assign namedtuple without errors
+        _ = Translation(
+            text='',
+            units=''
+        )
+        _ = DataPointTranslations(
+            datapoint='',
+            metadata_translations='',
+            pattoo_key_translation=''
+        )
+        _ = PageInfo(
+            endCursor='',
+            hasNextPage='',
+            hasPreviousPage='',
+            startCursor=''
+        )
 
 
 if __name__ == '__main__':
