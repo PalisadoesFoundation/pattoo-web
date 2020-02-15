@@ -30,32 +30,41 @@ from pattoo_web.web.query import datapoint
 
 
 # Create a common dataset for testing
-DATAPOINTS = {'data': {'allDatapoints': {'edges': [
-    {'node': {'agent': {'agentGroup': {'pairXlateGroup': {
-        'idxPairXlateGroup': '1'}},
-                        'agentPolledTarget': 'localhost',
-                        'agentProgram': 'pattoo_agent_snmpd'},
-              'glueDatapoint': {'edges': [
-                  {'node': {'pair': {'key': 'pattoo_agent_snmpd_oid',
-                                     'value': '.1.3.6.1.2.1.2.2.1.10.1'}}},
-                  {'node': {'pair': {
-                      'key': 'pattoo_key',
-                      'value': 'pattoo_agent_snmpd_.1.3.6.1.2.1.2.2.1.10'}}}]},
-              'id': 'RGF0YVBvaW50OjE=',
-              'idxDatapoint': '1'}},
-    {'node': {'agent': {'agentGroup': {
-        'pairXlateGroup': {'idxPairXlateGroup': '3'}},
-                        'agentPolledTarget': 'myhost',
-                        'agentProgram': 'pattoo_agent_test'},
-              'glueDatapoint': {'edges': [
-                  {'node': {'pair': {
-                      'key': 'pattoo_agent_snmpd_oid',
-                      'value': '.1.3.6.1.2.1.2.2.1.16.3'}}},
-                  {'node': {'pair': {
-                      'key': 'pattoo_key',
-                      'value': 'pattoo_agent_snmpd_.1.3.6.1.2.1.2.2.1.16'}}}]},
-              'id': 'RGF0YVBvaW50OjY=',
-              'idxDatapoint': '6'}}]}}}
+DATAPOINTS = {'data': {'allDatapoints': {
+    'pageInfo': {
+        'endCursor': 'YXJyYXljb25uZWN0aW9uOjM1NTQ=',
+        'hasNextPage': False,
+        'hasPreviousPage': False,
+        'startCursor': 'YXJyYXljb25uZWN0aW9uOjA='
+    },
+    'edges': [
+        {'node': {'agent': {'agentGroup': {'pairXlateGroup': {
+            'idxPairXlateGroup': '1'}},
+                            'agentPolledTarget': 'localhost',
+                            'agentProgram': 'pattoo_agent_snmpd'},
+                  'glueDatapoint': {'edges': [
+                      {'node': {'pair': {'key': 'pattoo_agent_snmpd_oid',
+                                         'value': '.1.3.6.1.2.1.2.2.1.10.1'}}},
+                      {'node': {'pair': {
+                          'key': 'pattoo_key',
+                          'value': '''\
+pattoo_agent_snmpd_.1.3.6.1.2.1.2.2.1.10'''}}}]},
+                  'id': 'RGF0YVBvaW50OjE=',
+                  'idxDatapoint': '1'}},
+        {'node': {'agent': {'agentGroup': {
+            'pairXlateGroup': {'idxPairXlateGroup': '3'}},
+                            'agentPolledTarget': 'myhost',
+                            'agentProgram': 'pattoo_agent_test'},
+                  'glueDatapoint': {'edges': [
+                      {'node': {'pair': {
+                          'key': 'pattoo_agent_snmpd_oid',
+                          'value': '.1.3.6.1.2.1.2.2.1.16.3'}}},
+                      {'node': {'pair': {
+                          'key': 'pattoo_key',
+                          'value': '''\
+pattoo_agent_snmpd_.1.3.6.1.2.1.2.2.1.16'''}}}]},
+                  'id': 'RGF0YVBvaW50OjY=',
+                  'idxDatapoint': '6'}}]}}}
 
 DATAPOINT = {'data': {'datapoint': {
     'agent': {'agentGroup': {'pairXlateGroup': {
@@ -95,6 +104,47 @@ class TestDataPoints(unittest.TestCase):
         self.assertEqual(len(result), 2)
         for item in result:
             self.assertIsInstance(item, datapoint.DataPoint)
+            self.assertTrue(item.valid)
+
+    def test_start_cursor(self):
+        """Testing method / function start_cursor."""
+        # Setup test object
+        expected = 'YXJyYXljb25uZWN0aW9uOjA='
+        tester = datapoint.DataPoints(DATAPOINTS)
+        result = tester.start_cursor()
+
+        # Test
+        self.assertEqual(result, expected)
+
+    def test_end_cursor(self):
+        """Testing method / function end_cursor."""
+        # Setup test object
+        expected = 'YXJyYXljb25uZWN0aW9uOjM1NTQ='
+        tester = datapoint.DataPoints(DATAPOINTS)
+        result = tester.end_cursor()
+
+        # Test
+        self.assertEqual(result, expected)
+
+    def test_has_next_page(self):
+        """Testing method / function has_next_page."""
+        # Setup test object
+        expected = False
+        tester = datapoint.DataPoints(DATAPOINTS)
+        result = tester.has_next_page()
+
+        # Test
+        self.assertEqual(result, expected)
+
+    def test_has_previous_page(self):
+        """Testing method / function has_previous_page."""
+        # Setup test object
+        expected = False
+        tester = datapoint.DataPoints(DATAPOINTS)
+        result = tester.has_previous_page()
+
+        # Test
+        self.assertEqual(result, expected)
 
 
 class TestDataPoint(unittest.TestCase):

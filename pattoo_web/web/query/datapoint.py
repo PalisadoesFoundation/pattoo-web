@@ -12,6 +12,7 @@ class DataPoints(object):
     {
       allDatapoints {
         edges {
+          cursor
           node {
             id
             idxDatapoint
@@ -37,6 +38,12 @@ class DataPoints(object):
             }
           }
         }
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+          hasPreviousPage
+        }
       }
     }
 
@@ -54,15 +61,78 @@ class DataPoints(object):
         """
         # Initialize the class
         self._nodes = []
+        self._page_info = {}
 
         # Check for validity
         if bool(data) is True:
             try:
-                self._nodes = data['data']['allDatapoints']['edges']
+                self._nodes = data['data']['allDatapoints'].get('edges')
             except:
                 log_message = ('Invalid datapoint data to process.')
                 log.log2warning(80012, log_message)
+            try:
+                self._page_info = data['data']['allDatapoints'].get('pageInfo')
+            except:
+                log_message = ('Invalid pageInfo data to process.')
+                log.log2warning(80013, log_message)
+
         self.valid = bool(self._nodes)
+
+    def start_cursor(self):
+        """Return startCursor value.
+
+        Args:
+            None
+
+        Returns:
+            result: startCursor value
+
+        """
+        # Return
+        result = self._page_info.get('startCursor')
+        return result
+
+    def end_cursor(self):
+        """Return endCursor value.
+
+        Args:
+            None
+
+        Returns:
+            result: endCursor value
+
+        """
+        # Return
+        result = self._page_info.get('endCursor')
+        return result
+
+    def has_next_page(self):
+        """Return hasNextPage value.
+
+        Args:
+            None
+
+        Returns:
+            result: hasNextPage value
+
+        """
+        # Return
+        result = self._page_info.get('hasNextPage')
+        return result
+
+    def has_previous_page(self):
+        """Return hasPreviousPage value.
+
+        Args:
+            None
+
+        Returns:
+            result: hasPreviousPage value
+
+        """
+        # Return
+        result = self._page_info.get('hasPreviousPage')
+        return result
 
     def datapoints(self):
         """Return a list of DataPoint objects.
@@ -282,6 +352,7 @@ def datapoints():
 {
   allDatapoints {
     edges {
+      cursor
       node {
         id
         idxDatapoint
@@ -305,6 +376,12 @@ def datapoints():
           }
         }
       }
+    }
+    pageInfo {
+      startCursor
+      endCursor
+      hasNextPage
+      hasPreviousPage
     }
   }
 }

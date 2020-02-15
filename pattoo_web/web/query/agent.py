@@ -2,6 +2,7 @@
 """Pattoo classes that manage GraphQL datapoint related queries."""
 
 import sys
+from pprint import pprint
 
 from pattoo_shared import log
 from pattoo_web.phttp import get
@@ -14,6 +15,7 @@ class DataPointsAgent(object):
     {
       agent(id: "XXXXXXXXXXXXXXXX") {
         datapointAgent {
+          cursor
           edges {
             node {
               id
@@ -41,6 +43,12 @@ class DataPointsAgent(object):
               }
             }
           }
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+            hasPreviousPage
+          }
         }
       }
     }
@@ -59,15 +67,79 @@ class DataPointsAgent(object):
         """
         # Initialize the class
         self._nodes = []
+        self._page_info = {}
 
         # Check for validity
         if bool(data) is True:
             try:
-                self._nodes = data['data']['agent']['datapointAgent']['edges']
+                self._nodes = data[
+                    'data']['agent']['datapointAgent'].get('edges')
             except:
                 log_message = ('Invalid agent data to process.')
                 log.log2warning(80015, log_message)
+            try:
+                self._page_info = data[
+                    'data']['agent']['datapointAgent'].get('pageInfo')
+            except:
+                log_message = ('Invalid pageInfo data to process.')
+                log.log2warning(80019, log_message)
         self.valid = bool(self._nodes)
+
+    def start_cursor(self):
+        """Return startCursor value.
+
+        Args:
+            None
+
+        Returns:
+            result: startCursor value
+
+        """
+        # Return
+        result = self._page_info.get('startCursor')
+        return result
+
+    def end_cursor(self):
+        """Return endCursor value.
+
+        Args:
+            None
+
+        Returns:
+            result: endCursor value
+
+        """
+        # Return
+        result = self._page_info.get('endCursor')
+        return result
+
+    def has_next_page(self):
+        """Return hasNextPage value.
+
+        Args:
+            None
+
+        Returns:
+            result: hasNextPage value
+
+        """
+        # Return
+        result = self._page_info.get('hasNextPage')
+        return result
+
+    def has_previous_page(self):
+        """Return hasPreviousPage value.
+
+        Args:
+            None
+
+        Returns:
+            result: hasPreviousPage value
+
+        """
+        # Return
+        result = self._page_info.get('hasPreviousPage')
+        return result
 
     def datapoints(self):
         """Return a list of DataPoint objects.
@@ -99,6 +171,12 @@ class Agents(object):
             agentProgram
           }
         }
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+          hasPreviousPage
+        }
       }
     }
 
@@ -116,6 +194,7 @@ class Agents(object):
         """
         # Initialize the class
         self._nodes = []
+        self._page_info = {}
 
         # Check for validity
         if bool(data) is True:
@@ -124,7 +203,70 @@ class Agents(object):
             except:
                 log_message = ('Invalid agent data to process.')
                 log.log2warning(80017, log_message)
+            try:
+                self._page_info = data[
+                    'data']['allAgent'].get('pageInfo')
+            except:
+                log_message = ('Invalid pageInfo data to process.')
+                log.log2warning(80018, log_message)
+
         self.valid = bool(self._nodes)
+
+    def start_cursor(self):
+        """Return startCursor value.
+
+        Args:
+            None
+
+        Returns:
+            result: startCursor value
+
+        """
+        # Return
+        result = self._page_info.get('startCursor')
+        return result
+
+    def end_cursor(self):
+        """Return endCursor value.
+
+        Args:
+            None
+
+        Returns:
+            result: endCursor value
+
+        """
+        # Return
+        result = self._page_info.get('endCursor')
+        return result
+
+    def has_next_page(self):
+        """Return hasNextPage value.
+
+        Args:
+            None
+
+        Returns:
+            result: hasNextPage value
+
+        """
+        # Return
+        result = self._page_info.get('hasNextPage')
+        return result
+
+    def has_previous_page(self):
+        """Return hasPreviousPage value.
+
+        Args:
+            None
+
+        Returns:
+            result: hasPreviousPage value
+
+        """
+        # Return
+        result = self._page_info.get('hasPreviousPage')
+        return result
 
     def agents(self):
         """Return a list of Agent objects.
@@ -251,6 +393,12 @@ def agents():
         agentProgram
       }
     }
+    pageInfo {
+      startCursor
+      endCursor
+      hasNextPage
+      hasPreviousPage
+    }
   }
 }
 """
@@ -261,11 +409,12 @@ def agents():
     return result
 
 
-def datapoints_agent(graphql_id):
+def datapoints_agent(graphql_id, screen=None):
     """Get translations for the GraphQL ID of a datapointAgent query.
 
     Args:
         graphql_id: GraphQL ID
+        screen: GraphQL filter for screening results
 
     Returns:
         result: DataPoint object
@@ -275,8 +424,9 @@ def datapoints_agent(graphql_id):
     query = '''\
 {
   agent(id: "IDENTIFIER") {
-    datapointAgent {
+    datapointAgent SCREEN {
       edges {
+        cursor
         node {
           id
           idxDatapoint
@@ -303,10 +453,23 @@ def datapoints_agent(graphql_id):
           }
         }
       }
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+        hasPreviousPage
+      }
     }
   }
 }
 '''.replace('IDENTIFIER', graphql_id)
+
+    if screen is None:
+        query = query.replace('SCREEN', '')
+    else:
+        query = query.replace('SCREEN', screen)
+
+    pprint(query)
 
     # Get data from API server
     data = None
