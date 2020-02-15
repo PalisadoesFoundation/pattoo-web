@@ -18,6 +18,8 @@ Translation = namedtuple('Translation', 'text units')
 DataPointTranslations = namedtuple(
     'DataPointTranslations',
     'datapoint metadata_translations pattoo_key_translation')
+PageInfo = namedtuple(
+    'PageInfo', 'endCursor hasNextPage hasPreviousPage startCursor')
 
 FOLDER_WEB_STATIC = 'theme/static'
 FOLDER_WEB_TEMPLATE = 'theme/templates'

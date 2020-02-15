@@ -2,6 +2,7 @@
 """Pattoo classes that manage GraphQL datapoint related queries."""
 
 import sys
+from pprint import pprint
 
 from pattoo_shared import log
 from pattoo_web.phttp import get
@@ -14,6 +15,7 @@ class DataPointsAgent(object):
     {
       agent(id: "XXXXXXXXXXXXXXXX") {
         datapointAgent {
+          cursor
           edges {
             node {
               id
@@ -407,11 +409,12 @@ def agents():
     return result
 
 
-def datapoints_agent(graphql_id):
+def datapoints_agent(graphql_id, screen=None):
     """Get translations for the GraphQL ID of a datapointAgent query.
 
     Args:
         graphql_id: GraphQL ID
+        screen: GraphQL filter for screening results
 
     Returns:
         result: DataPoint object
@@ -421,8 +424,9 @@ def datapoints_agent(graphql_id):
     query = '''\
 {
   agent(id: "IDENTIFIER") {
-    datapointAgent {
+    datapointAgent SCREEN {
       edges {
+        cursor
         node {
           id
           idxDatapoint
@@ -459,6 +463,13 @@ def datapoints_agent(graphql_id):
   }
 }
 '''.replace('IDENTIFIER', graphql_id)
+
+    if screen is None:
+        query = query.replace('SCREEN', '')
+    else:
+        query = query.replace('SCREEN', screen)
+
+    pprint(query)
 
     # Get data from API server
     data = None
