@@ -20,7 +20,7 @@ class RawCol(Col):
         return content
 
 
-class ItemTable(_Table):
+class ChartTable(_Table):
     """Table definition."""
 
     # Add attributes
@@ -33,28 +33,10 @@ class ItemTable(_Table):
     chart = RawCol('Chart')
 
 
-class Item(object):
-    """Table row definition."""
-
-    def __init__(self, timeframe, chart):
-        """Define row contents for table.
-
-        Args:
-            timeframe: Timeframe column
-            chart: Chart column
-
-        Returns:
-            None
-
-        """
-        self.timeframe = timeframe
-        self.chart = chart
-
-
 class Table(object):
     """Class for creating a chart table."""
 
-    def __init__(self, point_xlate, secondsago):
+    def __init__(self, point_xlate, secondsago=DEFAULT_CHART_SIZE_SECONDS):
         """Initialize the class.
 
         Args:
@@ -83,14 +65,16 @@ class Table(object):
         datapoint = self._point_xlate.datapoint
         result = []
         idx_datapoint = datapoint.idx_datapoint()
+        div_id = 'pattoo_simple_line_chart_{}'.format(idx_datapoint)
         restful_api_url = ('''{}/chart/{}/data?secondsago={}\
 '''.format(PATTOO_WEB_SITE_PREFIX, idx_datapoint, self._secondsago))
         chart = ('''\
-<div id="pattoo_simple_line_chart"></div>
+<div id="{0}"></div>
 <script type="text/javascript">
-  SimpleLineChart("{}", "{}", "{}");
+  SimpleLineChart("{1}", "{2}", "{3}", "#{0}");
 </script>\
-'''.format(restful_api_url,
+'''.format(div_id,
+           restful_api_url,
            datapoint.agent_polled_target(),
            self._point_xlate.pattoo_key_translation.units))
         timeframe = self._timeframe_links()
@@ -102,8 +86,9 @@ class Table(object):
             ))
 
         # Process API data
-        _html = ItemTable(result)
-        return _html.__html__()
+        html_table = ChartTable(result).__html__()
+        final_html = _wrapper(html_table, self._point_xlate)
+        return final_html
 
     def _timeframe_links(self):
         """Create links for chart table.
@@ -132,8 +117,66 @@ class Table(object):
                 datapoint.id(),
                 label=label,
                 secondsago=secondsago)
-            result = '{}\n<p>{}</p>'.format(result, link)
-        result = '{}\n'.format(result)
+            result = '{}\n<li>{}</li>'.format(result, link)
+        result = '\n<ul>{}\n</ul>\n'.format(result)
 
         # Returns
         return result
+
+
+def _wrapper(html_table, point_xlate):
+    """Wrap HTML with card.
+
+    Args:
+        heading: Heading for HTML
+        html_table: HTML to wrap
+        point_xlate: Metadata translations
+
+    Returns:
+        result: Wrapped HTML
+
+    """
+    # Format HTML for return
+    result = '''\
+<!-- Table -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">{0}</h6>
+  </div>
+  <div class="card-body">
+    {2}
+    <hr>
+    <div class="table-responsive">
+        {1}
+    </div>
+  </div>
+</div>
+<!-- End Table -->\
+'''.format(point_xlate.pattoo_key_translation.text,
+           html_table,
+           _footer(point_xlate))
+    return result
+
+
+def _footer(point_xlate):
+    """Create a footer to use for the chart.
+
+    Args:
+        point: DataPoint object
+
+    Returns:
+        result: Footer
+
+    """
+    # Initialize key variables
+    result = ''
+
+    # Process
+    for (meta, value) in point_xlate.metadata_translations:
+        # Translate key
+        text = meta.text
+        result = '{}{}: {}<br>'.format(result, text, value)
+
+    # Return
+    result = '<p>{}</p>'.format(result)
+    return result

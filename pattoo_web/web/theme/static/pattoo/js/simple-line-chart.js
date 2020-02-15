@@ -1,8 +1,9 @@
 
-function SimpleLineChart( url, heading, y_label ) {
+function SimpleLineChart( url, heading, y_label, div_id ) {
     //  url: URL from which to retrieve data.tsv file
     //  heading: Heading for chart
     //  y_label: Label to use for y axis
+    //  div_id: DIV ID for chart
 
     // set the dimensions and margins of the graph
     var margin = {top: 20, right: 50, bottom: 50, left: 75};
@@ -13,7 +14,7 @@ function SimpleLineChart( url, heading, y_label ) {
     var innerHeight = outerHeight - margin.top - margin.bottom;
 
     // Define where we are placing the chart
-    var div_id = '#pattoo_simple_line_chart'
+    //var div_id = '#pattoo_simple_line_chart'
 
     // Setup standard colors
     var standard_colors = d3.scaleOrdinal(d3.schemeCategory10);
