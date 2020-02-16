@@ -5,21 +5,19 @@ import os
 import unittest
 import sys
 from collections import namedtuple
-from copy import deepcopy
 
 # Try to create a working PYTHONPATH
 EXEC_DIR = os.path.dirname(os.path.realpath(__file__))
 ROOT_DIR = os.path.abspath(os.path.join(
     os.path.abspath(os.path.join(EXEC_DIR, os.pardir)), os.pardir))
-if EXEC_DIR.endswith(
-        '/pattoo-web/tests/test_pattoo_web') is True:
-    # We need to prepend the path in case PattooShared has been installed
+_EXPECTED = '{0}pattoo-web{0}tests{0}test_pattoo_web'.format(os.sep)
+if EXEC_DIR.endswith(_EXPECTED) is True:
+    # We need to prepend the path in case the repo has been installed
     # elsewhere on the system using PIP. This could corrupt expected results
     sys.path.insert(0, ROOT_DIR)
 else:
-    print('''\
-This script is not installed in the "pattoo-web/tests/test_pattoo_web" \
-directory. Please fix.''')
+    print('''This script is not installed in the "{0}" directory. Please fix.\
+'''.format(_EXPECTED))
     sys.exit(2)
 
 from tests.libraries.configuration import UnittestConfig
@@ -37,7 +35,7 @@ class TestBasicFunctions(unittest.TestCase):
     #########################################################################
 
     def test_chart_link(self):
-        """Testing method / function chart_link."""
+        """Testing method or function named chart_link."""
         # Test
         result = uri.chart_link('0', '3', '4')
         self.assertEqual(result, '''\
@@ -49,14 +47,14 @@ class TestBasicFunctions(unittest.TestCase):
 '''.format(PATTOO_WEB_SITE_PREFIX))
 
     def test_agent_link(self):
-        """Testing method / function agent_link."""
+        """Testing method or function named agent_link."""
         # Test
         result = uri.agent_link('0', '3')
         self.assertEqual(result, '''\
 <a href="{}/agent/0">3</a>'''.format(PATTOO_WEB_SITE_PREFIX))
 
     def test_integerize_arg(self):
-        """Testing method / function integerize_arg."""
+        """Testing method or function named integerize_arg."""
         # Test
         test_value = '30'
         result = uri.integerize_arg(test_value)
@@ -71,7 +69,7 @@ class TestBasicFunctions(unittest.TestCase):
         self.assertEqual(result, None)
 
     def test_prev_next(self):
-        """Testing method / function prev_next."""
+        """Testing method or function named prev_next."""
         # Initialize key variables
         Seed = namedtuple(
             'Seed', 'script_root path args')
@@ -179,7 +177,7 @@ class TestBasicFunctions(unittest.TestCase):
             self.assertEqual(result, expected)
 
     def test_graphql_filter(self):
-        """Testing method / function graphql_filter."""
+        """Testing method or function named graphql_filter."""
         # Initialize key variables
         Seed = namedtuple(
             'Seed', 'script_root path args')

@@ -4,7 +4,6 @@
 import os
 import unittest
 import sys
-from collections import namedtuple
 from random import random
 
 # Try to create a working PYTHONPATH
@@ -15,16 +14,15 @@ ROOT_DIR = os.path.abspath(os.path.join(
             os.path.abspath(os.path.join(
                 EXEC_DIR,
                 os.pardir)), os.pardir)), os.pardir)), os.pardir))
-
-if EXEC_DIR.endswith(
-        '/pattoo-web/tests/test_pattoo_web/web/query') is True:
-    # We need to prepend the path in case PattooShared has been installed
+_EXPECTED = (
+    '{0}pattoo-web{0}tests{0}test_pattoo_web{0}web{0}query'.format(os.sep))
+if EXEC_DIR.endswith(_EXPECTED) is True:
+    # We need to prepend the path in case the repo has been installed
     # elsewhere on the system using PIP. This could corrupt expected results
     sys.path.insert(0, ROOT_DIR)
 else:
-    print('''\
-This script is not installed in the "pattoo-web/tests/test_pattoo_web\
-/web/query" directory. Please fix.''')
+    print('''This script is not installed in the "{0}" directory. Please fix.\
+'''.format(_EXPECTED))
     sys.exit(2)
 
 from tests.libraries.configuration import UnittestConfig
@@ -103,11 +101,11 @@ class TestPairXlates(unittest.TestCase):
     #########################################################################
 
     def test___init__(self):
-        """Testing method / function __init__."""
+        """Testing method or function named __init__."""
         pass
 
     def test_agents(self):
-        """Testing method / function agents."""
+        """Testing method or function named agents."""
         _ = pair_xlate.PairXlates(PAIRS)
         result = _.datapoints()
 
@@ -131,11 +129,11 @@ class TestPairXlate(unittest.TestCase):
     other_tester2 = pair_xlate.PairXlate(PAIR2)
 
     def test___init__(self):
-        """Testing method / function __init__."""
+        """Testing method or function named __init__."""
         pass
 
     def test_id(self):
-        """Testing method / function id."""
+        """Testing method or function named id."""
         # Test
         ids = [
             'UGFpclhsYXRlR3JvdXA6MQ==',
@@ -147,7 +145,7 @@ class TestPairXlate(unittest.TestCase):
             self.other_tester.id(), 'UGFpclhsYXRlR3JvdXA6NQ==')
 
     def test_translations(self):
-        """Testing method / function translation."""
+        """Testing method or function named translation."""
         # Test
         ids = [
             {'1': {}},
@@ -195,7 +193,7 @@ class TestPairXlate(unittest.TestCase):
                         units='KVA'))}})
 
     def test__lookup(self):
-        """Testing method / function __lookup."""
+        """Testing method or function named __lookup."""
         # Test
         pass
 
@@ -208,11 +206,11 @@ class TestBasicFunctions(unittest.TestCase):
     #########################################################################
 
     def test_translations(self):
-        """Testing method / function agents."""
+        """Testing method or function named agents."""
         pass
 
     def test_translation(self):
-        """Testing method / function datapoints_pair_xlate."""
+        """Testing method or function named datapoints_pair_xlate."""
         pass
 
 

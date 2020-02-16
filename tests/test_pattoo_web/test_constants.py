@@ -9,14 +9,14 @@ import sys
 EXEC_DIR = os.path.dirname(os.path.realpath(__file__))
 ROOT_DIR = os.path.abspath(os.path.join(
     os.path.abspath(os.path.join(EXEC_DIR, os.pardir)), os.pardir))
-if EXEC_DIR.endswith(
-        '/pattoo-web/tests/test_pattoo_web') is True:
-    # We need to prepend the path in case PattooShared has been installed
+_EXPECTED = '{0}pattoo-web{0}tests{0}test_pattoo_web'.format(os.sep)
+if EXEC_DIR.endswith(_EXPECTED) is True:
+    # We need to prepend the path in case the repo has been installed
     # elsewhere on the system using PIP. This could corrupt expected results
     sys.path.insert(0, ROOT_DIR)
 else:
-    print('''\
-This script is not installed in the "pattoo-web/tests/test_pattoo_web" directory. Please fix.''')
+    print('''This script is not installed in the "{0}" directory. Please fix.\
+'''.format(_EXPECTED))
     sys.exit(2)
 
 from tests.libraries.configuration import UnittestConfig
@@ -43,7 +43,7 @@ class TestBasicFunctions(unittest.TestCase):
     #########################################################################
 
     def test_all(self):
-        """Testing method / function __init__."""
+        """Testing method or function named __init__."""
         # Test
         self.assertEqual(PATTOO_WEBD_NAME, 'pattoo_webd')
         self.assertEqual(PATTOO_WEBD_PROXY, 'pattoo_webd-gunicorn')

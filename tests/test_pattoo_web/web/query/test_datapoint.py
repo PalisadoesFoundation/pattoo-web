@@ -13,16 +13,15 @@ ROOT_DIR = os.path.abspath(os.path.join(
             os.path.abspath(os.path.join(
                 EXEC_DIR,
                 os.pardir)), os.pardir)), os.pardir)), os.pardir))
-
-if EXEC_DIR.endswith(
-        '/pattoo-web/tests/test_pattoo_web/web/query') is True:
-    # We need to prepend the path in case PattooShared has been installed
+_EXPECTED = (
+    '{0}pattoo-web{0}tests{0}test_pattoo_web{0}web{0}query'.format(os.sep))
+if EXEC_DIR.endswith(_EXPECTED) is True:
+    # We need to prepend the path in case the repo has been installed
     # elsewhere on the system using PIP. This could corrupt expected results
     sys.path.insert(0, ROOT_DIR)
 else:
-    print('''\
-This script is not installed in the "pattoo-web/tests/test_pattoo_web\
-/web/query" directory. Please fix.''')
+    print('''This script is not installed in the "{0}" directory. Please fix.\
+'''.format(_EXPECTED))
     sys.exit(2)
 
 from tests.libraries.configuration import UnittestConfig
@@ -90,12 +89,12 @@ class TestDataPoints(unittest.TestCase):
     #########################################################################
 
     def test___init__(self):
-        """Testing method / function __init__."""
+        """Testing method or function named __init__."""
         # Test
         pass
 
     def test_datapoints(self):
-        """Testing method / function datapoints."""
+        """Testing method or function named datapoints."""
         # Setup test object
         tester = datapoint.DataPoints(DATAPOINTS)
         result = tester.datapoints()
@@ -107,7 +106,7 @@ class TestDataPoints(unittest.TestCase):
             self.assertTrue(item.valid)
 
     def test_start_cursor(self):
-        """Testing method / function start_cursor."""
+        """Testing method or function named start_cursor."""
         # Setup test object
         expected = 'YXJyYXljb25uZWN0aW9uOjA='
         tester = datapoint.DataPoints(DATAPOINTS)
@@ -117,7 +116,7 @@ class TestDataPoints(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_end_cursor(self):
-        """Testing method / function end_cursor."""
+        """Testing method or function named end_cursor."""
         # Setup test object
         expected = 'YXJyYXljb25uZWN0aW9uOjM1NTQ='
         tester = datapoint.DataPoints(DATAPOINTS)
@@ -127,7 +126,7 @@ class TestDataPoints(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_has_next_page(self):
-        """Testing method / function has_next_page."""
+        """Testing method or function named has_next_page."""
         # Setup test object
         expected = False
         tester = datapoint.DataPoints(DATAPOINTS)
@@ -137,7 +136,7 @@ class TestDataPoints(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_has_previous_page(self):
-        """Testing method / function has_previous_page."""
+        """Testing method or function named has_previous_page."""
         # Setup test object
         expected = False
         tester = datapoint.DataPoints(DATAPOINTS)
@@ -160,11 +159,11 @@ class TestDataPoint(unittest.TestCase):
     other_tester = datapoint.DataPoint(DATAPOINT)
 
     def test___init__(self):
-        """Testing method / function __init__."""
+        """Testing method or function named __init__."""
         pass
 
     def test_id(self):
-        """Testing method / function id."""
+        """Testing method or function named id."""
         # Test
         ids = ['RGF0YVBvaW50OjE=', 'RGF0YVBvaW50OjY=']
         for index, item in enumerate(self.tester):
@@ -173,7 +172,7 @@ class TestDataPoint(unittest.TestCase):
             self.other_tester.id(), 'RGF0YVBvaW50OjM=')
 
     def test_idx_datapoint(self):
-        """Testing method / function idx_datapoint."""
+        """Testing method or function named idx_datapoint."""
         # Test
         expected = ['1', '6']
         for index, item in enumerate(self.tester):
@@ -182,7 +181,7 @@ class TestDataPoint(unittest.TestCase):
             self.other_tester.idx_datapoint(), '3')
 
     def test_agent_polled_target(self):
-        """Testing method / function agent_polled_target."""
+        """Testing method or function named agent_polled_target."""
         # Test
         expected = ['localhost', 'myhost']
         for index, item in enumerate(self.tester):
@@ -191,7 +190,7 @@ class TestDataPoint(unittest.TestCase):
             self.other_tester.agent_polled_target(), 'this_pc')
 
     def test_agent_program(self):
-        """Testing method / function agent_program."""
+        """Testing method or function named agent_program."""
         # Test
         expected = ['pattoo_agent_snmpd', 'pattoo_agent_test']
         for index, item in enumerate(self.tester):
@@ -200,7 +199,7 @@ class TestDataPoint(unittest.TestCase):
             self.other_tester.agent_program(), 'pattoo_test_snmpd')
 
     def test_idx_pair_xlate_group(self):
-        """Testing method / function idx_pair_xlate_group."""
+        """Testing method or function named idx_pair_xlate_group."""
         # Test
         expected = ['1', '3']
         for index, item in enumerate(self.tester):
@@ -209,7 +208,7 @@ class TestDataPoint(unittest.TestCase):
             self.other_tester.idx_pair_xlate_group(), '10')
 
     def test_id_pair_xlate_group(self):
-        """Testing method / function id_pair_xlate_group."""
+        """Testing method or function named id_pair_xlate_group."""
         # Test
         expected = [None, None]
         for index, item in enumerate(self.tester):
@@ -219,7 +218,7 @@ class TestDataPoint(unittest.TestCase):
             'UGFpclhsYXRlR3JvdXA6MQ==')
 
     def test_pattoo_key(self):
-        """Testing method / function pattoo_key."""
+        """Testing method or function named pattoo_key."""
         # Test
         expected = [
             'pattoo_agent_snmpd_.1.3.6.1.2.1.2.2.1.10',
@@ -230,7 +229,7 @@ class TestDataPoint(unittest.TestCase):
             self.other_tester.pattoo_key(), '123')
 
     def test_key_value_pairs(self):
-        """Testing method / function key_value_pairs."""
+        """Testing method or function named key_value_pairs."""
         # Test
         expected = [
             [('pattoo_agent_snmpd_oid', '.1.3.6.1.2.1.2.2.1.10.1')],
@@ -243,7 +242,7 @@ class TestDataPoint(unittest.TestCase):
             [('pattoo_agent_snmpd_oid', '.1.3.6.1.2.1.2.2.1.10.345')])
 
     def test__key_value_pairs(self):
-        """Testing method / function _key_value_pairs."""
+        """Testing method or function named _key_value_pairs."""
         pass
 
 
@@ -255,11 +254,11 @@ class TestBasicFunctions(unittest.TestCase):
     #########################################################################
 
     def test_datapoints(self):
-        """Testing method / function datapoints."""
+        """Testing method or function named datapoints."""
         pass
 
     def test_datapoint(self):
-        """Testing method / function datapoint."""
+        """Testing method or function named datapoint."""
         pass
 
 
