@@ -11,17 +11,17 @@ ROOT_DIR = os.path.abspath(os.path.join(
     os.path.abspath(os.path.join(
         os.path.abspath(os.path.join(
             os.path.abspath(os.path.join(
-                EXEC_DIR, os.pardir)), os.pardir)), os.pardir)), os.pardir))
-
-if EXEC_DIR.endswith(
-        '/pattoo-web/tests/test_pattoo_web/web/tables') is True:
-    # We need to prepend the path in case PattooShared has been installed
+                EXEC_DIR,
+                os.pardir)), os.pardir)), os.pardir)), os.pardir))
+_EXPECTED = (
+    '{0}pattoo-web{0}tests{0}test_pattoo_web{0}web{0}tables'.format(os.sep))
+if EXEC_DIR.endswith(_EXPECTED) is True:
+    # We need to prepend the path in case the repo has been installed
     # elsewhere on the system using PIP. This could corrupt expected results
     sys.path.insert(0, ROOT_DIR)
 else:
-    print('''\
-This script is not installed in the "pattoo-web/tests/test_pattoo_web\
-/tables/web" directory. Please fix.''')
+    print('''This script is not installed in the "{0}" directory. Please fix.\
+'''.format(_EXPECTED))
     sys.exit(2)
 
 from tests.libraries.configuration import UnittestConfig
@@ -49,7 +49,7 @@ class TestRawCol(unittest.TestCase):
     #########################################################################
 
     def test___init__(self):
-        """Testing method / function __init__."""
+        """Testing method or function named __init__."""
         pass
 
 
@@ -61,7 +61,7 @@ class TestItemTable(unittest.TestCase):
     #########################################################################
 
     def test___init__(self):
-        """Testing method / function __init__."""
+        """Testing method or function named __init__."""
         pass
 
 
@@ -73,7 +73,7 @@ class TestItem(unittest.TestCase):
     #########################################################################
 
     def test___init__(self):
-        """Testing method / function __init__."""
+        """Testing method or function named __init__."""
         pass
 
 
@@ -87,7 +87,7 @@ class TestBasicFunctions(unittest.TestCase):
     data = agent.Agents(AGENTS)
 
     def test_table(self):
-        """Testing method / function table."""
+        """Testing method or function named table."""
         result = home.table(self.data)
 
         # Test
@@ -106,9 +106,9 @@ localhost</a></td></tr>
         self.assertEqual(result, expected)
 
     def test__flask_table_rows(self):
-        """Testing method / function _flask_table_rows."""
+        """Testing method or function named _flask_table_rows."""
         result = home._flask_table_rows(self.data)
-        
+
         # Test
         expected = [
             {'agent_program': 'pattoo_agent_snmp_ifmibd',

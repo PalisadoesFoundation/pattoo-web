@@ -10,14 +10,14 @@ from random import random
 EXEC_DIR = os.path.dirname(os.path.realpath(__file__))
 ROOT_DIR = os.path.abspath(os.path.join(
     os.path.abspath(os.path.join(EXEC_DIR, os.pardir)), os.pardir))
-if EXEC_DIR.endswith(
-        '/pattoo-web/tests/test_pattoo_web') is True:
-    # We need to prepend the path in case PattooShared has been installed
+_EXPECTED = '{0}pattoo-web{0}tests{0}test_pattoo_web'.format(os.sep)
+if EXEC_DIR.endswith(_EXPECTED) is True:
+    # We need to prepend the path in case the repo has been installed
     # elsewhere on the system using PIP. This could corrupt expected results
     sys.path.insert(0, ROOT_DIR)
 else:
-    print('''\
-This script is not installed in the "pattoo-web/tests/test_pattoo_web" directory. Please fix.''')
+    print('''This script is not installed in the "{0}" directory. Please fix.\
+'''.format(_EXPECTED))
     sys.exit(2)
 
 from tests.libraries.configuration import UnittestConfig
@@ -95,11 +95,11 @@ class TestKeyPair(unittest.TestCase):
     #########################################################################
 
     def test___init__(self):
-        """Testing method / function __init__."""
+        """Testing method or function named __init__."""
         pass
 
     def test_key(self):
-        """Testing method / function key."""
+        """Testing method or function named key."""
         # Test with values that have translations from the pattoo server
         translator = KeyPair(PairXlates(PAIRS).datapoints())
         for item in PAIRS['data']['allPairXlateGroup']['edges']:
@@ -127,11 +127,11 @@ class TestAgentPair(unittest.TestCase):
     #########################################################################
 
     def test___init__(self):
-        """Testing method / function __init__."""
+        """Testing method or function named __init__."""
         pass
 
     def test_agent_program(self):
-        """Testing method / function agent_program."""
+        """Testing method or function named agent_program."""
         translator = AgentPair(AgentXlates(AGENTS).agents())
         for item in AGENTS['data']['allAgentXlate']['edges']:
             agent_program = item['node'].get('agentProgram')
@@ -147,7 +147,7 @@ class TestBasicFunctions(unittest.TestCase):
     #########################################################################
 
     def test_datapoint_translations(self):
-        """Testing method / function datapoint_translations."""
+        """Testing method or function named datapoint_translations."""
         _dp = lib_datapoint.DataPoint(DATAPOINT)
         translator = KeyPair(PairXlates(PAIRS).datapoints())
         result = datapoint_translations(_dp, translator)

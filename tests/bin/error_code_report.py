@@ -3,24 +3,20 @@
 
 from __future__ import print_function
 import os
-import inspect
-import re
 import sys
-import collections
 
 
 # Try to create a working PYTHONPATH
 DEV_DIR = os.path.dirname(os.path.realpath(__file__))
 ROOT_DIR = os.path.abspath(os.path.join(
     os.path.abspath(os.path.join(DEV_DIR, os.pardir)), os.pardir))
-if DEV_DIR.endswith('/pattoo-web/tests/bin') is True:
+_EXPECTED = '{0}pattoo-web{0}tests{0}bin'.format(os.sep)
+if DEV_DIR.endswith(_EXPECTED) is True:
     sys.path.insert(0, ROOT_DIR)
 else:
-    print('''\
-This script is not installed in the "pattoo-web/tests/bin" directory. \
-Please fix.''')
+    print('''This script is not installed in the "{0}" directory. Please fix.\
+'''.format(_EXPECTED))
     sys.exit(2)
-
 
 # Import pattoo libraries
 from pattoo_shared import errors

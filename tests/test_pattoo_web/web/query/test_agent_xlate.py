@@ -14,16 +14,15 @@ ROOT_DIR = os.path.abspath(os.path.join(
             os.path.abspath(os.path.join(
                 EXEC_DIR,
                 os.pardir)), os.pardir)), os.pardir)), os.pardir))
-
-if EXEC_DIR.endswith(
-        '/pattoo-web/tests/test_pattoo_web/web/query') is True:
-    # We need to prepend the path in case PattooShared has been installed
+_EXPECTED = (
+    '{0}pattoo-web{0}tests{0}test_pattoo_web{0}web{0}query'.format(os.sep))
+if EXEC_DIR.endswith(_EXPECTED) is True:
+    # We need to prepend the path in case the repo has been installed
     # elsewhere on the system using PIP. This could corrupt expected results
     sys.path.insert(0, ROOT_DIR)
 else:
-    print('''\
-This script is not installed in the "pattoo-web/tests/test_pattoo_web\
-/web/query" directory. Please fix.''')
+    print('''This script is not installed in the "{0}" directory. Please fix.\
+'''.format(_EXPECTED))
     sys.exit(2)
 
 from tests.libraries.configuration import UnittestConfig
@@ -64,11 +63,11 @@ class TestAgentXlates(unittest.TestCase):
     #########################################################################
 
     def test___init__(self):
-        """Testing method / function __init__."""
+        """Testing method or function named __init__."""
         pass
 
     def test_agents(self):
-        """Testing method / function agents."""
+        """Testing method or function named agents."""
         _ = agent_xlate.AgentXlates(AGENTS)
         result = _.agents()
 
@@ -92,11 +91,11 @@ class TestAgentXlate(unittest.TestCase):
     other_tester2 = agent_xlate.AgentXlate(AGENT2)
 
     def test___init__(self):
-        """Testing method / function __init__."""
+        """Testing method or function named __init__."""
         pass
 
     def test_id(self):
-        """Testing method / function id."""
+        """Testing method or function named id."""
         # Test
         ids = ['QWdlbnRYbGF0ZTox', 'QWdlbnRYbGF0ZToz']
         for index, item in enumerate(self.tester):
@@ -105,7 +104,7 @@ class TestAgentXlate(unittest.TestCase):
             self.other_tester.id(), 'QWdlbnRYbGF0ZTo0')
 
     def test_language_code(self):
-        """Testing method / function language_code."""
+        """Testing method or function named language_code."""
         # Test
         ids = ['en', 'en']
         for index, item in enumerate(self.tester):
@@ -116,7 +115,7 @@ class TestAgentXlate(unittest.TestCase):
             self.other_tester2.language_code(), _LANGUAGE)
 
     def test_translation(self):
-        """Testing method / function translation."""
+        """Testing method or function named translation."""
         # Test
         ids = [
             {'pattoo_agent_os_autonomousd': 'Pattoo Standard OS Autonomous AgentXlate'},
@@ -137,11 +136,11 @@ class TestBasicFunctions(unittest.TestCase):
     #########################################################################
 
     def test_translations(self):
-        """Testing method / function translations."""
+        """Testing method or function named translations."""
         pass
 
     def test_translation(self):
-        """Testing method / function translation."""
+        """Testing method or function named translation."""
         pass
 
 

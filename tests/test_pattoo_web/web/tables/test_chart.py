@@ -11,17 +11,17 @@ ROOT_DIR = os.path.abspath(os.path.join(
     os.path.abspath(os.path.join(
         os.path.abspath(os.path.join(
             os.path.abspath(os.path.join(
-                EXEC_DIR, os.pardir)), os.pardir)), os.pardir)), os.pardir))
-
-if EXEC_DIR.endswith(
-        '/pattoo-web/tests/test_pattoo_web/web/tables') is True:
-    # We need to prepend the path in case PattooShared has been installed
+                EXEC_DIR,
+                os.pardir)), os.pardir)), os.pardir)), os.pardir))
+_EXPECTED = (
+    '{0}pattoo-web{0}tests{0}test_pattoo_web{0}web{0}tables'.format(os.sep))
+if EXEC_DIR.endswith(_EXPECTED) is True:
+    # We need to prepend the path in case the repo has been installed
     # elsewhere on the system using PIP. This could corrupt expected results
     sys.path.insert(0, ROOT_DIR)
 else:
-    print('''\
-This script is not installed in the "pattoo-web/tests/test_pattoo_web\
-/tables/web" directory. Please fix.''')
+    print('''This script is not installed in the "{0}" directory. Please fix.\
+'''.format(_EXPECTED))
     sys.exit(2)
 
 
@@ -75,7 +75,7 @@ class TestRawCol(unittest.TestCase):
     #########################################################################
 
     def test___init__(self):
-        """Testing method / function __init__."""
+        """Testing method or function named __init__."""
         pass
 
 
@@ -87,7 +87,7 @@ class TestItemTable(unittest.TestCase):
     #########################################################################
 
     def test___init__(self):
-        """Testing method / function __init__."""
+        """Testing method or function named __init__."""
         pass
 
 
@@ -103,11 +103,11 @@ class TestTable(unittest.TestCase):
     tester = chart.Table(dpt, 501)
 
     def test___init__(self):
-        """Testing method / function __init__."""
+        """Testing method or function named __init__."""
         pass
 
     def test_html(self):
-        """Testing method / function html."""
+        """Testing method or function named html."""
         # Test
         result = self.tester.html()
         expected = '''\
@@ -145,7 +145,7 @@ class TestTable(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test__timeframe_links(self):
-        """Testing method / function _timeframe_links."""
+        """Testing method or function named _timeframe_links."""
         # Test
         result = self.tester._timeframe_links()
         expected = '''

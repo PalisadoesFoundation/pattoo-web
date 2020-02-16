@@ -13,16 +13,15 @@ ROOT_DIR = os.path.abspath(os.path.join(
             os.path.abspath(os.path.join(
                 EXEC_DIR,
                 os.pardir)), os.pardir)), os.pardir)), os.pardir))
-
-if EXEC_DIR.endswith(
-        '/pattoo-web/tests/test_pattoo_web/web/query') is True:
-    # We need to prepend the path in case PattooShared has been installed
+_EXPECTED = (
+    '{0}pattoo-web{0}tests{0}test_pattoo_web{0}web{0}query'.format(os.sep))
+if EXEC_DIR.endswith(_EXPECTED) is True:
+    # We need to prepend the path in case the repo has been installed
     # elsewhere on the system using PIP. This could corrupt expected results
     sys.path.insert(0, ROOT_DIR)
 else:
-    print('''\
-This script is not installed in the "pattoo-web/tests/test_pattoo_web\
-/web/query" directory. Please fix.''')
+    print('''This script is not installed in the "{0}" directory. Please fix.\
+'''.format(_EXPECTED))
     sys.exit(2)
 
 from tests.libraries.configuration import UnittestConfig
@@ -88,11 +87,11 @@ class TestDataPointsAgent(unittest.TestCase):
     #########################################################################
 
     def test___init__(self):
-        """Testing method / function __init__."""
+        """Testing method or function named __init__."""
         pass
 
     def test_start_cursor(self):
-        """Testing method / function start_cursor."""
+        """Testing method or function named start_cursor."""
         # Setup test object
         expected = 'AAYXJyYXljb25uZWN0aW9uOjA='
         tester = agent.DataPointsAgent(DATAPOINT_AGENT)
@@ -102,7 +101,7 @@ class TestDataPointsAgent(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_end_cursor(self):
-        """Testing method / function end_cursor."""
+        """Testing method or function named end_cursor."""
         # Setup test object
         expected = 'AAYXJyYXljb25uZWN0aW9uOjM1NTQ='
         tester = agent.DataPointsAgent(DATAPOINT_AGENT)
@@ -112,7 +111,7 @@ class TestDataPointsAgent(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_has_next_page(self):
-        """Testing method / function has_next_page."""
+        """Testing method or function named has_next_page."""
         # Setup test object
         expected = False
         tester = agent.DataPointsAgent(DATAPOINT_AGENT)
@@ -122,7 +121,7 @@ class TestDataPointsAgent(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_has_previous_page(self):
-        """Testing method / function has_previous_page."""
+        """Testing method or function named has_previous_page."""
         # Setup test object
         expected = False
         tester = agent.DataPointsAgent(DATAPOINT_AGENT)
@@ -132,7 +131,7 @@ class TestDataPointsAgent(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_datapoints(self):
-        """Testing method / function datapoints."""
+        """Testing method or function named datapoints."""
         _ = agent.DataPointsAgent(DATAPOINT_AGENT)
         result = _.datapoints()
 
@@ -162,11 +161,11 @@ class TestAgents(unittest.TestCase):
     #########################################################################
 
     def test___init__(self):
-        """Testing method / function __init__."""
+        """Testing method or function named __init__."""
         pass
 
     def test_start_cursor(self):
-        """Testing method / function start_cursor."""
+        """Testing method or function named start_cursor."""
         # Setup test object
         expected = 'YXJyYXljb25uZWN0aW9uOjA='
         tester = agent.Agents(AGENTS)
@@ -176,7 +175,7 @@ class TestAgents(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_end_cursor(self):
-        """Testing method / function end_cursor."""
+        """Testing method or function named end_cursor."""
         # Setup test object
         expected = 'YXJyYXljb25uZWN0aW9uOjM1NTQ='
         tester = agent.Agents(AGENTS)
@@ -186,7 +185,7 @@ class TestAgents(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_has_next_page(self):
-        """Testing method / function has_next_page."""
+        """Testing method or function named has_next_page."""
         # Setup test object
         expected = False
         tester = agent.Agents(AGENTS)
@@ -196,7 +195,7 @@ class TestAgents(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_has_previous_page(self):
-        """Testing method / function has_previous_page."""
+        """Testing method or function named has_previous_page."""
         # Setup test object
         expected = False
         tester = agent.Agents(AGENTS)
@@ -206,7 +205,7 @@ class TestAgents(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_agents(self):
-        """Testing method / function agents."""
+        """Testing method or function named agents."""
         _ = agent.Agents(AGENTS)
         result = _.agents()
 
@@ -229,11 +228,11 @@ class TestAgent(unittest.TestCase):
     other_tester = agent.Agent(AGENT)
 
     def test___init__(self):
-        """Testing method / function __init__."""
+        """Testing method or function named __init__."""
         pass
 
     def test_id(self):
-        """Testing method / function id."""
+        """Testing method or function named id."""
         # Test
         ids = ['QWdlbnQ6MQ==', 'QWdlbnQ6Mg==']
         for index, item in enumerate(self.tester):
@@ -242,7 +241,7 @@ class TestAgent(unittest.TestCase):
             self.other_tester.id(), 'polar_bear')
 
     def test_idx_agent(self):
-        """Testing method / function idx_agent."""
+        """Testing method or function named idx_agent."""
         # Test
         ids = ['1', '2']
         for index, item in enumerate(self.tester):
@@ -251,7 +250,7 @@ class TestAgent(unittest.TestCase):
             self.other_tester.idx_agent(), '7')
 
     def test_agent_polled_target(self):
-        """Testing method / function agent_polled_target."""
+        """Testing method or function named agent_polled_target."""
         # Test
         ids = ['localhost', 'that_host']
         for index, item in enumerate(self.tester):
@@ -260,7 +259,7 @@ class TestAgent(unittest.TestCase):
             self.other_tester.agent_polled_target(), 'teddy_bear')
 
     def test_agent_program(self):
-        """Testing method / function agent_program."""
+        """Testing method or function named agent_program."""
         # Test
         ids = ['pattoo_agent_snmpd', 'pattoo_agent_snmp_ifmibd']
         for index, item in enumerate(self.tester):
@@ -277,11 +276,11 @@ class TestBasicFunctions(unittest.TestCase):
     #########################################################################
 
     def test_agents(self):
-        """Testing method / function agents."""
+        """Testing method or function named agents."""
         pass
 
     def test_datapoints_agent(self):
-        """Testing method / function datapoints_agent."""
+        """Testing method or function named datapoints_agent."""
         pass
 
 
