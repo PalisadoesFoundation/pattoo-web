@@ -44,6 +44,7 @@ Follow these steps.
 
       $ pip3 install -r pip_requirements.txt
 
+#. Use the :doc:`configuration` to create a working configuration.
 #. Run the installation script
 
    .. code-block:: bash
