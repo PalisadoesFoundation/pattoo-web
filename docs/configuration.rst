@@ -1,18 +1,57 @@
-Configuration
-=============
+###################
+Configuration Guide
+###################
 
 After installation, you will need to create a configuration file in a directory dedicated to ``pattoo``.
 
-Set the  Configuration Directory Location
------------------------------------------
+*********************************************
+Setting the  Configuration Directory Location
+*********************************************
 
-You must set the location of the configuration directory by using the ``PATTOO_CONFIGDIR`` environmental variable. Here is how to do this:
+You must first set the location of the configuration directory by using the ``PATTOO_CONFIGDIR`` environmental variable. Here is how to do this from the Linux command line:
 
 .. code-block:: bash
 
     $ export PATTOO_CONFIGDIR=/path/to/configuration/directory
 
-Make sure that files in this directory are readable by the user that will be running ``pattoo`` daemons or scripts.
+``pattoo`` applications will read the configuration files located in this directory when ``PATTOO_CONFIGDIR`` is set.
+
+You can automatically set this variable each time you log in by adding these lines to your ``~/.bash_profile`` file.
+
+.. code-block:: bash
+
+    export PATTOO_CONFIGDIR=/path/to/configuration/directory
+
+Make sure that files in this directory are readable by the user that will be running ``pattoo`` agent daemons or scripts.
+
+*********************
+Configuration Options
+*********************
+
+There are two ways to configure ``pattoo``. These are the:
+
+#. Quick Method
+#. Expert Method
+
+Quick Method
+============
+
+Use the quick method if you are new to ``pattoo``.
+
+Run the ``setup/configure.py`` script. It will prompt you for all configuration parameters. The defaults should be sufficient in most cases.
+
+Here's the command to run:
+
+.. code-block:: bash
+
+    setup/configure.py
+
+Run the installation script next as outlined in the :doc:`installation` guide.
+
+Expert Method
+=============
+
+This section goes into configuration parameters in great detail.
 
 Copy the Templates to Your Configuration Directory
 --------------------------------------------------

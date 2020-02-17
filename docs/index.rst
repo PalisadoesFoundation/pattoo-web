@@ -20,10 +20,18 @@ General information about the project, including the the prerequisite steps to g
    :caption: Introduction:
 
    about
-   contributing
    installation
    configuration
    pattoo_webd
    troubleshooting
    backup
    cron
+
+Developers
+----------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Developers:
+
+   contributing
