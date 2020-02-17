@@ -29,7 +29,7 @@ def check_pip3():
         None
 
     """
-    # Initialze key variables
+    # Initialize key variables
     lines = []
 
     # Read pip_requirements file
