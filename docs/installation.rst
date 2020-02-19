@@ -42,14 +42,14 @@ Follow these steps.
 
    .. code-block:: bash
 
-      $ pip3 install -r pip_requirements.txt
+      $ pip3 install --user --requirement pip_requirements.txt
 
 #. Use the :doc:`configuration` to create a working configuration.
 #. Run the installation script
 
    .. code-block:: bash
 
-      $ sudo setup/install.py
+      $ setup/install.py
 
 #. Start the ``bin/pattoo_webd.py`` daemon to accept data sent by ``pattoo-agents``. :doc:`configuration`
 
