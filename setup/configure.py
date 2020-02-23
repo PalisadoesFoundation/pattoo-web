@@ -16,7 +16,7 @@ except:
 # Try to create a working PYTHONPATH
 EXEC_DIR = os.path.dirname(os.path.realpath(__file__))
 ROOT_DIR = os.path.abspath(os.path.join(EXEC_DIR, os.pardir))
-_EXPECTED = '{0}pattoo{0}setup'.format(os.sep)
+_EXPECTED = '{0}pattoo-web{0}setup'.format(os.sep)
 if EXEC_DIR.endswith(_EXPECTED) is True:
     sys.path.append(ROOT_DIR)
 else:
