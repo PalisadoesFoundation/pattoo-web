@@ -193,14 +193,14 @@ def next_steps():
 Hooray successful installation! Panna Cotta Time!
 
 Next Steps:
-    1) Start the 'bin/pattoo_api_agentd.py' script to accept agent data.
+    1) Start the 'bin/pattoo_webd.py' script to accept agent data.
     2) Configure your agents to post data to this server.
 
 Other steps:
-    1) You can make pattoo a system daemon by running the scripts in the
+    1) You can make pattoo-web a system daemon by running the scripts in the
        'setup/systemd' directory. Visit this link for details:
 
-       https://github.com/PalisadoesFoundation/pattoo/tree/master/setup/systemd
+       https://github.com/PalisadoesFoundation/pattoo-web/tree/master/setup/systemd
 
 ''')
     print(message)
@@ -222,7 +222,7 @@ def _log(message):
 
 
 def main():
-    """Setup pattoo.
+    """Install pattoo-web.
 
     Args:
         None
