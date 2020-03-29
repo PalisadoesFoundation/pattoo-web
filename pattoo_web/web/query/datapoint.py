@@ -6,7 +6,7 @@ from pattoo_shared import log
 from pattoo_web.phttp import get
 
 
-class DataPoints(object):
+class DataPoints():
     """Class to process the results of the GraphQL query below.
 
     {
@@ -151,7 +151,7 @@ class DataPoints(object):
         return result
 
 
-class DataPoint(object):
+class DataPoint():
     """Class to process the results of the GraphQL query below.
 
     {

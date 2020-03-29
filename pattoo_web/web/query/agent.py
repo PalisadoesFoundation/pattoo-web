@@ -9,7 +9,7 @@ from pattoo_web.phttp import get
 from .datapoint import DataPoint
 
 
-class DataPointsAgent(object):
+class DataPointsAgent():
     """Class to process the results of the GraphQL query below.
 
     {
@@ -158,7 +158,7 @@ class DataPointsAgent(object):
         return result
 
 
-class Agents(object):
+class Agents():
     """Class to process the results of the GraphQL query below.
 
     {
@@ -285,7 +285,7 @@ class Agents(object):
         return result
 
 
-class Agent(object):
+class Agent():
     """Class to process the nodes of the GraphQL query below.
 
     {

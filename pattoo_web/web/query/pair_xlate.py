@@ -7,7 +7,7 @@ from pattoo_web.phttp import get
 from pattoo_web.constants import Translation
 
 
-class PairXlates(object):
+class PairXlates():
     """Class to process the results of the GraphQL query below.
 
     {
@@ -67,7 +67,7 @@ class PairXlates(object):
         return result
 
 
-class PairXlate(object):
+class PairXlate():
     """Class to process the results of the GraphQL query below.
 
     {
