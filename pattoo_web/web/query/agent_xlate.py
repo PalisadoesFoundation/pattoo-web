@@ -6,7 +6,7 @@ from pattoo_web.translate import AgentPair
 from pattoo_web.phttp import get
 
 
-class AgentXlates(object):
+class AgentXlates():
     """Class to process the results of the GraphQL query below.
 
     {
@@ -59,7 +59,7 @@ class AgentXlates(object):
         return result
 
 
-class AgentXlate(object):
+class AgentXlate():
     """Class to process the results of the GraphQL query below.
 
     {

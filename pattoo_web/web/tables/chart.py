@@ -33,7 +33,7 @@ class ChartTable(_Table):
     chart = RawCol('Chart')
 
 
-class Table(object):
+class Table():
     """Class for creating a chart table."""
 
     def __init__(self, point_xlate, secondsago=DEFAULT_CHART_SIZE_SECONDS):

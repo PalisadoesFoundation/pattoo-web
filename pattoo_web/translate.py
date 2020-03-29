@@ -37,7 +37,7 @@ def datapoint_translations(datapoint, keypair):
     return result
 
 
-class KeyPair(object):
+class KeyPair():
     """Class to process the results of a PairXlates object."""
 
     def __init__(self, data):
@@ -87,7 +87,7 @@ class KeyPair(object):
         return result
 
 
-class AgentPair(object):
+class AgentPair():
     """Class to process the results of a PairXlates object."""
 
     def __init__(self, data):

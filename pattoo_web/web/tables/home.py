@@ -33,7 +33,7 @@ class ItemTable(Table):
     agent_polled_target = RawCol('Target')
 
 
-class Item(object):
+class Item():
     """Table row definition."""
 
     def __init__(self, agent_program, agent_polled_target):
