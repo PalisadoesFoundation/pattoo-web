@@ -2,12 +2,12 @@
 Tests
 =====
 
-Welcome to the developer testing section of ``pattoo-shared``.
+Welcome to the developer testing section of ``pattoo-web``.
 
 Running unittests
 -----------------
 
-You can run all the unittests in this directory by executing the ``_do_all_tests.py`` script.
+You can run all the unittests in this directory by executing the ``bin/_do_all_tests.py`` script.
 
 Duplicate Error Logging Codes
 -----------------------------

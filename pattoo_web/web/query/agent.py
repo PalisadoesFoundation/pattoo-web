@@ -2,7 +2,6 @@
 """Pattoo classes that manage GraphQL datapoint related queries."""
 
 import sys
-from pprint import pprint
 
 from pattoo_shared import log
 from pattoo_web.phttp import get
@@ -468,8 +467,6 @@ def datapoints_agent(graphql_id, screen=None):
         query = query.replace('SCREEN', '')
     else:
         query = query.replace('SCREEN', screen)
-
-    pprint(query)
 
     # Get data from API server
     data = None
