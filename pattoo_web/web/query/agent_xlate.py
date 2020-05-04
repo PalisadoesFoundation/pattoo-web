@@ -134,9 +134,9 @@ class AgentXlate():
         result = {}
         language_code = Config().language()
         if self.language_code() == language_code:
-            translation = self._data.get('translation')
+            _translation = self._data.get('translation')
             agent_program = self._data.get('agentProgram')
-            result[agent_program] = translation
+            result[agent_program] = _translation
         return result
 
 
