@@ -12,10 +12,10 @@ class DataPointsAgent():
     """Class to process the results of the GraphQL query below.
 
     {
-      agent(id: "XXXXXXXXXXXXXXXX") {
+      agent(id: "IDENTIFIER") {
         datapointAgent {
-          cursor
           edges {
+            cursor
             node {
               id
               idxDatapoint
@@ -23,11 +23,9 @@ class DataPointsAgent():
               agent {
                 agentProgram
                 agentPolledTarget
-                agentGroup {
-                  pairXlateGroup {
-                    idxPairXlateGroup
-                    id
-                  }
+                idxPairXlateGroup
+                pairXlateGroup{
+                  id
                 }
               }
               glueDatapoint {
@@ -390,6 +388,9 @@ def agents():
         idxAgent
         agentPolledTarget
         agentProgram
+        pairXlateGroup{
+          id
+        }
       }
     }
     pageInfo {
@@ -433,11 +434,9 @@ def datapoints_agent(graphql_id, screen=None):
           agent {
             agentProgram
             agentPolledTarget
-            agentGroup {
-              pairXlateGroup {
-                idxPairXlateGroup
-                id
-              }
+            idxPairXlateGroup
+            pairXlateGroup{
+              id
             }
           }
           glueDatapoint {

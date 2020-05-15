@@ -61,10 +61,10 @@ DATAPOINT_AGENT = {'data': {'agent': {'datapointAgent': {
         'startCursor': 'AAYXJyYXljb25uZWN0aW9uOjA='
     },
     'edges': [
-        {'node': {'agent': {'agentGroup': {
-            'pairXlateGroup': {'id': 'UGFpclhsYXRlR3JvdXA6MQ==',
-                               'idxPairXlateGroup': '1'}},
+        {'node': {'agent': {'pairXlateGroup': {
+            'id': 'UGFpclhsYXRlR3JvdXA6MQ=='},
                             'agentPolledTarget': 'localhost',
+                            'idxPairXlateGroup': '1',
                             'agentProgram': 'pattoo_agent_snmpd'},
                   'glueDatapoint': {'edges': [
                       {'node': {'pair': {

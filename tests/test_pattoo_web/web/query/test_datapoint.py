@@ -37,9 +37,10 @@ DATAPOINTS = {'data': {'allDatapoints': {
         'startCursor': 'YXJyYXljb25uZWN0aW9uOjA='
     },
     'edges': [
-        {'node': {'agent': {'agentGroup': {'pairXlateGroup': {
-            'idxPairXlateGroup': '1'}},
+        {'node': {'agent': {'pairXlateGroup': {
+            'id': 'vaW50ORGF0YVBjE='},
                             'agentPolledTarget': 'localhost',
+                            'idxPairXlateGroup': '1',
                             'agentProgram': 'pattoo_agent_snmpd'},
                   'glueDatapoint': {'edges': [
                       {'node': {'pair': {'key': 'pattoo_agent_snmpd_oid',
@@ -50,9 +51,10 @@ DATAPOINTS = {'data': {'allDatapoints': {
 pattoo_agent_snmpd_.1.3.6.1.2.1.2.2.1.10'''}}}]},
                   'id': 'RGF0YVBvaW50OjE=',
                   'idxDatapoint': '1'}},
-        {'node': {'agent': {'agentGroup': {
-            'pairXlateGroup': {'idxPairXlateGroup': '3'}},
+        {'node': {'agent': {'pairXlateGroup': {
+            'id': 'VBjRGvaW50OF0YE='},
                             'agentPolledTarget': 'myhost',
+                            'idxPairXlateGroup': '3',
                             'agentProgram': 'pattoo_agent_test'},
                   'glueDatapoint': {'edges': [
                       {'node': {'pair': {
@@ -66,10 +68,10 @@ pattoo_agent_snmpd_.1.3.6.1.2.1.2.2.1.16'''}}}]},
                   'idxDatapoint': '6'}}]}}}
 
 DATAPOINT = {'data': {'datapoint': {
-    'agent': {'agentGroup': {'pairXlateGroup': {
-        'id': 'UGFpclhsYXRlR3JvdXA6MQ==',
-        'idxPairXlateGroup': '10'}},
+    'agent': {'pairXlateGroup': {
+        'id': 'UGFpclhsYXRlR3JvdXA6MQ=='},
               'agentPolledTarget': 'this_pc',
+              'idxPairXlateGroup': '10',
               'agentProgram': 'pattoo_test_snmpd'},
     'glueDatapoint': {'edges': [
         {'node': {'pair': {'key': 'pattoo_agent_snmpd_oid',
@@ -210,7 +212,7 @@ class TestDataPoint(unittest.TestCase):
     def test_id_pair_xlate_group(self):
         """Testing method or function named id_pair_xlate_group."""
         # Test
-        expected = [None, None]
+        expected = ['vaW50ORGF0YVBjE=', 'VBjRGvaW50OF0YE=']
         for index, item in enumerate(self.tester):
             self.assertEqual(item.id_pair_xlate_group(), expected[index])
         self.assertEqual(
