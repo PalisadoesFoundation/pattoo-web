@@ -19,11 +19,9 @@ class DataPoints():
             agent {
               agentProgram
               agentPolledTarget
-              agentGroup {
-                pairXlateGroup {
-                  idxPairXlateGroup
-                  id
-                }
+              idxPairXlateGroup
+              pairXlateGroup{
+                id
               }
             }
             glueDatapoint {
@@ -155,17 +153,15 @@ class DataPoint():
     """Class to process the results of the GraphQL query below.
 
     {
-      datapoint(id: "XXXXXXXXXXXXXXXX") {
+      datapoint(id: "IDENTIFIER") {
         id
         idxDatapoint
         agent {
           agentProgram
           agentPolledTarget
-          agentGroup {
-            pairXlateGroup {
-              idxPairXlateGroup
-              id
-            }
+          idxPairXlateGroup
+          pairXlateGroup{
+            id
           }
         }
         glueDatapoint {
@@ -271,7 +267,7 @@ class DataPoint():
 
         """
         result = self._datapoint[
-            'agent']['agentGroup']['pairXlateGroup'].get('idxPairXlateGroup')
+            'agent'].get('idxPairXlateGroup')
         return result
 
     def id_pair_xlate_group(self):
@@ -285,7 +281,7 @@ class DataPoint():
 
         """
         result = self._datapoint[
-            'agent']['agentGroup']['pairXlateGroup'].get('id')
+            'agent']['pairXlateGroup'].get('id')
         return result
 
     def pattoo_key(self):
@@ -359,10 +355,9 @@ def datapoints():
         agent {
           agentProgram
           agentPolledTarget
-          agentGroup {
-            pairXlateGroup {
-              idxPairXlateGroup
-            }
+          idxPairXlateGroup
+          pairXlateGroup{
+            id
           }
         }
         glueDatapoint {
@@ -412,11 +407,9 @@ def datapoint(graphql_id):
     agent {
       agentProgram
       agentPolledTarget
-      agentGroup {
-        pairXlateGroup {
-          idxPairXlateGroup
-          id
-        }
+      idxPairXlateGroup
+      pairXlateGroup{
+        id
       }
     }
     glueDatapoint {

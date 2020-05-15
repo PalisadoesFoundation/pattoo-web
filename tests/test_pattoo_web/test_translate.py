@@ -72,10 +72,10 @@ PAIRS = {'data': {'allPairXlateGroup': {'edges': [
                       'language': {'code': 'en'}}}]}}}]}}}
 
 DATAPOINT = {'data': {'datapoint': {
-    'agent': {'agentGroup': {'pairXlateGroup': {
-        'id': 'UGFpclhsYXRlR3JvdXA6MQ==',
-        'idxPairXlateGroup': '2'}},
+    'agent': {'pairXlateGroup': {
+        'id': 'UGFpclhsYXRlR3JvdXA6MQ=='},
               'agentPolledTarget': 'this_pc',
+              'idxPairXlateGroup': '2',
               'agentProgram': 'pattoo_test_snmpd'},
     'glueDatapoint': {'edges': [
         {'node': {'pair': {'key': 'pattoo_agent_snmpd_oid',

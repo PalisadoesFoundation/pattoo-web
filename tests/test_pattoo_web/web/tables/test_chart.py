@@ -35,10 +35,10 @@ from pattoo_web.web.query.pair_xlate import PairXlates
 
 # Create a common dataset for testing
 DATAPOINT = {'data': {'datapoint': {
-    'agent': {'agentGroup': {'pairXlateGroup': {
-        'id': 'UGFpclhsYXRlR3JvdXA6MQ==',
-        'idxPairXlateGroup': '10'}},
+    'agent': {'pairXlateGroup': {
+        'id': 'UGFpclhsYXRlR3JvdXA6MQ=='},
               'agentPolledTarget': 'this_pc',
+              'idxPairXlateGroup': '10',
               'agentProgram': 'pattoo_test_snmpd'},
     'glueDatapoint': {'edges': [
         {'node': {'pair': {'key': 'pattoo_agent_snmpd_oid',
