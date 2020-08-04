@@ -9,7 +9,7 @@ import requests
 
 # Pattoo imports
 from pattoo_shared import log
-from pattoo_web.configuration import Config
+from pattoo_shared.configuration import WebConfig
 from pattoo_web.web.tables import chart
 from pattoo_web import uri
 from pattoo_web.constants import SECONDS_IN_DAY
