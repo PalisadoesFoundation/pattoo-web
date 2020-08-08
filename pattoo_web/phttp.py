@@ -7,7 +7,7 @@ import requests
 
 # Pattoo imports
 from pattoo_shared import log
-from pattoo_shared.configuration import WebConfig
+from pattoo_web.configuration import WebConfig
 
 
 def get(query):

@@ -9,7 +9,7 @@ import requests
 
 # Pattoo imports
 from pattoo_shared import log
-from pattoo_shared.configuration import WebConfig
+from pattoo_web.configuration import WebConfig
 from pattoo_web.web.tables import chart
 from pattoo_web import uri
 from pattoo_web.constants import SECONDS_IN_DAY
@@ -71,7 +71,7 @@ def route_chart_data(idx_datapoint):
     success = False
     response = False
     data = []
-    config = Config()
+    config = WebConfig()
 
     # Get URL parameters
     secondsago = uri.integerize_arg(request.args.get('secondsago'))

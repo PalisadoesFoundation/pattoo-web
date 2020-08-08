@@ -24,11 +24,10 @@ def install():
             'ip_listen_address': '0.0.0.0',
             'ip_bind_port': 20200,
         },
-        'pattoo_webd_client': {
+        'pattoo_web_api': {
             'ip_address': '::1',
             'ip_bind_port': 20202
-        }
-
+        },
     }
 
     # Attempt to create configuration directory
