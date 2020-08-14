@@ -57,7 +57,12 @@ class UnittestConfig():
             'pattoo_webd': {
                 'pattoo_webd': {
                     'ip_listen_address': '127.0.0.1',
-                    'ip_bind_port': 40200}
+                    'ip_bind_port': 40200
+                },
+                'pattoo_web_api': {
+                    'ip_address': '127.0.0.3',
+                    'ip_bind_port': 30303
+                }
             }
         }
 
