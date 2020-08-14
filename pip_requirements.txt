@@ -4,11 +4,7 @@
 
 # Pattoo packages
 
-<<<<<<< HEAD
-PattooShared==0.0.87
-=======
 PattooShared==0.0.91
->>>>>>> 08e81b12fd769b6aac1b0b65017552ce9ce781d7
 
 # Miscellaneous packages
 pyYAML

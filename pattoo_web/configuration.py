@@ -82,27 +82,6 @@ class Config(_Config):
             result = int(intermediate)
         return result
 
-
-class WebConfig(BaseConfig):
-    """Class gathers all configuration information relating to pattoo web.
-
-    The configuration values for this class will be written to pattoo_webd.yaml
-    """
-
-    def __init__(self):
-        """Initialize the class.
-
-        Args:
-            None
-
-        Returns:
-            None
-
-        """
-        # Get the configuration
-        BaseConfig.__init__(self)
-        self._web_yaml_configuration = _config_reader('pattoo_webd.yaml')
-
     def web_api_ip_address(self):
         """Get web_api_ip_address.
 
@@ -119,7 +98,7 @@ class WebConfig(BaseConfig):
 
         # Get result
         result = search(
-            key, sub_key, self._web_yaml_configuration, die=True)
+            key, sub_key, self._base_yaml_configuration, die=True)
         return result
 
     def web_api_ip_bind_port(self):
@@ -138,7 +117,7 @@ class WebConfig(BaseConfig):
 
         # Get result
         intermediate = search(
-            key, sub_key, self._web_yaml_configuration, die=False)
+            key, sub_key, self._base_yaml_configuration, die=False)
         if intermediate is None:
             result = 20202
         else:

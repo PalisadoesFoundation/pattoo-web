@@ -60,16 +60,6 @@ class UnittestConfig():
                     'ip_listen_address': '127.0.0.1',
                     'ip_bind_port': 40200,
                 }
-            },
-            'pattoo_agent': {
-                'pattoo_agent_api': {
-                    'ip_address': '127.0.0.6',
-                    'ip_bind_port': 50505,
-                },
-
-                'encryption': {
-                    'agent_email': 'test_agent@example.org'
-                }
             }
         }
 
