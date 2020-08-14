@@ -4,13 +4,13 @@
 # Import project libraries
 from pattoo_shared import files
 from pattoo_shared.configuration import search, agent_config_filename
-from pattoo_shared.configuration import Config as _Config
+from pattoo_shared.configuration import BaseConfig
 from pattoo_web.constants import PATTOO_WEBD_NAME
 from pattoo_shared import url
 from pattoo_shared.constants import PATTOO_API_WEB_PREFIX
 
 
-class Config(_Config):
+class Config(BaseConfig):
     """Class gathers all configuration information.
 
     Only processes the following YAML keys in the configuration file:
@@ -30,7 +30,7 @@ class Config(_Config):
 
         """
         # Instantiate inheritance
-        _Config.__init__(self)
+        BaseConfig.__init__(self)
 
         # Get the configuration directory
         config_file = agent_config_filename(PATTOO_WEBD_NAME)
