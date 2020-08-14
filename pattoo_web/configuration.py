@@ -95,7 +95,7 @@ class Config(_Config):
 
         # Get result
         result = search(
-            key, sub_key, self._base_yaml_configuration, die=True)
+            key, sub_key, self._daemon_configuration, die=True)
         return result
 
     def web_api_ip_bind_port(self):
@@ -114,7 +114,7 @@ class Config(_Config):
 
         # Get result
         intermediate = search(
-            key, sub_key, self._base_yaml_configuration, die=False)
+            key, sub_key, self._daemon_configuration, die=False)
         if intermediate is None:
             result = 20202
         else:
