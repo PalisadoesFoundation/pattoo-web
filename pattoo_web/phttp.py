@@ -7,7 +7,7 @@ import requests
 
 # Pattoo imports
 from pattoo_shared import log
-from pattoo_web.configuration import WebConfig
+from pattoo_web.configuration import Config
 
 
 def get(query):
@@ -22,7 +22,7 @@ def get(query):
     """
     # Initialize key variables
     success = False
-    config = WebConfig()
+    config = Config()
     result = None
 
     # Get the data from the GraphQL API

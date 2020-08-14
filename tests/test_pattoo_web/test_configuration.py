@@ -31,7 +31,6 @@ class TestConfiguration(unittest.TestCase):
     #########################################################################
 
     config = configuration.Config()
-    web_config = configuration.WebConfig()
 
     def test___init__(self):
         """Testing method or function named __init__."""
