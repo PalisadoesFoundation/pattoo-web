@@ -52,19 +52,19 @@ class TestConfiguration(unittest.TestCase):
     def test_web_api_ip_address(self):
         """Testing method or function named web_api_ip_address."""
         # Test
-        result = self.web_config.web_api_ip_address()
+        result = self.config.web_api_ip_address()
         self.assertEqual(result, '127.0.0.3')
 
     def test_web_api_ip_bind_port(self):
         """Testing method or function named web_api_ip_bind_port."""
         # Test
-        result = self.web_config.web_api_ip_bind_port()
+        result = self.config.web_api_ip_bind_port()
         self.assertEqual(result, 30303)
 
     def test_web_api_server_url(self):
         """Testing method or function named web_api_server_url."""
         # Test
-        result = self.web_config.web_api_server_url()
+        result = self.config.web_api_server_url()
         self.assertEqual(
             result, 'http://127.0.0.3:30303/pattoo/api/v1/web/graphql')
 
