@@ -73,8 +73,6 @@ class UnittestConfig():
             }
         }
 
-
-
     def create(self):
         """Create a good config and set the PATTOO_CONFIGDIR variable.
 

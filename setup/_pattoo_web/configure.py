@@ -4,7 +4,7 @@ from pattoo_shared.installation import configure, shared
 from pattoo_shared import files
 
 
-def install():
+def install(pattoo_home):
     """Start configuration process.
 
     Args:
@@ -34,10 +34,11 @@ def install():
     files.mkdir(config_dir)
 
     # Create the pattoo user and group
-    configure.create_user('pattoo', '/nonexistent', ' /bin/false', True)
+    configure.create_user('pattoo', pattoo_home, ' /bin/false', True)
 
-    # Attempt to change the ownership of the configuration directory
+    # Attempt to change the ownership of the config and pattoo-home directories
     shared.chown(config_dir)
+    shared.chown(pattoo_home)
 
     # Configure pattoo web
     configure.configure_component('pattoo_webd', config_dir, pattoo_webd_dict)

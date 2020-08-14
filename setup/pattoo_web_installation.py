@@ -6,7 +6,6 @@ import argparse
 import sys
 import os
 import getpass
-print(sys.path)
 # Set up python path
 EXEC_DIR = os.path.dirname(os.path.realpath(sys.argv[0]))
 ROOT_DIR = os.path.abspath(os.path.join(EXEC_DIR, os.pardir))
@@ -34,7 +33,7 @@ except ModuleNotFoundError:
 "python3 -m pip install PattooShared" to continue')
 
 # Import pattoo related libraries
-from pattoo_shared.installation import packages, shared, systemd
+from pattoo_shared.installation import packages, shared, systemd, environment
 from _pattoo_web import configure
 
 
@@ -197,17 +196,26 @@ class _Install():
 
 def check_user():
     """Validate conditions needed to start installation.
-    Prevents installation if the script is not run as root
+
+    Prevents installation if the script is not run as root and prevents
+    installation if script is run in a home related directory
+
     Args:
         None
+
     Returns:
         True: If conditions for installation are satisfied
+
     """
     if getpass.getuser() != 'travis':
         if getpass.getuser() != 'root':
             shared.log('You are currently not running the script as root.\
 Run as root to continue')
-    return True
+        # Check installation directory
+        if os.getcwd().startswith('/home'):
+            shared.log('''
+You cloned the repository in a home related directory, please clone in a\
+ non-home directory to continue''')
 
 
 def main():
@@ -224,9 +232,16 @@ def main():
     _help = 'This program is the CLI interface to configuring pattoo web'
     template_dir = os.path.join(ROOT_DIR, 'setup/systemd/system')
     daemon_list = ['pattoo_webd']
+    pattoo_home = os.path.join(os.path.expanduser('~'), 'pattoo-home')
+    venv_dir = os.path.join(pattoo_home, 'pattoo-venv')
+    venv_interpreter = os.path.join(venv_dir, 'bin/python3')
+    installation_dir = '{} {}'.format(venv_interpreter, ROOT_DIR)
 
     # Ensure user is running as root or travis
     check_user()
+
+    # Setup virtual environment
+    environment.environment_setup(venv_dir)
 
     # Process the CLI
     _parser = Parser(additional_help=_help)
@@ -238,28 +253,28 @@ def main():
         # Installs all pattoo webd agent components
         if args.qualifier == 'all':
             print('Installing everything')
-            configure.install()
-            packages.install(ROOT_DIR)
+            configure.install(pattoo_home)
+            packages.install(ROOT_DIR, venv_dir)
             systemd.install(daemon_list=daemon_list,
                             template_dir=template_dir,
-                            installation_dir=ROOT_DIR)
+                            installation_dir=installation_dir)
 
         # Sets up configuration for agent
         elif args.qualifier == 'configuration':
             print('Installing configuration')
-            configure.install()
+            configure.install(pattoo_home)
 
         # Installs pip packages
         elif args.qualifier == 'pip':
             print('Installing pip packages')
-            packages.install(ROOT_DIR, args.verbose)
+            packages.install(ROOT_DIR, venv_dir)
 
         # Installs and runs system daemons in the daemon list
         elif args.qualifier == 'systemd':
             print('Installing and running system daemons')
             systemd.install(daemon_list=daemon_list,
                             template_dir=template_dir,
-                            installation_dir=ROOT_DIR)
+                            installation_dir=installation_dir)
 
         else:
             parser.print_help(sys.stderr)

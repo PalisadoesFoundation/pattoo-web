@@ -9,6 +9,8 @@ from pattoo_shared.configuration import _config_reader, BaseConfig
 from pattoo_shared.constants import PATTOO_API_WEB_PREFIX
 from pattoo_shared import url
 from pattoo_web.constants import PATTOO_WEBD_NAME
+from pattoo_shared import url
+from pattoo_shared.constants import PATTOO_API_WEB_PREFIX
 
 
 class Config(_Config):
