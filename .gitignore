@@ -150,3 +150,6 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# Javascript
+pattoo_web/node_modules
