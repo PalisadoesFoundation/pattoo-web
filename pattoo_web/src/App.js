@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
+import Dashboard from "./routes/dashboard/dashboard.js";
 import Login from "./routes/login/login.js";
-import Sidebar from "./routes/misc/sidebar/sidebar.js";
 
 function App() {
   return (
     <div className="App">
-      <Sidebar />
+      <Dashboard />
     </div>
   );
 }

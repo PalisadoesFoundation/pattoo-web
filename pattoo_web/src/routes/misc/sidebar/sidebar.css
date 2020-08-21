@@ -1,16 +1,12 @@
 .sidebar {
   display: grid;
   grid-template-rows: 1fr 1fr 3fr 2fr;
-  grid-template-columns: 1fr 5fr 1fr;
+  grid-template-columns: (12, 1fr);
   grid-row-gap: 1.5rem;
   background: #ffffff;
   box-shadow: 0px 6px 42px 10px rgba(0, 0, 0, 0.06);
   height: 100%;
   width: 15%;
-}
-
-.section {
-  grid-column-start: 2;
 }
 
 /* Header */
@@ -40,6 +36,7 @@
 
 .nav_element {
   display: flex;
+  grid-column-start: 3;
   justify-content: flex-start;
   align-items: center;
 }
@@ -61,6 +58,7 @@
 
 /* Controls */
 .controls {
+  grid-row: 4;
   border: 1px solid purple;
 }
 
