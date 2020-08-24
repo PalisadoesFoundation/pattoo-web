@@ -1,6 +1,9 @@
+/* React Imports */
 import React, { useState } from "react";
-import "./login.css";
-import PattooLogo from "./assets/pattoo-light 1.png";
+
+/* Styles and Assets Imports */
+import "../styles/login.css";
+import PattooLogo from "../assets/pattoo-light 1.png";
 
 function Login() {
   const [username, setUsername] = useState("");

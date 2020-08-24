@@ -2,15 +2,15 @@
 import React, { useState } from "react";
 
 /* Tailwind css build */
-import "../../../styles/main.css";
+import "../styles/main.css";
 
 /* Assets Imports */
-import PattooLogo from "./assets/pattoo-light 1.png";
-import DashBoardIcon from "./assets/dashboard.png";
-import AgentIcon from "./assets/agents.png";
-import SettingsIcon from "./assets/settings.png";
-import ThemesIcon from "./assets/themes.png";
-import LogoutIcon from "./assets/logout.png";
+import PattooLogo from "../assets/pattoo-light 1.png";
+import DashBoardIcon from "../assets/dashboard.png";
+import AgentIcon from "../assets/agents.png";
+import SettingsIcon from "../assets/settings.png";
+import ThemesIcon from "../assets/themes.png";
+import LogoutIcon from "../assets/logout.png";
 
 /* Sidebar Components */
 function Header() {

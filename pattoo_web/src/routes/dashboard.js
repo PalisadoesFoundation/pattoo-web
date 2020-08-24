@@ -2,10 +2,10 @@
 import React from "react";
 
 /* Components Import */
-import Sidebar from "../misc/sidebar/sidebar.js";
+import Sidebar from "../components/sidebar";
 
 /* Tailwind css build */
-import "../../styles/main.css";
+import "../styles/main.css";
 
 function StatsColumn({ header, stats }) {
   return (
