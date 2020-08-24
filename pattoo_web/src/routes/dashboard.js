@@ -24,9 +24,8 @@ function StatItem({ key_index, value }) {
 
 function Dashboard() {
   return (
-    <div className="Dashboard">
+    <div className="dashboard">
       <Sidebar />
-      <div className="p-8"></div>
     </div>
   );
 }

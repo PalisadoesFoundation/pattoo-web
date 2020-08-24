@@ -4,18 +4,13 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 
 /* Styles Imports */
-import "./styles/index.css";
+import "./styles/main.css";
 
-/* Component Imports */
-import Dashboard from "./routes/dashboard";
-import Login from "./routes/login";
+/* Routes Imports */
+import RenderRoutes from "./route";
 
 function App() {
-  return (
-    <div className="App">
-      <Login />
-    </div>
-  );
+  return <RenderRoutes />;
 }
 
 ReactDOM.render(
