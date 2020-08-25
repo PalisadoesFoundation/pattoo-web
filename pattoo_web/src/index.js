@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import "./styles/main.css";
 
 /* Routes Imports */
-import RenderRoutes from "./route";
+import RenderRoutes from "./routes";
 
 function App() {
   return <RenderRoutes />;
