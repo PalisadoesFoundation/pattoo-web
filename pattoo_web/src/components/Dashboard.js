@@ -3,6 +3,7 @@ import React from "react";
 
 /* Components Imports */
 import Base from "./Base";
+import { Line } from "react-chartjs-2";
 
 /* Styles and Assets Imports */
 import "../styles/main.css";
@@ -34,10 +35,11 @@ function StatsCard({ title, stats, index }) {
   if (index > 0) {
     margin = 8;
   }
-  const _mainClassName = `mt-${margin} bg-gray-100 shadow-md rounded-lg p-5`;
 
   return (
-    <div className={_mainClassName}>
+    <div
+      className={`stat-card-height mt-${margin} bg-green-100 shadow-md rounded-lg p-5`}
+    >
       <h3 className="text-xs underline">{title}</h3>
       <div className="mt-2">
         {stats.map(({ name, value }) => (
@@ -55,7 +57,56 @@ function StatsCard({ title, stats, index }) {
 }
 
 function Chart() {
-  return <div className="bg-red-300 mb-8 h-64 shadow-xl"></div>;
+  let chart_data = [];
+  for (let i = 0; i < 100; i++) chart_data.push(Math.random() * 1000 + 1);
+  const data = {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+      {
+        backgroundColor: "rgba(255,99,132,0.2)",
+        borderColor: "rgba(255,99,132,1)",
+        borderWidth: 1,
+        hoverBackgroundColor: "rgba(255,99,132,0.4)",
+        hoverBorderColor: "rgba(255,99,132,1)",
+        data: chart_data,
+      },
+    ],
+  };
+
+  const options = {
+    maintainAspectRatio: false,
+    radius: 0,
+    legend: { display: false },
+    elements: {
+      line: { tension: 0.1 },
+      point: {
+        radius: 0,
+      },
+    },
+    layout: {
+      padding: {
+        top: 100,
+      },
+    },
+    scales: {
+      xAxes: [
+        {
+          display: false,
+        },
+      ],
+      yAxes: [
+        {
+          display: false,
+        },
+      ],
+    },
+  };
+
+  return (
+    <div className="chart-height rounded-lg mb-8 shadow-xl">
+      <Line data={data} options={options} />
+    </div>
+  );
 }
 
 function DashboardComponent(props) {

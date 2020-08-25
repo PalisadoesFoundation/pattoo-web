@@ -18650,6 +18650,14 @@ video {
   animation: bounce 1s infinite;
 }
 
+.chart-height {
+  height: 35vh;
+}
+
+.stat-card-height{
+  height: 35vh;
+}
+
 @media (min-width: 640px){
   .sm\:container{
     width: 100%;
