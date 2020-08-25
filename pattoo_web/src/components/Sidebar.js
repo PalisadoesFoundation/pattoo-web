@@ -14,22 +14,17 @@ import LogoutIcon from "../assets/logout.png";
 
 /* Sidebar Components */
 function Header() {
-  const imgStyle = {
-    width: "75px",
-    height: "80px",
-  };
-
   return (
-    <div className="col-span-8 row-span-1 flex flex-col items-center pt-8">
-      <img src={PattooLogo} style={imgStyle} className="flex-1" />
-      <p className="flex-1 text-xs text-gray-600">v1.0</p>
+    <div className="row-span-1 flex flex-col justify-center border-b border-grey-200">
+      <img src={PattooLogo} className="object-contain h-16 w-full" />
+      <p className="text-center text-xs text-gray-600 font-bold">v1.0</p>
     </div>
   );
 }
 
 function Nav({ elements }) {
   return (
-    <div className="flex flex-col justify-around col-span-8 row-span-1 border pt-2 pb-2">
+    <div className="row-span-2 flex flex-col justify-center ml-16">
       {elements.map(({ icon, name }) => (
         <NavItem key={name} icon={icon} name={name} />
       ))}
@@ -38,37 +33,31 @@ function Nav({ elements }) {
 }
 
 function NavItem({ icon, name }) {
-  const iconStyle = {
-    width: "15px",
-    height: "15px",
-  };
   return (
-    <div className="grid grid-cols-12 cursor-pointer">
-      <div className="col-start-3 flex items-center">
-        <img src={icon} className="" style={iconStyle} />
-        <p className="ml-4">{name}</p>
-      </div>
+    <div className="flex items-center py-5">
+      <img src={icon} className="object-contain" />
+      <span className="ml-5 text-sm">{name}</span>
     </div>
   );
 }
 
 function Favorites({ favorites }) {
   return (
-    <div className="grid grid-cols-8 border pt-8 col-span-8 row-span-5">
-      {favorites.map((name) => (
-        <div key={name} className="col-start-2 col-span-8 text-xs ml-4">
-          <span className="cursor-pointer">{name}</span>
+    <div className="row-span-5 border-b border-t">
+      <div className="h-full flex flex-col justify-between ml-16 py-5">
+        {favorites.map((name) => (
+          <FavoritesItem key={name} name={name} />
+        ))}
+        <div className="">
+          <span className="text-xs">...Show more</span>
         </div>
-      ))}
-      <div className="col-start-2 col-span-8 text-xs ml-4">
-        <span className="cursor-pointer">...Shore more</span>
       </div>
     </div>
   );
 }
 
-function Separator({ titleOn, title }) {
-  return <p>Hello World</p>;
+function FavoritesItem({ name }) {
+  return <span className="text-sm">{name}</span>;
 }
 
 const mainNav = [
@@ -93,7 +82,7 @@ function Sidebar() {
 
   // useEffect to update state of favorite charts, querying graphql
   return (
-    <div className="grid grid-cols-8 grid-rows-12 h-full w-1/6 fixed shadow-xl">
+    <div className="fixed w-1/6 h-full grid grid-row-12 shadow-lg">
       <Header />
       <Nav elements={mainNav} />
       <Favorites favorites={favorites} />
