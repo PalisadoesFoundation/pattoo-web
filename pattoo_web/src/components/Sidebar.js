@@ -16,7 +16,7 @@ import LogoutIcon from "../assets/logout.png";
 function Header() {
   return (
     <div className="row-span-1 flex flex-col justify-center border-b border-grey-200">
-      <img src={PattooLogo} className="object-contain h-16 w-full" />
+      <img src={PattooLogo} className="object-contain h-20 w-full" />
       <p className="text-center text-xs text-gray-600 font-bold">v1.0</p>
     </div>
   );
@@ -57,7 +57,7 @@ function Favorites({ favorites }) {
 }
 
 function FavoritesItem({ name }) {
-  return <span className="text-sm">{name}</span>;
+  return <span className="text-xs">{name}</span>;
 }
 
 const mainNav = [
@@ -82,7 +82,7 @@ function Sidebar() {
 
   // useEffect to update state of favorite charts, querying graphql
   return (
-    <div className="fixed w-1/6 h-full grid grid-row-12 shadow-lg">
+    <div className="fixed w-64 h-full grid grid-row-12 shadow-lg">
       <Header />
       <Nav elements={mainNav} />
       <Favorites favorites={favorites} />

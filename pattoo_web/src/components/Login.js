@@ -10,6 +10,7 @@ function LoginComponent({
   password,
   updateLoginField,
   updatePasswordField,
+  submission,
 }) {
   return (
     <div className="border w-full h-screen flex justify-center">
@@ -40,7 +41,10 @@ function LoginComponent({
         </div>
 
         <div className="mt-8 flex flex-col items-center">
-          <button className="w-2/3 bg-gray-500 uppercase text-sm font-bold text-white rounded-full py-5">
+          <button
+            onClick={submission}
+            className="w-2/3 bg-gray-500 uppercase text-sm font-bold text-white rounded-full py-5"
+          >
             Sign in now
           </button>
           <p className="mt-5 text-sm text-gray-500">

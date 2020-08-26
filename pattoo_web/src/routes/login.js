@@ -1,6 +1,9 @@
 /* React Imports */
 import React, { useState } from "react";
 
+/* Authentication method imports */
+import { authenticate } from "../graphql_client";
+
 /* Components */
 import LoginComponent from "../components/Login";
 
@@ -17,6 +20,7 @@ function Login() {
       password={password}
       updateLoginField={updateLoginField}
       updatePasswordField={updatePasswordField}
+      submission={() => authenticate(username, password)}
     />
   );
 }
