@@ -56,11 +56,21 @@ function StatsCard({ title, stats, index }) {
   );
 }
 
-function Chart() {
-  let chart_data = [];
-  for (let i = 0; i < 100; i++) chart_data.push(Math.random() * 1000 + 1);
+function Chart({ chartData }) {
+  //let chart_data = [];
+  //for (let i = 0; i < 100; i++) chart_data.push(Math.random() * 1000 + 1);
+  let labels = [];
+  let dataSet = [];
+
+  for (let i = 0; i < chartData.length; i++) {
+    labels.push(chartData[i].node.timestamp);
+    dataSet.push(chartData[i].node.value);
+  }
+
+  console.log(labels);
+  console.log(dataSet);
   const data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: labels,
     datasets: [
       {
         backgroundColor: "rgba(255,99,132,0.2)",
@@ -68,7 +78,7 @@ function Chart() {
         borderWidth: 1,
         hoverBackgroundColor: "rgba(255,99,132,0.4)",
         hoverBorderColor: "rgba(255,99,132,1)",
-        data: chart_data,
+        data: dataSet,
       },
     ],
   };
@@ -85,7 +95,7 @@ function Chart() {
     },
     layout: {
       padding: {
-        top: 100,
+        top: 50,
       },
     },
     scales: {
@@ -109,7 +119,8 @@ function Chart() {
   );
 }
 
-function DashboardComponent(props) {
+function DashboardComponent({ data }) {
+  console.log(data);
   return (
     <Base
       pageName="Dashboard"
@@ -127,11 +138,12 @@ function DashboardComponent(props) {
           </div>
           <div className="grid grid-cols-12">
             <div className="col-start-4 col-end-13">
-              <Chart />
-              <Chart />
-              <Chart />
-              <Chart />
-              <Chart />
+              <Chart chartData={data} />
+              <Chart chartData={data} />
+              <Chart chartData={data} />
+              <Chart chartData={data} />
+              <Chart chartData={data} />
+              <Chart chartData={data} />
             </div>
           </div>
         </div>

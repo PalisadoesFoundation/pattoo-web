@@ -3,7 +3,7 @@ import React from "react";
 
 /* Styles and Assets Imports */
 import "../styles/main.css";
-import PattooLoginLogo from "../assets/pattoo_login.png";
+import PattooLogo from "../assets/pattoo-light 1.png";
 
 function LoginComponent({
   username,
@@ -13,17 +13,16 @@ function LoginComponent({
   submission,
 }) {
   return (
-    <div className="border w-full h-screen flex justify-center">
-      <div className="w-2/5 h-auto flex flex-col items-center mt-40">
+    <div className="w-full h-screen flex justify-center sm:flex-none">
+      <div className="w-2/5 md:w-4/5 sm:w-full border h-auto flex flex-col items-center mt-48">
         <div className="w-full h-auto flex flex-col items-center py-6">
-          <img src={PattooLoginLogo} className="object-contain h-32 w-full" />
-          <h2 className="mt-4 text-3xl font-bold uppercase">Sign in</h2>
-          <p className="w-1/2 mt-4 text-md font-medium">
-            Hello! Sign in and start managing your Pattoo data!
-          </p>
+          <img
+            src={PattooLogo}
+            className="object-contain h-48 xs:h-20 w-full"
+          />
         </div>
 
-        <div className="w-1/2">
+        <div className="w-1/2 mt-10">
           <input
             type="text"
             placeholder="Login"

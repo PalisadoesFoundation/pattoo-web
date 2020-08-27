@@ -5,31 +5,47 @@ const axios = require("axios").default;
 
 const serverUrl = "http://localhost:20202/pattoo/api/v1/web/graphql";
 
-function queryResource(query) {}
+async function queryResource(query) {
+  return await axios({
+    method: "post",
+    url: serverUrl,
+    data: { query: query },
+  });
+}
 
 // Authenticates and saves access and refresh tokesn for `username` and `password`
-function authenticate(username, password) {
-  const auth_query = `
+async function authenticate(username, password) {
+  const response = await axios({
+    method: "post",
+    url: serverUrl,
+    data: {
+      query: `
     mutation {
         authenticate(Input: {
-            username: ${username},
-            password: ${password}
+            username: "${username}",
+            password: "${password}"
         }){
             accessToken
             refreshToken
         }
-    }
-    `;
-
-  axios({
-    method: "post",
-    url: serverUrl,
-    data: {
-      query: auth_query,
+    }`,
     },
-  })
-    .then((response) => console.log(response))
-    .catch((err) => console.log(`Error: ${err}`));
+  });
+
+  if (response.data.data.authenticate === null) {
+    return false;
+  }
+
+  localStorage.setItem(
+    "accessToken",
+    response.data.data.authenticate.accessToken
+  );
+  localStorage.setItem(
+    "refreshToken",
+    response.data.data.authenticate.refreshToken
+  );
+
+  return true;
 }
 
 function refreshToken(refreshToken) {}
