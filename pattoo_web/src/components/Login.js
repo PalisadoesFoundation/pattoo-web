@@ -14,7 +14,7 @@ function LoginComponent({
 }) {
   return (
     <div className="w-full h-screen flex justify-center sm:flex-none">
-      <div className="w-2/5 md:w-4/5 sm:w-full border h-auto flex flex-col items-center mt-48">
+      <div className="lg:w-2/5 md:w-4/5 sm:w-full h-auto flex flex-col items-center mt-48">
         <div className="w-full h-auto flex flex-col items-center py-6">
           <img
             src={PattooLogo}

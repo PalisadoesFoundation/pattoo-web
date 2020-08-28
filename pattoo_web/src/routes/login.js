@@ -18,6 +18,7 @@ function Login() {
   const login = async (e) => {
     authenticate(username, password).then((response) => {
       if (response) {
+        localStorage.setItem("current_user", username);
         history.push("/");
       } else {
         setUsername("");

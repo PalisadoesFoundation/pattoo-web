@@ -1,30 +1,33 @@
 /* React Imports */
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 /* Tailwind css build */
 import "../styles/main.css";
 
+/* Fontawesome Icons */
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+
 /* Assets Imports */
 import PattooLogo from "../assets/pattoo-light 1.png";
-import DashBoardIcon from "../assets/dashboard.png";
-import AgentIcon from "../assets/agents.png";
-import SettingsIcon from "../assets/settings.png";
-import ThemesIcon from "../assets/themes.png";
-import LogoutIcon from "../assets/logout.png";
 
 /* Sidebar Components */
 function Header() {
   return (
-    <div className="row-span-1 flex flex-col justify-center border-b border-grey-200">
-      <img src={PattooLogo} className="object-contain h-20 w-full" />
+    <div className="py-5 flex justify-between items-center px-5 border-b border-grey-200">
+      <img src={PattooLogo} className="object-contain h-16" />
       <p className="text-center text-xs text-gray-600 font-bold">v1.0</p>
     </div>
   );
 }
 
-function Nav({ elements }) {
+function Nav({ elements, subtitle }) {
   return (
-    <div className="row-span-2 flex flex-col justify-center ml-16">
+    <div className="flex flex-col mt-5">
+      <h3 className="text-indigo-400 tracking-wider uppercase text-xxs font-bold py-2 ml-5">
+        {subtitle}
+      </h3>
       {elements.map(({ icon, name }) => (
         <NavItem key={name} icon={icon} name={name} />
       ))}
@@ -32,18 +35,24 @@ function Nav({ elements }) {
   );
 }
 
-function NavItem({ icon, name }) {
+function NavItem({ icon, name, path }) {
   return (
-    <div className="flex items-center py-5">
-      <img src={icon} className="object-contain" />
-      <span className="ml-5 text-sm">{name}</span>
-    </div>
+    <Link to={path}>
+      <div className="py-3 mt-5 rounded bg-pattooPrimary mx-2">
+        <div className="flex items-center w-1/2 ml-5 ">
+          <FontAwesomeIcon icon={icon} size="xs" />
+          <span className="ml-5 text-sm text-pattooAccentTwo font-semibold">
+            {name}
+          </span>
+        </div>
+      </div>
+    </Link>
   );
 }
 
 function Favorites({ favorites }) {
   return (
-    <div className="row-span-5 border-b border-t">
+    <div className="border-b border-t">
       <div className="h-full flex flex-col justify-between ml-16 py-5">
         {favorites.map((name) => (
           <FavoritesItem key={name} name={name} />
@@ -61,14 +70,30 @@ function FavoritesItem({ name }) {
 }
 
 const mainNav = [
-  { icon: DashBoardIcon, name: "Dashboard" },
-  { icon: AgentIcon, name: "Agents" },
+  {
+    icon: faHome,
+    name: "Dashboard",
+    path: "/dashboard",
+  },
+  {
+    icon: faHome,
+    name: "Agents",
+    path: "/agents",
+  },
 ];
 
 const controlNav = [
-  { icon: SettingsIcon, name: "Settings" },
-  { icon: ThemesIcon, name: "Themes" },
-  { icon: LogoutIcon, name: "Logout" },
+  {
+    icon: faHome,
+    name: "Settings",
+    path: "/settings",
+  },
+  {
+    icon: faHome,
+    name: "Themes",
+    path: "/themes",
+  },
+  { icon: faHome, name: "Logout", path: "/login" },
 ];
 
 function Sidebar() {
@@ -82,11 +107,15 @@ function Sidebar() {
 
   // useEffect to update state of favorite charts, querying graphql
   return (
-    <div className="fixed w-64 h-full grid grid-row-12 shadow-lg">
+    <div className="fixed w-64 h-full shadow-lg">
       <Header />
-      <Nav elements={mainNav} />
-      <Favorites favorites={favorites} />
-      <Nav elements={controlNav} />
+      <div className="pt-10">
+        <Nav
+          elements={mainNav}
+          subtitle={localStorage.getItem("current_user")}
+        />
+        <Nav elements={controlNav} subtitle="controls" />
+      </div>
     </div>
   );
 }

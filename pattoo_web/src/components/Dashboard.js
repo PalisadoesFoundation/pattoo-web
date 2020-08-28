@@ -38,17 +38,19 @@ function StatsCard({ title, stats, index }) {
 
   return (
     <div
-      className={`stat-card-height mt-${margin} bg-green-100 shadow-md rounded-lg p-5`}
+      className={`stat-card-height mt-${margin} bg-pattooPrimary shadow-md rounded-lg p-5`}
     >
-      <h3 className="text-xs underline">{title}</h3>
+      <h3 className="text-xs text-pattooAccentThree underline font-semibold">
+        {title}
+      </h3>
       <div className="mt-2">
         {stats.map(({ name, value }) => (
           <div
             key={`entry-${name}`}
-            className="flex justify-between text-sm py-4"
+            className="flex justify-between font-semibold text-xs text-pattooAccentTwo py-4"
           >
             <p className="">{name}</p>
-            <p className="text-gray-500 text-xs font-semibold">{value}</p>
+            <p className="text-xxs font-semibold">{value}</p>
           </div>
         ))}
       </div>
@@ -113,7 +115,7 @@ function Chart({ chartData }) {
   };
 
   return (
-    <div className="chart-height rounded-lg mb-8 shadow-xl">
+    <div className="chart-height rounded-lg mb-8 shadow-xl bg-white">
       <Line data={data} options={options} />
     </div>
   );
@@ -137,7 +139,7 @@ function DashboardComponent({ data }) {
             ))}
           </div>
           <div className="grid grid-cols-12">
-            <div className="col-start-4 col-end-13">
+            <div className="col-start-4 col-end-12">
               <Chart chartData={data} />
               <Chart chartData={data} />
               <Chart chartData={data} />

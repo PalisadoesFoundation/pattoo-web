@@ -13,8 +13,8 @@ function Base({ pageName, Component }) {
   return (
     <div className="">
       <Sidebar />
-      <div className="grid grid-cols-7">
-        <div className="col-start-2 col-end-8 p-10">
+      <div className="grid grid-cols-8">
+        <div className="col-start-2 col-end-9 p-16">
           <h1 className="text-4xl font-black">{pageName}</h1>
           <div className="mt-5">
             <Component />
