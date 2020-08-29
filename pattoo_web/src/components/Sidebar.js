@@ -7,7 +7,12 @@ import "../styles/main.css";
 
 /* Fontawesome Icons */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHome,
+  faStar,
+  faLayerGroup,
+  faCog,
+} from "@fortawesome/free-solid-svg-icons";
 
 /* Assets Imports */
 import PattooLogo from "../assets/pattoo-light 1.png";
@@ -76,15 +81,20 @@ const mainNav = [
     path: "/dashboard",
   },
   {
-    icon: faHome,
+    icon: faLayerGroup,
     name: "Agents",
     path: "/agents",
+  },
+  {
+    icon: faStar,
+    name: "Favorites",
+    path: "/favorites",
   },
 ];
 
 const controlNav = [
   {
-    icon: faHome,
+    icon: faCog,
     name: "Settings",
     path: "/settings",
   },
@@ -107,7 +117,7 @@ function Sidebar() {
 
   // useEffect to update state of favorite charts, querying graphql
   return (
-    <div className="fixed w-64 h-full shadow-lg">
+    <div className="fixed w-56 h-full shadow-xl">
       <Header />
       <div className="pt-10">
         <Nav

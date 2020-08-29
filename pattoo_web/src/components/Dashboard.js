@@ -38,7 +38,7 @@ function StatsCard({ title, stats, index }) {
 
   return (
     <div
-      className={`stat-card-height mt-${margin} bg-pattooPrimary shadow-md rounded-lg p-5`}
+      className={`stat-card-height mt-${margin} shadow-card border rounded-lg p-5`}
     >
       <h3 className="text-xs text-pattooAccentThree underline font-semibold">
         {title}
@@ -59,8 +59,6 @@ function StatsCard({ title, stats, index }) {
 }
 
 function Chart({ chartData }) {
-  //let chart_data = [];
-  //for (let i = 0; i < 100; i++) chart_data.push(Math.random() * 1000 + 1);
   let labels = [];
   let dataSet = [];
 
@@ -115,7 +113,7 @@ function Chart({ chartData }) {
   };
 
   return (
-    <div className="chart-height rounded-lg mb-8 shadow-xl bg-white">
+    <div className="chart-height rounded-lg mb-8 shadow-card border bg-white">
       <Line data={data} options={options} />
     </div>
   );
@@ -128,7 +126,7 @@ function DashboardComponent({ data }) {
       pageName="Dashboard"
       Component={(props) => (
         <div className="">
-          <div className="fixed w-1/6">
+          <div className="fixed w-1/5">
             {dummyStats.map(({ title, stats }, index) => (
               <StatsCard
                 key={title}
@@ -139,7 +137,7 @@ function DashboardComponent({ data }) {
             ))}
           </div>
           <div className="grid grid-cols-12">
-            <div className="col-start-4 col-end-12">
+            <div className="col-start-4 col-end-13 ml-8">
               <Chart chartData={data} />
               <Chart chartData={data} />
               <Chart chartData={data} />

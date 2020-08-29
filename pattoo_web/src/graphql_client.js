@@ -5,11 +5,14 @@ const axios = require("axios").default;
 
 const serverUrl = "http://localhost:20202/pattoo/api/v1/web/graphql";
 
-async function queryResource(query) {
+async function queryResource(data) {
   return await axios({
     method: "post",
     url: serverUrl,
-    data: { query: query },
+    data: {
+      query: data.query,
+      variables: data.variables,
+    },
   });
 }
 

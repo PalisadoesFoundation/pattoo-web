@@ -14,6 +14,10 @@ module.exports = {
         pattooAccentTwo: "#112A46",
         pattooAccentThree: "#291d89",
       },
+      boxShadow: {
+        sidebar: "0px 6px 42px 10px rgba(0, 0, 0, 0.06)",
+        card: "0px 6px 45px rgba(0, 0, 0, 0.1)",
+      },
     },
   },
   variants: {},
