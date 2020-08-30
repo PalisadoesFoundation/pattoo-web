@@ -5,9 +5,9 @@
 @tailwind utilities;
 
 .chart-height {
-    height: 35vh;
+  height: 40vh;
 }
 
-.stat-card-height{
-    height: 35vh;
+.stat-card-height {
+  height: 40vh;
 }

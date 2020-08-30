@@ -10,16 +10,6 @@ import "../styles/main.css";
 
 const dummyStats = [
   {
-    title: "Recently Updates",
-    stats: [
-      { name: "Pattoo Agent Linux", value: "10 mins ago" },
-      { name: "Samsung A/C modules", value: "1 hour ago" },
-      { name: "nGix Server Metrics", value: "5 mins ago" },
-      { name: "OS Modules", value: "10 mins ago" },
-      { name: "JSE - Main Market", value: "24 mins ago" },
-    ],
-  },
-  {
     title: "Account Statistics",
     stats: [
       { name: "Files Ingested Today", value: "1000" },
@@ -31,26 +21,23 @@ const dummyStats = [
 ];
 
 function StatsCard({ title, stats, index }) {
-  let margin = 0;
-  if (index > 0) {
-    margin = 8;
-  }
-
   return (
-    <div
-      className={`stat-card-height mt-${margin} shadow-card border rounded-lg p-5`}
-    >
-      <h3 className="text-xs text-pattooAccentThree underline font-semibold">
+    <div className={`stat-card-height mt-8 shadow-card border rounded-lg p-5`}>
+      <h3 className="w-full p-5 text-md text-pattooAccentOne font-semibold">
         {title}
       </h3>
-      <div className="mt-2">
+      <div className="px-5">
         {stats.map(({ name, value }) => (
           <div
             key={`entry-${name}`}
-            className="flex justify-between font-semibold text-xs text-pattooAccentTwo py-4"
+            className="flex items-center justify-between font-semibold text-xs text-pattooAccentThree py-3"
           >
             <p className="">{name}</p>
-            <p className="text-xxs font-semibold">{value}</p>
+            <div className="bg-pattooAccentOne rounded-full h-10 w-10 flex items-center justify-center">
+              <span className="text-xxs font-semibold text-white font-bold">
+                {value}
+              </span>
+            </div>
           </div>
         ))}
       </div>
@@ -105,13 +92,13 @@ function Chart({ title, chartData }) {
   };
 
   // Computing date time between start and end of line chart
-  const date = Date(chartData[0].data[0].timestamp);
-  const date_two = Date(
-    chartData[0].data[chartData[0].data.length - 1].timestamp
-  );
-  console.log(chartData[0].date[0].timestamp);
-  console.log(chartData[0].data[chartData[0].data.length - 1].timestamp);
-  console.log("\n\n");
+  //const date = Date(chartData[0].data[0].timestamp);
+  //const date_two = Date(
+  //chartData[0].data[chartData[0].data.length - 1].timestamp
+  //);
+  //console.log(chartData[0].date[0].timestamp);
+  //console.log(chartData[0].data[chartData[0].data.length - 1].timestamp);
+  //console.log("\n\n");
   return (
     <div className="relative chart-height rounded-lg mb-8 shadow-card border bg-white">
       <div className="">
@@ -125,6 +112,18 @@ function Chart({ title, chartData }) {
   );
 }
 
+function RecentButton({ text, active }) {
+  const bgColor = active ? "pattooAccentThree" : "pattooAccentOne";
+  const buttonShadow = active ? "shadow-button" : "";
+  return (
+    <button
+      className={`bg-${bgColor} text-white font-bold ${buttonShadow} rounded py-2 mt-6`}
+    >
+      {text}
+    </button>
+  );
+}
+
 function DashboardComponent({ data }) {
   return (
     <Base
@@ -132,6 +131,16 @@ function DashboardComponent({ data }) {
       Component={() => (
         <div className="">
           <div className="fixed w-1/5">
+            <div className="stat-card-height shadow-card border rounded-lg p-5">
+              <h2 className="w-full p-5 text-md text-pattooAccentOne font-semibold">
+                Recently Updated
+              </h2>
+              <div className="flex flex-col w-full px-5">
+                <RecentButton text="Favorites" active={true} />
+                <RecentButton text="Charts" active={false} />
+                <RecentButton text="Agents" active={false} />
+              </div>
+            </div>
             {dummyStats.map(({ title, stats }, index) => (
               <StatsCard
                 key={title}
@@ -142,7 +151,7 @@ function DashboardComponent({ data }) {
             ))}
           </div>
           <div className="grid grid-cols-12">
-            <div className="col-start-4 col-end-13 ml-8">
+            <div className="col-start-4 col-end-12 ml-8">
               {data.map(({ name, datapoints }) => (
                 <Chart key={name} title={name} chartData={datapoints} />
               ))}

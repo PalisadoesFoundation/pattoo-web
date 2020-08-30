@@ -14114,6 +14114,10 @@ video {
   box-shadow: 0px 6px 45px rgba(0, 0, 0, 0.1);
 }
 
+.shadow-button{
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 .hover\:shadow-xs:hover{
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
@@ -14162,6 +14166,10 @@ video {
   box-shadow: 0px 6px 45px rgba(0, 0, 0, 0.1);
 }
 
+.hover\:shadow-button:hover{
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 .focus\:shadow-xs:focus{
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
@@ -14208,6 +14216,10 @@ video {
 
 .focus\:shadow-card:focus{
   box-shadow: 0px 6px 45px rgba(0, 0, 0, 0.1);
+}
+
+.focus\:shadow-button:focus{
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .fill-current{
@@ -19135,11 +19147,11 @@ video {
 }
 
 .chart-height {
-  height: 35vh;
+  height: 40vh;
 }
 
-.stat-card-height{
-  height: 35vh;
+.stat-card-height {
+  height: 40vh;
 }
 
 @media (min-width: 640px){
@@ -32678,6 +32690,10 @@ video {
     box-shadow: 0px 6px 45px rgba(0, 0, 0, 0.1);
   }
 
+  .sm\:shadow-button{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
   .sm\:hover\:shadow-xs:hover{
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
   }
@@ -32726,6 +32742,10 @@ video {
     box-shadow: 0px 6px 45px rgba(0, 0, 0, 0.1);
   }
 
+  .sm\:hover\:shadow-button:hover{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
   .sm\:focus\:shadow-xs:focus{
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
   }
@@ -32772,6 +32792,10 @@ video {
 
   .sm\:focus\:shadow-card:focus{
     box-shadow: 0px 6px 45px rgba(0, 0, 0, 0.1);
+  }
+
+  .sm\:focus\:shadow-button:focus{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
 
   .sm\:fill-current{
@@ -51204,6 +51228,10 @@ video {
     box-shadow: 0px 6px 45px rgba(0, 0, 0, 0.1);
   }
 
+  .md\:shadow-button{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
   .md\:hover\:shadow-xs:hover{
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
   }
@@ -51252,6 +51280,10 @@ video {
     box-shadow: 0px 6px 45px rgba(0, 0, 0, 0.1);
   }
 
+  .md\:hover\:shadow-button:hover{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
   .md\:focus\:shadow-xs:focus{
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
   }
@@ -51298,6 +51330,10 @@ video {
 
   .md\:focus\:shadow-card:focus{
     box-shadow: 0px 6px 45px rgba(0, 0, 0, 0.1);
+  }
+
+  .md\:focus\:shadow-button:focus{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
 
   .md\:fill-current{
@@ -69730,6 +69766,10 @@ video {
     box-shadow: 0px 6px 45px rgba(0, 0, 0, 0.1);
   }
 
+  .lg\:shadow-button{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
   .lg\:hover\:shadow-xs:hover{
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
   }
@@ -69778,6 +69818,10 @@ video {
     box-shadow: 0px 6px 45px rgba(0, 0, 0, 0.1);
   }
 
+  .lg\:hover\:shadow-button:hover{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
   .lg\:focus\:shadow-xs:focus{
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
   }
@@ -69824,6 +69868,10 @@ video {
 
   .lg\:focus\:shadow-card:focus{
     box-shadow: 0px 6px 45px rgba(0, 0, 0, 0.1);
+  }
+
+  .lg\:focus\:shadow-button:focus{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
 
   .lg\:fill-current{
@@ -88256,6 +88304,10 @@ video {
     box-shadow: 0px 6px 45px rgba(0, 0, 0, 0.1);
   }
 
+  .xl\:shadow-button{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
   .xl\:hover\:shadow-xs:hover{
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
   }
@@ -88304,6 +88356,10 @@ video {
     box-shadow: 0px 6px 45px rgba(0, 0, 0, 0.1);
   }
 
+  .xl\:hover\:shadow-button:hover{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
   .xl\:focus\:shadow-xs:focus{
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
   }
@@ -88350,6 +88406,10 @@ video {
 
   .xl\:focus\:shadow-card:focus{
     box-shadow: 0px 6px 45px rgba(0, 0, 0, 0.1);
+  }
+
+  .xl\:focus\:shadow-button:focus{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
 
   .xl\:fill-current{
