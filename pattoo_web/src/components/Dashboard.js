@@ -58,27 +58,19 @@ function StatsCard({ title, stats, index }) {
   );
 }
 
-function Chart({ chartData }) {
-  let labels = [];
-  let dataSet = [];
-
-  for (let i = 0; i < chartData.length; i++) {
-    labels.push(chartData[i].node.timestamp);
-    dataSet.push(chartData[i].node.value);
-  }
-
-  console.log(labels);
-  console.log(dataSet);
+function Chart({ title, chartData }) {
   const data = {
-    labels: labels,
+    labels: chartData[0].data.map(({ timestamp }) => timestamp),
     datasets: [
       {
+        labels: chartData[0].datapointID,
         backgroundColor: "rgba(255,99,132,0.2)",
         borderColor: "rgba(255,99,132,1)",
+        fill: true,
         borderWidth: 1,
         hoverBackgroundColor: "rgba(255,99,132,0.4)",
         hoverBorderColor: "rgba(255,99,132,1)",
-        data: dataSet,
+        data: chartData[0].data.map(({ value }) => value),
       },
     ],
   };
@@ -95,7 +87,7 @@ function Chart({ chartData }) {
     },
     layout: {
       padding: {
-        top: 50,
+        top: 150,
       },
     },
     scales: {
@@ -112,19 +104,32 @@ function Chart({ chartData }) {
     },
   };
 
+  // Computing date time between start and end of line chart
+  const date = Date(chartData[0].data[0].timestamp);
+  const date_two = Date(
+    chartData[0].data[chartData[0].data.length - 1].timestamp
+  );
+  console.log(chartData[0].date[0].timestamp);
+  console.log(chartData[0].data[chartData[0].data.length - 1].timestamp);
+  console.log("\n\n");
   return (
-    <div className="chart-height rounded-lg mb-8 shadow-card border bg-white">
+    <div className="relative chart-height rounded-lg mb-8 shadow-card border bg-white">
+      <div className="">
+        <h3 className="absolute mt-12 ml-12 text-xl font-bold text-pattooAccentOne font-main">
+          {title}
+        </h3>
+        <h4></h4>
+      </div>
       <Line data={data} options={options} />
     </div>
   );
 }
 
 function DashboardComponent({ data }) {
-  console.log(data);
   return (
     <Base
       pageName="Dashboard"
-      Component={(props) => (
+      Component={() => (
         <div className="">
           <div className="fixed w-1/5">
             {dummyStats.map(({ title, stats }, index) => (
@@ -138,12 +143,9 @@ function DashboardComponent({ data }) {
           </div>
           <div className="grid grid-cols-12">
             <div className="col-start-4 col-end-13 ml-8">
-              <Chart chartData={data} />
-              <Chart chartData={data} />
-              <Chart chartData={data} />
-              <Chart chartData={data} />
-              <Chart chartData={data} />
-              <Chart chartData={data} />
+              {data.map(({ name, datapoints }) => (
+                <Chart key={name} title={name} chartData={datapoints} />
+              ))}
             </div>
           </div>
         </div>

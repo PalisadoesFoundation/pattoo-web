@@ -1,5 +1,8 @@
 /* Makes queries to graphql server */
 
+/* Authentication query */
+import { userAuth } from "./api";
+
 /* Imports */
 const axios = require("axios").default;
 
@@ -18,20 +21,13 @@ async function queryResource(data) {
 
 // Authenticates and saves access and refresh tokesn for `username` and `password`
 async function authenticate(username, password) {
+  const data = userAuth(username, password);
   const response = await axios({
     method: "post",
     url: serverUrl,
     data: {
-      query: `
-    mutation {
-        authenticate(Input: {
-            username: "${username}",
-            password: "${password}"
-        }){
-            accessToken
-            refreshToken
-        }
-    }`,
+      query: data.query,
+      variables: data.variables,
     },
   });
 
@@ -47,6 +43,8 @@ async function authenticate(username, password) {
     "refreshToken",
     response.data.data.authenticate.refreshToken
   );
+
+  localStorage.setItem("userID", response.data.data.authenticate.idxUser);
 
   return true;
 }

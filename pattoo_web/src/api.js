@@ -1,13 +1,31 @@
 /* Project Queries */
 
-const userFavorite = (accessToken) => {
+const userAuth = (username, password) => {
   return {
     query: `
-    query userFavorite($token: String!){
-      allFavorite(idxUser: "3", token: $token) {
+    mutation auth($username: String!, $password: String!){
+        authenticate(Input: {
+            username: $username,
+            password: $password
+        }){
+            accessToken
+            refreshToken
+            idxUser
+        }
+    }`,
+    variables: { username: username, password: password },
+  };
+};
+
+const userFavorite = (idxUser, accessToken) => {
+  return {
+    query: `
+    query userFavorite($idxUser: String! ,$token: String!){
+      allFavorite(idxUser: $idxUser, token: $token) {
         edges {
           node {
             chart {
+              name
               chartDatapointChart {
                 edges {
                   node {
@@ -31,8 +49,8 @@ const userFavorite = (accessToken) => {
       }
     }
     `,
-    variables: { token: accessToken },
+    variables: { idxUser: idxUser, token: accessToken },
   };
 };
 
-export { userFavorite };
+export { userAuth, userFavorite };
