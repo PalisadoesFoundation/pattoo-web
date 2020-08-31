@@ -20,13 +20,31 @@ import {
 /* Assets Imports */
 import PattooLogo from "../assets/pattoo-light 1.png";
 
+// Binding React Modal to public/index.html 'modal' element
+Modal.setAppElement("#modal");
+Modal.defaultStyles.overlay.backgroundColor = "rgba(240, 244, 255, 0.5)";
+
 /* Sidebar Components */
 function Header() {
   const [showModal, setShowModal] = useState(false);
-  const updateShowModal = (e) => setShowModal(true);
+  const updateShowModal = () => setShowModal(true);
+
+  const closeModal = () => setShowModal(false);
 
   return (
     <div className="row-span-1 py-5 flex flex-col justify-between">
+      <Modal
+        isOpen={true}
+        onRequestClose={closeModal}
+        shouldCloseOnOverlayClick={true}
+        className={`container mx-auto mt-56 rounded-lg shadow-card bg-white w-1/2 p-16`}
+      >
+        <h2 className="text-4xl font-main font-bold text-pattooAccentOne">
+          Create Chart
+        </h2>
+        <div className=""></div>
+      </Modal>
+
       <div className="w-full flex justify-between items-center border-b border-grey-200  p-5">
         <img src={PattooLogo} className="object-contain h-16" />
         <p className="text-center text-xs text-gray-600 font-bold">v1.0</p>
@@ -41,6 +59,8 @@ function Header() {
     </div>
   );
 }
+
+function CreateChartModal() {}
 
 function Nav({ elements, subtitle }) {
   return (

@@ -26,14 +26,14 @@ function LoginComponent({
           <input
             type="text"
             placeholder="Login"
-            className="w-full border-b-2 pb-2 text-sm text-grey-500"
+            className="w-full border-b-2 pb-2 text-sm text-grey-500 focus:outline-none focus:border-pattooAccentTwo"
             value={username}
             onChange={updateLoginField}
           />
           <input
             type="password"
             placeholder="Password"
-            className="mt-8 w-full border-b-2 pb-2 text-sm text-grey-500"
+            className="mt-8 w-full border-b-2 pb-2 text-sm text-grey-500 focus:outline-none focus:border-pattooAccentTwo"
             value={password}
             onChange={updatePasswordField}
           />
@@ -42,13 +42,18 @@ function LoginComponent({
         <div className="mt-8 flex flex-col items-center">
           <button
             onClick={submission}
-            className="w-2/3 bg-gray-500 uppercase text-sm font-bold text-white rounded-full py-5"
+            className="w-2/3 bg-pattooAccentThree uppercase text-sm font-black text-white rounded-full py-5 "
           >
             Sign in now
           </button>
           <p className="mt-5 text-sm text-gray-500">
-            Forgot Password?
-            <a href="#" className="ml-1 hover:underline font-bold">
+            <span className="text-pattooAccentOne font-medium">
+              Forgot Password?
+            </span>
+            <a
+              href="#"
+              className="ml-1 hover:underline font-bold text-pattooAccentThree"
+            >
               Request to reset
             </a>
           </p>
