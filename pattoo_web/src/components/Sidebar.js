@@ -1,7 +1,11 @@
 /* React Imports */
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Modal from "react-modal";
+
+/* API queries */
+import queryResource from "../graphql_client";
+import { createChart, createFavorite, createDatapoint } from "../api";
 
 /* Tailwind css build */
 import "../styles/main.css";
@@ -31,8 +35,7 @@ function Header() {
   const [enabled, setEnabled] = useState(1);
   const [favorite, setFavorite] = useState(0);
 
-  const clearFields = (e) => {
-    e.preventDefault();
+  const clearFields = () => {
     setChartTitle("");
     setDatapointID("");
     setEnabled(1);
@@ -43,13 +46,40 @@ function Header() {
   const updateShowModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
 
+  const accessToken = localStorage.getItem("accessToken");
+  const userID = localStorage.getItem("userID");
+  const chartSubmission = () => {
+    queryResource(
+      createChart(chartTitle, `Checksum-${chartTitle}`, enabled, accessToken)
+    )
+      .then((response) => {
+        const chartID = response.data.data.createChart.chart.idxChart;
+        queryResource(
+          createDatapoint(datapointID, chartID, enabled, accessToken)
+        ).then((response) => {
+          // Setups favorite
+          if (favorite === 1) {
+            const chartID =
+              response.data.data.createChartDataPoint.chartDatapoint.idxChart;
+            queryResource(
+              createFavorite(userID, chartID, "1", enabled, accessToken)
+            );
+          }
+        });
+
+        closeModal();
+        clearFields();
+      })
+      .catch(console.log);
+  };
+
   return (
     <div className="row-span-1 py-5 flex flex-col justify-between">
       <Modal
         isOpen={showModal}
         onRequestClose={closeModal}
         shouldCloseOnOverlayClick={true}
-        className={`container mx-auto mt-56 rounded-lg shadow-card bg-white w-1/4 p-16`}
+        className={`container mx-auto mt-56 rounded-lg shadow-card bg-white w-1/4 p-16 focus:border-none`}
       >
         <h2 className="text-4xl font-main font-bold text-pattooAccentOne">
           Create Chart
@@ -68,7 +98,7 @@ function Header() {
             <div className="">
               <h4 className="text-lg text-pattooAccentThree">Datapoint ID</h4>
               <input
-                type="text"
+                type="number"
                 className="mt-2 text-sm text-pattooAccentOne p-2 border-2 border-pattooAccentOne rounded"
                 value={datapointID}
                 onChange={(e) => setDatapointID(e.target.value)}
@@ -102,7 +132,10 @@ function Header() {
             >
               Clear
             </button>
-            <button className="col-start-6 col-end-10 py-4 bg-pattooAccentOne text-white rounded">
+            <button
+              onClick={chartSubmission}
+              className="col-start-6 col-end-10 py-4 bg-pattooAccentOne text-white rounded"
+            >
               Create
             </button>
           </div>
