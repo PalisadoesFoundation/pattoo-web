@@ -26,23 +26,87 @@ Modal.defaultStyles.overlay.backgroundColor = "rgba(240, 244, 255, 0.5)";
 
 /* Sidebar Components */
 function Header() {
+  const [chartTitle, setChartTitle] = useState("");
+  const [datapointID, setDatapointID] = useState("");
+  const [enabled, setEnabled] = useState(1);
+  const [favorite, setFavorite] = useState(0);
+
+  const clearFields = (e) => {
+    e.preventDefault();
+    setChartTitle("");
+    setDatapointID("");
+    setEnabled(1);
+    setFavorite(0);
+  };
+
   const [showModal, setShowModal] = useState(false);
   const updateShowModal = () => setShowModal(true);
-
   const closeModal = () => setShowModal(false);
 
   return (
     <div className="row-span-1 py-5 flex flex-col justify-between">
       <Modal
-        isOpen={true}
+        isOpen={showModal}
         onRequestClose={closeModal}
         shouldCloseOnOverlayClick={true}
-        className={`container mx-auto mt-56 rounded-lg shadow-card bg-white w-1/2 p-16`}
+        className={`container mx-auto mt-56 rounded-lg shadow-card bg-white w-1/4 p-16`}
       >
         <h2 className="text-4xl font-main font-bold text-pattooAccentOne">
           Create Chart
         </h2>
-        <div className=""></div>
+        <div className="mt-5">
+          <div className="w-full">
+            <h4 className="text-lg text-pattooAccentThree">Chart Title</h4>
+            <input
+              type="text"
+              className="mt-2 text-sm text-pattooAccentOne p-2 w-full border-2 border-pattooAccentOne rounded"
+              value={chartTitle}
+              onChange={(e) => setChartTitle(e.target.value)}
+            />
+          </div>
+          <div className="flex justify-between mt-5">
+            <div className="">
+              <h4 className="text-lg text-pattooAccentThree">Datapoint ID</h4>
+              <input
+                type="text"
+                className="mt-2 text-sm text-pattooAccentOne p-2 border-2 border-pattooAccentOne rounded"
+                value={datapointID}
+                onChange={(e) => setDatapointID(e.target.value)}
+              />
+            </div>
+            <div className="w-1/2 flex flex-col items-center justify-center">
+              <div className="flex">
+                <input
+                  type="checkbox"
+                  value={enabled}
+                  checked={enabled}
+                  onClick={() => setEnabled(enabled === 1 ? 0 : 1)}
+                />
+                <label className="ml-5">Enabled</label>
+              </div>
+              <div className="flex">
+                <input
+                  type="checkbox"
+                  value={favorite}
+                  checked={favorite}
+                  onClick={() => setFavorite(favorite === 1 ? 0 : 1)}
+                />
+                <label className="ml-5">Favorite</label>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-9 mt-10">
+            <button
+              className="col-start-1 col-end-5 py-4 border-2 border-pattooAccentOne text-pattooAccentThree"
+              onClick={clearFields}
+            >
+              Clear
+            </button>
+            <button className="col-start-6 col-end-10 py-4 bg-pattooAccentOne text-white rounded">
+              Create
+            </button>
+          </div>
+        </div>
       </Modal>
 
       <div className="w-full flex justify-between items-center border-b border-grey-200  p-5">
@@ -59,8 +123,6 @@ function Header() {
     </div>
   );
 }
-
-function CreateChartModal() {}
 
 function Nav({ elements, subtitle }) {
   return (
@@ -84,7 +146,7 @@ function NavItem({ icon, name, path, active }) {
       <div className={`focus:border-none bg-${bgColor} py-3 mt-5 rounded mx-2`}>
         <div className={`flex items-center w-1/2 ml-5 ${textColor}`}>
           <FontAwesomeIcon icon={icon} size="xs" />
-          <span className="ml-5 text-sm font-semibold">{name}</span>
+          <span className="ml-5 text-sm font-bold">{name}</span>
         </div>
       </div>
     </Link>
