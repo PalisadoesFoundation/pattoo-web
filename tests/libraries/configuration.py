@@ -49,12 +49,13 @@ class UnittestConfig():
                     'daemon_directory': self._daemon_directory,
                     'polling_interval': 20
                 },
-                'pattoo_web_api': {
-                    'ip_address': '127.0.0.1',
-                    'ip_bind_port': 40202
-                }
+
             },
             'pattoo_webd': {
+                'pattoo_web_api': {
+                    'ip_address': '127.0.0.3',
+                    'ip_bind_port': 30303,
+                },
                 'pattoo_webd': {
                     'ip_listen_address': '127.0.0.1',
                     'ip_bind_port': 40200

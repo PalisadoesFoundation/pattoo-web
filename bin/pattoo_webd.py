@@ -8,7 +8,6 @@ Serves as a Gunicorn WSGI entry point for pattoo-api
 # Standard libraries
 import sys
 import os
-
 # Try to create a working PYTHONPATH
 _BIN_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 _ROOT_DIRECTORY = os.path.abspath(os.path.join(_BIN_DIRECTORY, os.pardir))
