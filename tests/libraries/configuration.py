@@ -18,7 +18,7 @@ import yaml
 from pattoo_shared import log
 
 
-class UnittestConfig(object):
+class UnittestConfig():
     """Creates configuration for testing."""
 
     def __init__(self):
@@ -49,15 +49,21 @@ class UnittestConfig(object):
                     'daemon_directory': self._daemon_directory,
                     'polling_interval': 20
                 },
-                'pattoo_web_api': {
-                    'ip_address': '127.0.0.1',
-                    'ip_bind_port': 40202
-                }
+
             },
             'pattoo_webd': {
+                'pattoo_web_api': {
+                    'ip_address': '127.0.0.3',
+                    'ip_bind_port': 30303,
+                },
                 'pattoo_webd': {
                     'ip_listen_address': '127.0.0.1',
-                    'ip_bind_port': 40200}
+                    'ip_bind_port': 40200
+                },
+                'pattoo_web_api': {
+                    'ip_address': '127.0.0.3',
+                    'ip_bind_port': 30303
+                }
             }
         }
 

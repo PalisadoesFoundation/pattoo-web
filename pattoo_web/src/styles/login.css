@@ -1,0 +1,101 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  margin-top: 5rem;
+  width: 30%;
+  height: 80%;
+}
+
+/* Header */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 45%;
+}
+
+.header img {
+  height: 135px;
+  width: 125px;
+}
+
+.header h2 {
+  font-weight: 900;
+  font-size: 36px;
+  text-transform: uppercase;
+}
+
+.header p {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Credentials */
+.credentials {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 27.5%;
+  padding-top: 1rem;
+}
+
+.credentials input {
+  border: none;
+  border-bottom: 2px solid #808080;
+  padding-bottom: 20px;
+  font-size: 14px;
+}
+
+/* Button Group */
+.button_group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 27.5%;
+}
+
+.sign_up_button {
+  border-radius: 50px;
+  border: none;
+  width: 40%;
+  padding: 1.25rem;
+  background: #808080;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.request_password {
+  font-size: 14px;
+  color: #808080;
+}
+
+.request_password_link {
+  text-decoration: none;
+  color: #808080;
+  font-weight: bold;
+}
+
+.request_password_link:hover {
+  text-decoration: underline;
+}
+
+.request_password_link::before {
+  content: " ";
+}

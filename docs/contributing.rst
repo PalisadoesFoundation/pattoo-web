@@ -17,7 +17,7 @@ Below is the workflow for having your contribution accepted into the ``pattoo-we
 #. you may create additional branches if modifying multiple parts of the code
 #. Write code and Commit your changes locally. An example of a proper ``git commit`` message can be seen below:
 
-    .. code-block::
+    .. code-block:: text
 
         Make the example in CONTRIBUTING imperative and concrete ...
 
@@ -83,7 +83,7 @@ Sample .vimrc File for Compliance
 
 You can use this sample .vimrc file to help meet our style requirements
 
-.. code-block::
+.. code-block:: vim
 
    " Activate syntax
    syntax on
