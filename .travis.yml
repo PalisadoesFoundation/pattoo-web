@@ -19,4 +19,4 @@ before_install:
   - npm install
 
 # Run the unittest scripts
-script: npm test --passWithNoTests
+script: npm test
