@@ -5,27 +5,18 @@ dist: bionic
 sudo: false
 
 # Define the language and versions that infoset is written in
-language: python
-python:
-  - 3.6
+language: node_js
+node:
+  - 10
 
 # Run tests only against the master branch
 # branches:
 #   only:
 #     - master
 
-# Setup services
-services:
-  - mysql
-
-# Setup global environmental variables
-env:
-    - PYTHONPATH=./ PATTOO_CONFIGDIR=$HOME/.pattoo-web-unittests/config
-
-# Install PIP packages and create a temporary config file before installing
+# Install node modules and packages before testing
 before_install:
-    - pip install -r pip_requirements.txt
-    - tests/bin/unittest_setup.py
+  - npm install
 
 # Run the unittest scripts
-script: tests/bin/do_all_tests.py
+script: npm test
