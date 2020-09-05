@@ -22,6 +22,7 @@ General information about the project, including the the prerequisite steps to g
    about
    installation
    configuration
+   systemd
    pattoo_webd
    troubleshooting
    backup
