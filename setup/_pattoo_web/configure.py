@@ -34,7 +34,7 @@ def install(pattoo_home):
     files.mkdir(config_dir)
 
     # Create the pattoo user and group
-    configure.create_user('pattoo', pattoo_home, ' /bin/false', True)
+    configure.create_user('pattoo', pattoo_home, '/bin/false', True)
 
     # Attempt to change the ownership of the config and pattoo-home directories
     shared.chown(config_dir)
