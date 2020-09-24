@@ -4,8 +4,8 @@ import { Link, useHistory } from "react-router-dom";
 import Modal from "react-modal";
 
 /* API queries */
-import queryResource from "../graphql_client";
-import { createChart, createFavorite, createDatapoint } from "../api";
+import query from "../../utils/query";
+import { createChart, createFavorite, createDatapoint } from "../../utils/api";
 
 /* Tailwind css build */
 import "../styles/main.css";
@@ -49,23 +49,21 @@ function Header() {
   const accessToken = localStorage.getItem("accessToken");
   const userID = localStorage.getItem("userID");
   const chartSubmission = () => {
-    queryResource(
+    query(
       createChart(chartTitle, `Checksum-${chartTitle}`, enabled, accessToken)
     )
       .then((response) => {
         const chartID = response.data.data.createChart.chart.idxChart;
-        queryResource(
-          createDatapoint(datapointID, chartID, enabled, accessToken)
-        ).then((response) => {
-          // Setups favorite
-          if (favorite === 1) {
-            const chartID =
-              response.data.data.createChartDataPoint.chartDatapoint.idxChart;
-            queryResource(
-              createFavorite(userID, chartID, "1", enabled, accessToken)
-            );
+        query(createDatapoint(datapointID, chartID, enabled, accessToken)).then(
+          (response) => {
+            // Setups favorite
+            if (favorite === 1) {
+              const chartID =
+                response.data.data.createChartDataPoint.chartDatapoint.idxChart;
+              query(createFavorite(userID, chartID, "1", enabled, accessToken));
+            }
           }
-        });
+        );
 
         closeModal();
         clearFields();

@@ -7,10 +7,10 @@ import { BrowserRouter } from "react-router-dom";
 import "./styles/main.css";
 
 /* Routes Imports */
-import RenderRoutes from "./routes";
+import RouteClient from "./RouteClient";
 
 function App() {
-  return <RenderRoutes />;
+  return <RouteClient />;
 }
 
 ReactDOM.render(

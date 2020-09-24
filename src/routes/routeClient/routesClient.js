@@ -1,12 +1,10 @@
-/* Routes configuration */
-
 /* React Imports */
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 /* Route components */
-import Login from "./routes/login";
-import Dashboard from "./routes/dashboard";
+import Login from "../Login";
+import Dashboard from "../Dashboard";
 
 function ProtectedRoute({ component: Component, ...props }) {
   return (
@@ -24,7 +22,7 @@ function ProtectedRoute({ component: Component, ...props }) {
   );
 }
 
-function RenderRoutes() {
+function RouteClient() {
   return (
     <Switch>
       <Route
@@ -47,4 +45,4 @@ function RenderRoutes() {
   );
 }
 
-export default RenderRoutes;
+export default RouteClient;

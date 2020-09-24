@@ -1,5 +1,3 @@
-/* Makes queries to graphql server */
-
 /* Authentication query */
 import { userAuth } from "./api";
 
@@ -51,5 +49,5 @@ async function authenticate(username, password) {
 
 function refreshToken(refreshToken) {}
 
-export default queryResource;
+export default query;
 export { authenticate, refreshToken };
