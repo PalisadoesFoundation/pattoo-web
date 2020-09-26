@@ -8,7 +8,7 @@ import query from "../../utils/query";
 import { createChart, createFavorite, createDatapoint } from "../../utils/api";
 
 /* Tailwind css build */
-import "../styles/main.css";
+import "../../styles/main.css";
 
 /* Fontawesome Icons */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,7 +22,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 /* Assets Imports */
-import PattooLogo from "../assets/pattoo-light 1.png";
+import PattooLogo from "../../assets/pattoo-light 1.png";
 
 // Binding React Modal to public/index.html 'modal' element
 Modal.setAppElement("#modal");

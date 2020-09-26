@@ -1,12 +1,12 @@
 /* Authentication query */
-import { userAuth } from "./api";
+import { userAuth } from "../api";
 
 /* Imports */
 const axios = require("axios").default;
 
 const serverUrl = "http://localhost:20202/pattoo/api/v1/web/graphql";
 
-async function queryResource(data) {
+async function query(data) {
   return await axios({
     method: "post",
     url: serverUrl,

@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 /* Authentication method imports */
-import { authenticate } from "../graphql_client";
+import { authenticate } from "../../utils/query";
 
 /* Components */
-import LoginComponent from "../components/Login";
+import LoginComponent from "../../components/Login";
 
 function Login() {
   const history = useHistory();

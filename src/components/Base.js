@@ -4,7 +4,7 @@
 import React from "react";
 
 /* Components Imports */
-import Sidebar from "./Sidebar";
+import Sidebar from "./sidebar";
 
 /* Styles and Assets Imports */
 import "../styles/main.css";

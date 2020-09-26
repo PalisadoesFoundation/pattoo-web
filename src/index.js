@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import "./styles/main.css";
 
 /* Routes Imports */
-import RouteClient from "./RouteClient";
+import RouteClient from "./routes/routeClient";
 
 function App() {
   return <RouteClient />;
