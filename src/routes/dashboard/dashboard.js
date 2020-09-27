@@ -2,14 +2,14 @@
 import React, { useState, useEffect } from "react";
 
 /* Components Import */
-import DashboardComponent from "../../components/Dashboard";
+import DashboardComponent from "components/Dashboard";
 
 /* Querying */
-import query from "../../utils/query";
-import { userFavorite } from "../../utils/api";
+import query from "utils/query";
+import { userFavorite } from "utils/api";
 
 /* Tailwind css build */
-import "../../styles/main.css";
+import "styles/main.css";
 
 function parseFavoriteCharts(response) {
   return response.data.data.allFavorite.edges

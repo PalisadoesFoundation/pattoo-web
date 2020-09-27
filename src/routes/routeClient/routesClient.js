@@ -3,8 +3,8 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 /* Route components */
-import Login from "../login";
-import Dashboard from "../dashboard";
+import Login from "routes/login";
+import Dashboard from "routes/dashboard";
 
 function ProtectedRoute({ component: Component, ...props }) {
   return (

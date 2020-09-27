@@ -1,8 +1,8 @@
 /* Authentication query */
-import { userAuth } from "../api";
+import { userAuth } from "utils/api";
 
 /* Imports */
-const axios = require("axios").default;
+import axios from "axios";
 
 const serverUrl = "http://localhost:20202/pattoo/api/v1/web/graphql";
 

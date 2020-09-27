@@ -1,2 +1,2 @@
-import RoutesClient from "./routeClient";
+import RoutesClient from "routes/routeClient";
 export default RoutesClient;
