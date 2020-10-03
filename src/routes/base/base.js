@@ -4,10 +4,10 @@
 import React from "react";
 
 /* Components Imports */
-import Sidebar from "./sidebar";
+import Sidebar from "components/sidebar";
 
 /* Styles and Assets Imports */
-import "../styles/main.css";
+import "styles/main.css";
 
 function Base({ pageName, Component }) {
   return (
