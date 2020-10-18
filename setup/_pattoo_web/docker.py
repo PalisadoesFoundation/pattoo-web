@@ -105,10 +105,10 @@ def expose_ports(config_path, docker_path):
     try:
         f_handle = open(docker_path, 'r+')
     except FileNotFoundError:
-        log.log2die_safe(20319, 'The Dockerfile does not exist')
+        log.log2die_safe(80090, 'The Dockerfile does not exist')
     except PermissionError:
         log.log2die_safe(
-                20591, 'Insufficient permissions for reading the Dockerfile')
+                80092, 'Insufficient permissions for reading the Dockerfile')
     else:
         with f_handle:
             content = f_handle.readlines()
@@ -150,7 +150,7 @@ Ensure that docker is installed before creating the pattoo docker container.'''
         message = '''\
 Unknown error code.
 Ensure that docker is running and has the adequate permissions'''
-    log.log2die_safe(20172, message)
+    log.log2die_safe(80007, message)
 
 
 def image_check(image_name):
@@ -164,7 +164,7 @@ def image_check(image_name):
                 'docker image inspect {}'.format(image_name), die=False)[0]
     if status == 0:
         message = 'The docker image "{}" already exists'.format(image_name)
-        log.log2die_safe(20170, message)
+        log.log2die_safe(80009, message)
 
 
 def install(container_name, config_files, verbose=True):
