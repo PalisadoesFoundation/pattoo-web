@@ -33,6 +33,7 @@ RUN apt-get install -y systemd
 COPY . /pattoo-web
 
 # Expose ports
+EXPOSE 20201
 EXPOSE 20200
 EXPOSE 20202
 
