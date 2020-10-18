@@ -30,15 +30,32 @@ def install(pattoo_home):
         },
     }
 
+    shared_config = {
+        'pattoo': {
+            'language': 'en',
+            'log_directory': (
+                '/var/log/pattoo'),
+            'log_level': 'debug',
+            'cache_directory': (
+                '/opt/pattoo/cache'),
+            'daemon_directory': (
+                '/opt/pattoo/daemon'),
+            'system_daemon_directory': '/var/run/pattoo',
+        }
+    }
+
     # Attempt to create configuration directory
     files.mkdir(config_dir)
 
     # Create the pattoo user and group
-    configure.create_user('pattoo', pattoo_home, ' /bin/false', True)
+    configure.create_user('pattoo', pattoo_home, '/bin/false', True)
 
     # Attempt to change the ownership of the config and pattoo-home directories
     shared.chown(config_dir)
     shared.chown(pattoo_home)
+
+    # Create pattoo configuration if pattoo had not been installed
+    configure.configure_component('pattoo', config_dir, shared_config)
 
     # Configure pattoo web
     configure.configure_component('pattoo_webd', config_dir, pattoo_webd_dict)

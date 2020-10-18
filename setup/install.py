@@ -202,6 +202,17 @@ Install pattoo web. Type install --help to see additional arguments'''
             '--verbose',
             action='store_true',
             help='Enable verbose mode.')
+    
+    def docker(self, width=80):
+        parser = self.subparsers.add_parser(
+            'docker',
+            help=textwrap.fill('Install and run system daemons', width=width)
+        )
+
+        parser.add_argument(
+            '--verbose',
+            action='store_true',
+            help='Enable verbose mode.')
 
 
 def get_pattoo_home():
@@ -309,6 +320,9 @@ def main():
     _help = 'This program is the CLI interface to configuring pattoo web'
     template_dir = os.path.join(ROOT_DIR, 'setup/systemd/system')
     daemon_list = ['pattoo_webd']
+    config_files = ['pattoo.yaml', 
+                    'pattoo_server.yaml', 
+                    'pattoo_agent.yaml','pattoo_webd.yaml']
 
     # Ensure user is running as root or travis
     installation_checks()
@@ -324,7 +338,7 @@ def main():
         venv_check()
 
         # Import packages that depend on pattoo shared
-        from _pattoo_web import configure
+        from _pattoo_web import configure, docker
         from pattoo_shared.installation import packages, systemd, environment
 
         # Setup virtual environment
@@ -367,6 +381,8 @@ def main():
                             template_dir=template_dir,
                             installation_dir=installation_dir,
                             verbose=args.verbose)
+        elif args.qualifier == 'docker':
+            docker.install('pattoo-web', config_files)
 
         else:
             parser.print_help(sys.stderr)
