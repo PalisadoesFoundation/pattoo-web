@@ -1,8 +1,16 @@
 language: node_js
 node_js:
   - 14
+
+# Caches dependencies
 cache:
   directories:
     - node_modules
+
+# Installs all require modules before testing
+before_script:
+  - npm install
+
+# Runs all unittests
 script:
   - npm run test
