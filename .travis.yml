@@ -11,29 +11,6 @@ cache:
 before_script:
   - npm install
 
-<<<<<<< HEAD
 # Runs all unittests
 script:
   - npm run test
-=======
-# Run tests only against the master branch
-# branches:
-#   only:
-#     - master
-
-# Setup services
-services:
-  - mysql
-
-# Setup global environmental variables
-env:
-    - PYTHONPATH=./ PATTOO_CONFIGDIR=$HOME/.pattoo-web-unittests/config
-
-# Install PIP packages and create a temporary config file before installing
-before_install:
-    - pip install -r pip_requirements.txt
-    - tests/bin/unittest_setup.py
-
-# Run the unittest scripts
-script: tests/bin/do_all_tests.py
->>>>>>> 3eec68ec8481ebf0065d100977d0fb92ff28c95a
