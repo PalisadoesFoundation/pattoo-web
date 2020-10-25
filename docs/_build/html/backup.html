@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Backup and Restoration &#8212; Pattoo Web  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="shortcut icon" href="_static/pattoo-rtd.png"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Periodic Jobs" href="cron.html" />
+    <link rel="prev" title="Troubleshooting Pattoo Agents" href="troubleshooting.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="backup-and-restoration">
+<h1>Backup and Restoration<a class="headerlink" href="#backup-and-restoration" title="Permalink to this headline">¶</a></h1>
+<p>Always take precautions. Backup your data as you’ll never know when you’ll need to restore it.</p>
+<div class="section" id="backup">
+<h2>Backup<a class="headerlink" href="#backup" title="Permalink to this headline">¶</a></h2>
+<p>It is strongly advised that you backup your agents to protect you in the event of catastrophe.</p>
+<p>The following directories need to be saved periodically.</p>
+<ol class="arabic simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">PATTOO_CONFIGDIR</span></code> directory which contains your configuration</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">daemon_directory</span></code> location defined in your configuration. This area stores important authentication information.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">pattoo-agents</span></code> directory which contains your source code.</p></li>
+</ol>
+<p>We’ll discuss data restoration next.</p>
+</div>
+<div class="section" id="restoration">
+<h2>Restoration<a class="headerlink" href="#restoration" title="Permalink to this headline">¶</a></h2>
+<p>It’s important to follow these steps in this order when restoring <code class="docutils literal notranslate"><span class="pre">pattoo-agents</span></code> after a disaster.</p>
+<ol class="arabic simple">
+<li><p>FIRST make sure all the <code class="docutils literal notranslate"><span class="pre">pattoo</span></code> agents are stopped.</p></li>
+<li><p>SECOND restore the contents of the <code class="docutils literal notranslate"><span class="pre">daemon_directory</span></code> location defined in your configuration. This area stores important authentication information.</p></li>
+<li><p>Restore the <code class="docutils literal notranslate"><span class="pre">PATTOO_CONFIGDIR</span></code> directory which contains your configuration</p></li>
+<li><p>Restore <code class="docutils literal notranslate"><span class="pre">pattoo-agents</span></code> directory which contains your source code.</p></li>
+</ol>
+<p>You should now be able to restart your agents without issue.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/pattoo-rtd.png" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<p class="caption"><span class="caption-text">Introduction:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="project-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Pattoo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Basic Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pattoo_webd.html">Pattoo Web API Daemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Pattoo Agents</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Backup and Restoration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#backup">Backup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#restoration">Restoration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cron.html">Periodic Jobs</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developers:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How To Contribute</a></li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="troubleshooting.html" title="previous chapter">Troubleshooting Pattoo Agents</a></li>
+      <li>Next: <a href="cron.html" title="next chapter">Periodic Jobs</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Peter Harrison.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/backup.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
