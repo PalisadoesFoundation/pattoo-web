@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic Installation &#8212; Pattoo Web  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="shortcut icon" href="_static/pattoo-rtd.png"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Configuration Guide" href="configuration.html" />
+    <link rel="prev" title="About Pattoo" href="about.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="basic-installation">
+<h1>Basic Installation<a class="headerlink" href="#basic-installation" title="Permalink to this headline">¶</a></h1>
+<p>This section covers some key steps to get you started.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>There are some software components that need to be installed prior to starting.</p>
+<ol class="arabic simple">
+<li><p><cite>pattoo-web</cite> requires that you use <cite>npm</cite> or <cite>yarn</cite> to install the various</p></li>
+</ol>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Follow these steps.</p>
+<ol class="arabic simple">
+<li><p>Make sure you have a fully configured <code class="docutils literal notranslate"><span class="pre">`pattoo`</span></code> server as this is a <code class="docutils literal notranslate"><span class="pre">pattoo-web</span></code> pre-requisite.</p></li>
+</ol>
+<p>Follow these steps.</p>
+<ol class="arabic">
+<li><p>Install <code class="docutils literal notranslate"><span class="pre">git</span></code> on your system.</p></li>
+<li><p>Select and create the parent directory in which you want to install <code class="docutils literal notranslate"><span class="pre">pattoo-web</span></code>.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mkdir -p /installation/parent/directory
+$ <span class="nb">cd</span> /installation/parent/directory
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Clone the repository to the parent directory using the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> command. You can also choose to downloading and unzip the file in the parent directory. The repository can be found at: <a class="reference external" href="https://github.com/PalisadoesFoundation/pattoo-web">https://github.com/PalisadoesFoundation/pattoo-web</a></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> /installation/parent/directory
+$ git clone https://github.com/PalisadoesFoundation/pattoo-web.git
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Enter the <code class="docutils literal notranslate"><span class="pre">/installation/parent/directory/pattoo-web</span></code> directory with the <code class="docutils literal notranslate"><span class="pre">pattoo-web</span></code> files.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">install</span></code> or <code class="docutils literal notranslate"><span class="pre">yarn</span> <span class="pre">install</span></code> to install dependencies</p></li>
+</ol>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>All tests are done through <cite>jest</cite> and <cite>react-testing-library</cite>.</p>
+<dl class="simple">
+<dt>To run all tests either run:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">test</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">yarn</span> <span class="pre">test</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/pattoo-rtd.png" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<p class="caption"><span class="caption-text">Introduction:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="project-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Pattoo</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Basic Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pattoo_webd.html">Pattoo Web API Daemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Pattoo Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backup.html">Backup and Restoration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cron.html">Periodic Jobs</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developers:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How To Contribute</a></li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="about.html" title="previous chapter">About Pattoo</a></li>
+      <li>Next: <a href="configuration.html" title="next chapter">Configuration Guide</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Peter Harrison.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/installation.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

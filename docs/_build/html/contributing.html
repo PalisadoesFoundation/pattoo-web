@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How To Contribute &#8212; Pattoo Web  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="shortcut icon" href="_static/pattoo-rtd.png"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Periodic Jobs" href="cron.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="how-to-contribute">
+<h1>How To Contribute<a class="headerlink" href="#how-to-contribute" title="Permalink to this headline">¶</a></h1>
+<p>Start contributing today!</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Below is the workflow for having your contribution accepted into the <code class="docutils literal notranslate"><span class="pre">pattoo-web</span></code> repository.</p>
+<ol class="arabic">
+<li><p>Create an Issue or comment on an existing issue to discuss the feature</p></li>
+<li><p>If the feature is approved, assign the issue to yourself</p></li>
+<li><p>Fork the project</p></li>
+<li><p>Clone the fork to your local machine</p></li>
+<li><p>Add the original project as a remote (git remote add upstream <a class="reference external" href="https://github.com/PalisadoesFoundation/pattoo-web">https://github.com/PalisadoesFoundation/pattoo-web</a>, check with: git remote -v)</p></li>
+<li><p>Create a topic branch for your change (git checkout -b <code class="docutils literal notranslate"><span class="pre">BranchName</span></code>)</p></li>
+<li><p>you may create additional branches if modifying multiple parts of the code</p></li>
+<li><p>Write code and Commit your changes locally. An example of a proper <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> message can be seen below:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Make</span> <span class="n">the</span> <span class="n">example</span> <span class="ow">in</span> <span class="n">CONTRIBUTING</span> <span class="n">imperative</span> <span class="ow">and</span> <span class="n">concrete</span> <span class="o">...</span>
+
+<span class="n">Without</span> <span class="n">this</span> <span class="n">patch</span> <span class="n">applied</span> <span class="n">the</span> <span class="n">example</span> <span class="n">commit</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">CONTRIBUTING</span>
+<span class="n">document</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">a</span> <span class="n">concrete</span> <span class="n">example</span><span class="o">.</span>  <span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">problem</span> <span class="n">because</span> <span class="n">the</span>
+<span class="n">contributor</span> <span class="ow">is</span> <span class="n">left</span> <span class="n">to</span> <span class="n">imagine</span> <span class="n">what</span> <span class="n">the</span> <span class="n">commit</span> <span class="n">message</span> <span class="n">should</span> <span class="n">look</span> <span class="n">like</span>
+<span class="n">based</span> <span class="n">on</span> <span class="n">a</span> <span class="n">description</span> <span class="n">rather</span> <span class="n">than</span> <span class="n">an</span> <span class="n">example</span><span class="o">.</span>  <span class="n">This</span> <span class="n">patch</span> <span class="n">fixes</span> <span class="n">the</span>
+<span class="n">problem</span> <span class="n">by</span> <span class="n">making</span> <span class="n">the</span> <span class="n">example</span> <span class="n">concrete</span> <span class="ow">and</span> <span class="n">imperative</span><span class="o">.</span>
+
+<span class="n">The</span> <span class="n">first</span> <span class="n">line</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">real</span> <span class="n">life</span> <span class="n">imperative</span> <span class="n">statement</span> <span class="k">with</span> <span class="n">a</span> <span class="n">ticket</span> <span class="n">number</span>
+<span class="kn">from</span> <span class="nn">our</span> <span class="n">issue</span> <span class="n">tracker</span><span class="o">.</span>  <span class="n">The</span> <span class="n">body</span> <span class="n">describes</span> <span class="n">the</span> <span class="n">behavior</span> <span class="n">without</span> <span class="n">the</span> <span class="n">patch</span><span class="p">,</span>
+<span class="n">why</span> <span class="n">this</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">problem</span><span class="p">,</span> <span class="ow">and</span> <span class="n">how</span> <span class="n">the</span> <span class="n">patch</span> <span class="n">fixes</span> <span class="n">the</span> <span class="n">problem</span> <span class="n">when</span> <span class="n">applied</span><span class="o">.</span>
+
+<span class="n">Resolves</span> <span class="n">Issue</span><span class="p">:</span> <span class="c1">#123</span>
+<span class="n">See</span> <span class="n">also</span><span class="p">:</span> <span class="c1">#456, #789</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>When you need to synch with upstream (pull the latest changes from main repo into your current branch), do:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">upstream</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span> <span class="pre">upstream/master</span></code></p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Check for unnecessary white space with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">--check</span></code>.</p></li>
+<li><p>Write the necessary unit tests for your changes.</p></li>
+<li><p>Run all the tests to assure nothing else was accidentally broken</p></li>
+<li><p>Push your changes to your forked repository (git push origin <code class="docutils literal notranslate"><span class="pre">branch</span></code>)</p></li>
+<li><p>Perform a pull request on GitHub</p></li>
+<li><p>Your code will be reviewed</p></li>
+<li><p>If your code passes review, your pull request will be accepted</p></li>
+</ol>
+</div>
+<div class="section" id="code-style-guide">
+<h2>Code Style Guide<a class="headerlink" href="#code-style-guide" title="Permalink to this headline">¶</a></h2>
+<p>For ease of readability and maintainability code for all <code class="docutils literal notranslate"><span class="pre">pattoo</span></code> projects must follow these guidelines. Code that does not comply will not be added to the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch.</p>
+<ol class="arabic simple">
+<li><p>All <code class="docutils literal notranslate"><span class="pre">pattoo</span></code> projects use the <a class="reference external" href="https://google.github.io/styleguide/pyguide.html#Exceptions">Google Python Style Guide</a> for general style requirements</p></li>
+<li><p>All <code class="docutils literal notranslate"><span class="pre">pattoo</span></code> python projects use the The Chromium Projects Python Style Guidelines for docstrings.</p></li>
+<li><p>Indentations must be multiples of 4 blank spaces. No tabs.</p></li>
+<li><p>All strings must be enclosed in single quotes</p></li>
+<li><p>In addition too being <code class="docutils literal notranslate"><span class="pre">pylint</span></code> compliant, the code must be PEP8 and PEP257 compliant too.</p></li>
+<li><p>There should be no trailing spaces in files</p></li>
+</ol>
+<div class="section" id="guidelines-to-remember">
+<h3>Guidelines to remember<a class="headerlink" href="#guidelines-to-remember" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Always opt for the most pythonic solution to a problem</p></li>
+<li><p>Avoid applying idioms from other programming languages</p></li>
+<li><p>Import each module with its full path name. ie: from pack.subpack import module</p></li>
+<li><p><a class="reference external" href="https://google.github.io/styleguide/pyguide.html#Exceptions">Use exceptions where appropriate</a></p></li>
+<li><p><a class="reference external" href="http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_google.html">Use doc strings</a></p></li>
+<li><p>Try not to have returns at multiple points in a function unless they are failure state returns.</p></li>
+<li><p>If you are in the middle of a development session and have to interrupt your work, it is a good idea to write a broken unit test about what you want to develop next. When coming back to work, you will have a pointer to where you were and get back on track faster.</p></li>
+</ul>
+</div>
+<div class="section" id="commits">
+<h3>Commits<a class="headerlink" href="#commits" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">pattoo</span></code> projects strive to maintain a proper log of development through well structured git commits. The links below offer insight and advice on the topic of commit messages:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message">https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message</a></p></li>
+<li><p><a class="reference external" href="http://chris.beams.io/posts/git-commit/">http://chris.beams.io/posts/git-commit/</a></p></li>
+</ol>
+</div>
+<div class="section" id="sample-vimrc-file-for-compliance">
+<h3>Sample .vimrc File for Compliance<a class="headerlink" href="#sample-vimrc-file-for-compliance" title="Permalink to this headline">¶</a></h3>
+<p>You can use this sample .vimrc file to help meet our style requirements</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&quot; Activate syntax
+syntax on
+&quot; set number
+
+&quot; Disable automatic comment insertion
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+&quot; Delete trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//e
+
+&quot; Convert tabs to spaces
+set expandtab
+
+&quot; Set tabs to 4 spaces
+set tabstop=4
+
+&quot; Set the number of spaces for indentation
+set shiftwidth=4
+
+&quot; Switch on highlighting the last used search pattern when the terminal has colors
+if &amp;t_Co &gt; 2 || has(&quot;gui_running&quot;)
+  set hlsearch
+endif
+
+&quot; Tell vim to remember certain things when we exit
+&quot;  &#39;10  :  marks will be remembered for up to 10 previously edited files
+&quot;  &quot;100 :  will save up to 100 lines for each register
+&quot;  :20  :  up to 20 lines of command-line history will be remembered
+&quot;  %    :  saves and restores the buffer list
+&quot;  n... :  where to save the viminfo files
+set viminfo=&#39;10,\&quot;100,:20,%,n~/.viminfo
+
+&quot; Function for viminfo to work
+function! ResCur()
+  if line(&quot;&#39;\&quot;&quot;) &lt;= line(&quot;$&quot;)
+    normal! g`&quot;
+    return 1
+  endif
+endfunction
+
+&quot; Function for viminfo to work
+augroup resCur
+  autocmd!
+  autocmd BufWinEnter * call ResCur()
+augroup END
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/pattoo-rtd.png" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<p class="caption"><span class="caption-text">Introduction:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="project-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Pattoo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Basic Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pattoo_webd.html">Pattoo Web API Daemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Pattoo Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backup.html">Backup and Restoration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cron.html">Periodic Jobs</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developers:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How To Contribute</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#code-style-guide">Code Style Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#guidelines-to-remember">Guidelines to remember</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#commits">Commits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sample-vimrc-file-for-compliance">Sample .vimrc File for Compliance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="cron.html" title="previous chapter">Periodic Jobs</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Peter Harrison.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/contributing.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
