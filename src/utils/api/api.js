@@ -115,21 +115,7 @@ const createFavorite = (userID, chartID, order, enabled, accessToken) => {
         query: `
         mutation createFavorite($userID: String!, $chartID: String!, $order: String!, $enabled: String!, $token: String!){
           createFavorite(Input: {idxUser: $userID, idxChart: $chartID, order: $order, enabled: $enabled}, token: $token) {
-            favorite {maica fall relative to the others? 🤔 
-              https://appinventiv.com/guide/mobile-app-development-cost/amp/
-              “Apps Developed by Large App Development Companies, with a team size of cost 3000+ experts – cost $450,000 to $1,500,000”
-              2:34 PM
-              “3000 experts”
-              2:34 PM
-              +1 (876) 544-6673Pablooo
-              Lol do I divide or multiply?
-              2:39 PM
-              +1 (876) 287-4267Jordan
-              +1 (876) 544-6673Pablooo
-              Lol do I divide or multiply?
-              Divide by nuff
-              2:40 PM
-              
+            favorite {
               __typename
               ... on Favorite {
                 idxFavorite
