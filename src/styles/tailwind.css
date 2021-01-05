@@ -1,18 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@import "tailwindcss/base";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/components";
 
-html,
-body {
-  font-family: "Lato", Arial, Helvetica, sans-serif;
-}
-
-.chart-height {
-  height: 40vh;
-}
-
-.stat-card-height {
-  height: 40vh;
-}
+@import "tailwindcss/utilities";
