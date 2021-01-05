@@ -5,11 +5,12 @@ import {
     createDatapoint,
     createFavorite,
 } from "./api.js";
-import uuid from "uuid";
+
+import { v4 as uuidv4 } from "uuid";
 
 test("Tests the userAuth function", () => {
-    const randomUname = uuid.v4();
-    const randomPass = uuid.v4();
+    const randomUname = uuidv4();
+    const randomPass = uuidv4();
     const result = userAuth(randomUname, randomPass);
     const expected = {
         query: `
@@ -27,11 +28,11 @@ test("Tests the userAuth function", () => {
     };
     expect(expected).toEqual(result);
 });
-uuid.v4();
+uuidv4();
 test("Tests the userFavorite function", () => {
     // Initiaizing test variables
     const randomUserId = Math.floor(Math.random() * 100 + 1).toString();
-    const randomAccessToken = uuid.v4();
+    const randomAccessToken = uuidv4();
     const result = userFavorite(randomUserId, randomAccessToken);
     const expected = {
         query: `
@@ -72,11 +73,11 @@ test("Tests the userFavorite function", () => {
 
 test("Tests the createFavorite function", () => {
     // Initializing test variables
-    const userID = uuid.v4();
-    const chartID = uuid.v4();
+    const userID = uuidv4();
+    const chartID = uuidv4();
     const order = "0";
     const enabled = "0";
-    const accessToken = uuid.v4();
+    const accessToken = uuidv4();
     const result = createFavorite(userID, chartID, order, enabled, accessToken);
     const expected = {
         query: `
@@ -108,10 +109,10 @@ test("Tests the createFavorite function", () => {
 
 test("Tests the createChart function", () => {
     // Initializing test variables
-    const chartTitle = uuid.v4();
-    const checksum = uuid.v4();
+    const chartTitle = uuidv4();
+    const checksum = uuidv4();
     const enabled = "0";
-    const accessToken = uuid.v4();
+    const accessToken = uuidv4();
     const result = createChart(chartTitle, checksum, enabled, accessToken);
     const expected = {
         query: `
@@ -142,10 +143,10 @@ test("Tests the createChart function", () => {
 });
 
 test("Tests the createDatapoint function", () => {
-    const datapointID = uuid.v4();
-    const chartID = uuid.v4();
+    const datapointID = uuidv4();
+    const chartID = uuidv4();
     const enabled = "0";
-    const accessToken = uuid.v4();
+    const accessToken = uuidv4();
     const result = createDatapoint(datapointID, chartID, enabled, accessToken);
     const expected = {
         query: `
