@@ -141,12 +141,11 @@ const createFavorite = (userID, chartID, order, enabled, accessToken) => {
 /*
 import uuid from "uuid";
 
-const userID = uuid.v4();
+const datapointID = uuid.v4();
 const chartID = uuid.v4();
-const order = "0";
 const enabled = "0";
 const accessToken = uuid.v4();
-let expected = createFavorite(userID, chartID, order, enabled, accessToken);
+let expected = createDatapoint(datapointID, chartID, enabled, accessToken);
 
 console.log(expected);*/
 
