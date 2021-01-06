@@ -7,7 +7,7 @@ function Sidebar() {
     return (
         <div id="sidebar" className="bg-side-nav w-1/2 md:w-1/6 lg:w-1/6 border-r border-side-nav hidden md:block lg:block">
 
-            <ul classNameName="list-reset flex flex-col">
+            <ul className="list-reset flex flex-col">
 
                 <li className=" w-full h-full py-3 px-2 border-b border-300-border ">
                     <a href="index.html" className="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">

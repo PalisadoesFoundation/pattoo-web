@@ -8,9 +8,9 @@ import "../../styles/main.css";
 function Header() {
   return (
     <header className="flex bg-nav bg-gray-900">
-        <div className="p-5 inline-flex">
-          <h1 className="text-white font-bold">Logo</h1>
-        </div>
+      <div className="p-5 inline-flex">
+        <h1 className="text-white font-bold">Logo</h1>
+      </div>
     </header>
   );
 }

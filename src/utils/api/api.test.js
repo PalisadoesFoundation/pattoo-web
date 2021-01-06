@@ -9,8 +9,10 @@ import {
 import { v4 as uuidv4 } from "uuid";
 
 test("Tests the userAuth function", () => {
+    // Arranging test variables
     const randomUname = uuidv4();
     const randomPass = uuidv4();
+
     const result = userAuth(randomUname, randomPass);
     const expected = {
         query: `
@@ -28,7 +30,7 @@ test("Tests the userAuth function", () => {
     };
     expect(expected).toEqual(result);
 });
-uuidv4();
+
 test("Tests the userFavorite function", () => {
     // Initiaizing test variables
     const randomUserId = Math.floor(Math.random() * 100 + 1).toString();
@@ -174,4 +176,5 @@ test("Tests the createDatapoint function", () => {
             token: accessToken,
         },
     };
+    expect(expected).toEqual(result);
 });
