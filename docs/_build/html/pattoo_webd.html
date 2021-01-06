@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pattoo Web API Daemon &#8212; Pattoo Web  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="shortcut icon" href="_static/pattoo-rtd.png"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Troubleshooting Pattoo Agents" href="troubleshooting.html" />
+    <link rel="prev" title="Configuration Guide" href="configuration.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="pattoo-web-api-daemon">
+<h1>Pattoo Web API Daemon<a class="headerlink" href="#pattoo-web-api-daemon" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">pattoo_webd</span></code> makes <code class="docutils literal notranslate"><span class="pre">pattoo</span></code> agent data available to web users.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Follow these steps.</p>
+<ol class="arabic simple">
+<li><p>Follow the installation steps in the <a class="reference internal" href="installation.html"><span class="doc">Basic Installation</span></a> file.</p></li>
+<li><p>Configure the main section of the configuration file following the steps in <a class="reference internal" href="configuration.html"><span class="doc">Configuration Guide</span></a> file.</p></li>
+<li><p>Start the desired daemons using the commands below. You may want to make these <code class="docutils literal notranslate"><span class="pre">systemd</span></code> daemons, if so follow the steps in the <a class="reference internal" href="installation.html"><span class="doc">Basic Installation</span></a> file.</p></li>
+</ol>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">pattoo_webd</span></code> has a simple command structure.</p>
+<p>The daemon will require a configuration file in the <code class="docutils literal notranslate"><span class="pre">etc/</span></code> directory. See the configuration section for details.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ bin/pattoo_webd.py --help
+usage: pattoo_webd.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>--start<span class="o">]</span> <span class="o">[</span>--stop<span class="o">]</span> <span class="o">[</span>--status<span class="o">]</span> <span class="o">[</span>--restart<span class="o">]</span>
+                         <span class="o">[</span>--force<span class="o">]</span>
+
+optional arguments:
+  -h, --help  show this <span class="nb">help</span> message and <span class="nb">exit</span>
+  --start     Start the agent daemon.
+  --stop      Stop the agent daemon.
+  --status    Get daemon daemon status.
+  --restart   Restart the agent daemon.
+  --force     Stops or restarts the agent daemon ungracefully when used with --stop or
+              --restart.
+$
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>No additional configuration steps beyond that in the <a class="reference internal" href="configuration.html"><span class="doc">Configuration Guide</span></a> file are required.</p>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>There are a number of steps you can take to make sure everything is OK.</p>
+<ol class="arabic simple">
+<li><p>If you have setup the daemon for <code class="docutils literal notranslate"><span class="pre">systemd</span></code> then you can use the <code class="docutils literal notranslate"><span class="pre">systemctl</span></code> command to get the status of the daemon.</p></li>
+<li><p>The daemon should be running on the port configured with the <code class="docutils literal notranslate"><span class="pre">ip_bind_port</span></code> parameter. Use the <code class="docutils literal notranslate"><span class="pre">netstat</span></code> command to verify this.</p></li>
+<li><p>Visit the URL <code class="docutils literal notranslate"><span class="pre">http://localhost:20202/pattoo/api/v1/web/status</span></code> to get the status page.</p></li>
+<li><p>Use the <a class="reference internal" href="troubleshooting.html"><span class="doc">Troubleshooting Pattoo Agents</span></a> for further steps to take</p></li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/pattoo-rtd.png" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<p class="caption"><span class="caption-text">Introduction:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="project-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Pattoo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Basic Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pattoo Web API Daemon</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Pattoo Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backup.html">Backup and Restoration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cron.html">Periodic Jobs</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developers:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How To Contribute</a></li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="configuration.html" title="previous chapter">Configuration Guide</a></li>
+      <li>Next: <a href="troubleshooting.html" title="next chapter">Troubleshooting Pattoo Agents</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Peter Harrison.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/pattoo_webd.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

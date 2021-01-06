@@ -1,31 +1,16 @@
-# Run on ubuntu
-dist: bionic
+language: node_js
+node_js:
+  - 14
 
-# Don't use
-sudo: false
+# Caches dependencies
+cache:
+  directories:
+    - node_modules
 
-# Define the language and versions that infoset is written in
-language: python
-python:
-  - 3.6
+# Installs all require modules before testing
+before_script:
+  - npm install
 
-# Run tests only against the master branch
-# branches:
-#   only:
-#     - master
-
-# Setup services
-services:
-  - mysql
-
-# Setup global environmental variables
-env:
-    - PYTHONPATH=./ PATTOO_CONFIGDIR=$HOME/.pattoo-web-unittests/config
-
-# Install PIP packages and create a temporary config file before installing
-before_install:
-    - pip install -r pip_requirements.txt
-    - tests/bin/unittest_setup.py
-
-# Run the unittest scripts
-script: tests/bin/do_all_tests.py
+# Runs all unittests
+script:
+  - npm run test

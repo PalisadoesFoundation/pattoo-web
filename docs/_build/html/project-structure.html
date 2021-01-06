@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Structure &#8212; Pattoo Web  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="shortcut icon" href="_static/pattoo-rtd.png"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="About Pattoo" href="about.html" />
+    <link rel="prev" title="Pattoo Web" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="project-structure">
+<h1>Project Structure<a class="headerlink" href="#project-structure" title="Permalink to this headline">¶</a></h1>
+<p>This section covers general pattoo-web file structure. Due to the project being
+based in Reactjs, a javascript framework, the file structure is pretty
+opiniated. A pragmatic approach to structing the project was followed, in which
+groups of related elements/components were placed placed together.</p>
+<p>It should also be noted that following JavaScript testing convention unittests
+for even elements are co-located with the given element/component.</p>
+<div class="section" id="project-root">
+<h2>Project Root<a class="headerlink" href="#project-root" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>├── docs
+├── .eslintrc.json
+├── .git
+├── .github
+├── .gitignore
+├── jsconfig.json
+├── LICENSE
+├── package.json
+├── package-lock.json
+├── postcss.config.js
+├── public
+├── README.rst
+├── .readthedocs.yml
+├── setup
+├── src
+├── tailwind.config.js
+├── tailwind-default.config.js
+└── .travis.yml
+</pre></div>
+</div>
+</div>
+<div class="section" id="key-project-configuration-files">
+<h2>Key Project Configuration Files<a class="headerlink" href="#key-project-configuration-files" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>jsconfig.json: Primarly allows for setting project root directory, and allows
+for absolute path imports anywhere in the <cite>src</cite> folder.</p></li>
+<li><p>postcss.config.js</p></li>
+<li><p>tailwind.config.js</p></li>
+<li><p>tailwind-default.config.js</p></li>
+<li><p>.eslintrc.json</p></li>
+</ul>
+</div>
+<div class="section" id="source-folder-src">
+<h2>Source Folder (src)<a class="headerlink" href="#source-folder-src" title="Permalink to this headline">¶</a></h2>
+<p>The goal for the source folders is to keep the project from having a <cite>depth
+heavy</cite> file structure.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>src
+├── assets
+├── components
+│   └── sidebar
+│       └── components
+├── routes
+│   ├── base
+│   ├── dashboard
+│   ├── login
+│   └── routeClient
+├── styles
+└── utils
+    ├── api
+    └── query
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><cite>assets</cite> holds all images and icons used througout the project</p></li>
+<li><p><cite>components</cite> stores all project</p></li>
+<li><p><cite>routes</cite> stores all page application pages, these operate like components as
+well, but a large component with smaller developer defined components or
+third-party components.</p></li>
+<li><p><cite>routeClient</cite> this is not a page route, but this handles routing within the
+application, this is where all routes in the <cite>routes</cite> folder is registered.</p></li>
+<li><p><cite>styles</cite> stores compiled tailwindcss styles</p></li>
+<li><p><cite>utils</cite> stores applicaiton buinsess logic that is not related to styled
+components.</p></li>
+</ul>
+<p>General rule of thumb is to place reusable components within the components
+folder. In the case of a component that can only be utilized within one
+component, you can create an additional sub-component directory within the
+parent component that houses components that can be utilized within the parent
+component.</p>
+<p>e.g The <cite>sidebar</cite> component has a sub-directory that contains additional
+components only usable or applicable in the <cite>sidebar</cite> component.</p>
+</div>
+<div class="section" id="javascript-module-structure">
+<h2>Javascript Module Structure<a class="headerlink" href="#javascript-module-structure" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>routeClient
+├── index.js
+├── routesClient.css
+├── routesClient.js
+└── routesClient.test.js
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><cite>index.js</cite> this is used to export the default and named exports from a given
+module.</p></li>
+<li><p><cite>routeClient.js</cite> this houses the actual code for a given module, additional
+module files ot separate concern is advise so as to not have large files.</p></li>
+<li><p><cite>routesClient.test.js</cite> this file tests the various elements within the
+<cite>routesClient.js</cite>, this convention of using <cite>filename.test.js</cite> should be used
+throughout to test each module file.</p></li>
+</ul>
+</div>
+<div class="section" id="additional-notes">
+<h2>Additional Notes<a class="headerlink" href="#additional-notes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Try to utilize absolute imports, this is convention that is used throughout
+the other <cite>pattoo</cite> projects and would be greatly be advise to mirror this
+convention for <cite>pattoo-web</cite>. This is achieved through the <cite>jsconfig.json</cite> file
+which denotes the root of the project and the <cite>source folder (src)</cite></p></li>
+<li><p>Do not create project folders that are more than three levels in depth. This
+is so that when importing a given module that the filepaths are not very long,
+and much easier to find varioius files when needed.</p></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/pattoo-rtd.png" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">Table of Contents</a></h3>
+<p class="caption"><span class="caption-text">Introduction:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Project Structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#project-root">Project Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-project-configuration-files">Key Project Configuration Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#source-folder-src">Source Folder (src)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#javascript-module-structure">Javascript Module Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#additional-notes">Additional Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Pattoo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Basic Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pattoo_webd.html">Pattoo Web API Daemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Pattoo Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backup.html">Backup and Restoration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cron.html">Periodic Jobs</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developers:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How To Contribute</a></li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Pattoo Web</a></li>
+      <li>Next: <a href="about.html" title="next chapter">About Pattoo</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Peter Harrison.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/project-structure.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
