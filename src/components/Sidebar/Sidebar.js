@@ -2,37 +2,18 @@
 import React from "react";
 
 import "../../styles/main.css";
+import SidebarItem from "../SidebarItem/SidebarItem";
+
+let sidebarItems=['Dashboard', 'Agents', 'Favorites', 'Settings'];
 
 function Sidebar() {
     return (
-        <div id="sidebar" className="bg-side-nav w-1/2 md:w-1/6 lg:w-1/6 border-r border-side-nav hidden md:block lg:block">
+        <div id="sidebar" className="h-screen md:w-64 lg:w-64 hidden md:block lg:block bg-gray-900">
 
-            <ul classNameName="list-reset flex flex-col">
-
-                <li className=" w-full h-full py-3 px-2 border-b border-300-border ">
-                    <a href="index.html" className="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
-                        Dashboard
-                    </a>
-                </li>
-
-                <li className="w-full h-full py-3 px-2 border-b border-300-border">
-                    <a href="index.html" className="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
-                        Agents
-                    </a>
-                </li>
-
-                <li className="w-full h-full py-3 px-2 border-b border-300-border">
-                    <a href="index.html" className="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
-                        Favorite
-                    </a>
-                </li>
-
-                <li className="w-full h-full py-3 px-2 border-b border-light-border">
-                    <a href="index.html" className="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
-                        Settings
-                    </a>
-                </li>
-            
+            <ul className="flex flex-col">
+                {sidebarItems.map((text,index) => (
+                    <SidebarItem text={text} key={index} />
+                ))}
             </ul>
 
         </div>
@@ -40,3 +21,8 @@ function Sidebar() {
 }
 
 export default Sidebar;
+
+
+//            TODO
+//add "X" to close menu and reveal hamburger icon
+//add profile section - profileDesign.png
