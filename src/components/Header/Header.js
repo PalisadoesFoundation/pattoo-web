@@ -7,9 +7,9 @@ import "../../styles/main.css";
 
 function Header() {
   return (
-    <header className="flex w-full px-6 items-center h-16 bg-gray-900 z-10">
-        <div className="inline-flex">
-          <h1 className="text-white font-bold">Pattoo</h1>
+    <header className="flex w-full px-6 items-center h-16 bg-white shadow-lg z-10">
+        <div className="inline-flex px-6 text-gray-800 text-4xl font-bold ">
+          Dashboard
         </div>
     </header>
   );

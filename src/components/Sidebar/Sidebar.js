@@ -8,8 +8,12 @@ let sidebarItems=['Dashboard', 'Agents', 'Favorites', 'Settings'];
 
 function Sidebar() {
     return (
-        <div id="sidebar" className="h-screen md:w-64 lg:w-64 hidden md:block lg:block bg-gray-900">
+        <div id="sidebar" className="h-screen md:w-64 lg:w-64 hidden md:block lg:block bg-gray-800">
+            <div className="flex w-full h-16 bg-gray-800 font-bold text-white text-2xl items-center justify-around">
+                Pattoo
+            </div>
 
+            <p className="px-4 py-2 font-bold text-white">Main</p>
             <ul className="flex flex-col">
                 {sidebarItems.map((text,index) => (
                     <SidebarItem text={text} key={index} />

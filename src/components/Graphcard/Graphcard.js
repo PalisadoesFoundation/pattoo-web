@@ -3,13 +3,10 @@ import React from "react";
 import { Line } from "react-chartjs-2"
 import "../../styles/main.css";
 
-
-
-
 //consider Apexcharts for graphs if chart.js presents problems
 function Graphcard() {
     return (
-       <div className="flex flex-col items-center rounded-md m-4 p-4 w-80 h-64 border shadow-lg">
+       <div className="flex flex-col items-center rounded-md bg-white m-4 p-4 w-80 h-64 border shadow-lg">
             <Line
                 data={{
                     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
