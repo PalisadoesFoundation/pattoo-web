@@ -7,18 +7,29 @@ import { BrowserRouter } from "react-router-dom";
 import "./styles/main.css";
 
 /* Routes Imports */
-// import RouteClient from "./routes/routeClient/routesClient";
-
-/* Component Imports */
 import Sidebar from "./components/Sidebar/Sidebar";
 import Header from "./components/Header/Header";
-// import Login from "./routes/login/login";
+import Card from "./components/Card/Card";
+import Graphcard from "./components/Graphcard/Graphcard";
 
 function App() {
   return (
-    <div>
-      <Header />
+    <div className="flex min-h-screen min-w-screen">
       <Sidebar />
+      <div id="main-content" className="w-full">
+        <Header />
+        <div id="body" className="flex bg-gray-200 w-full h-full">
+          <div>
+            <Card />
+            <Card />
+          </div>
+
+          <div>
+            <Graphcard />
+            <Graphcard />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

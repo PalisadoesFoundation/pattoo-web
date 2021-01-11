@@ -7,12 +7,18 @@ import "../../styles/main.css";
 
 function Header() {
   return (
-    <header className="flex bg-nav bg-gray-900">
-      <div className="p-5 inline-flex">
-        <h1 className="text-white font-bold">Logo</h1>
-      </div>
+    <header className="flex w-full px-6 items-center h-16 bg-white shadow-lg z-10">
+        <div className="inline-flex px-6 text-gray-800 text-4xl font-bold ">
+          Dashboard
+        </div>
     </header>
   );
 }
 
 export default Header;
+
+
+//            TODO
+//add hamburger option for mobile
+//add pattoo logo 
+//add logout button
