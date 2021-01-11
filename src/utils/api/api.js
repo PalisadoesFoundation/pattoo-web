@@ -1,8 +1,8 @@
 /* Project Queries */
 
 const userAuth = (username, password) => {
-    return {
-        query: `
+  return {
+    query: `
     mutation auth($username: String!, $password: String!){
         authenticate(Input: {
             username: $username,
@@ -13,13 +13,13 @@ const userAuth = (username, password) => {
             idxUser
         }
     }`,
-        variables: { username: username, password: password },
-    };
+    variables: { username: username, password: password },
+  };
 };
 
 const userFavorite = (idxUser, accessToken) => {
-    return {
-        query: `
+  return {
+    query: `
     query userFavorite($idxUser: String! ,$token: String!){
       allFavorite(idxUser: $idxUser, token: $token) {
         edges {
@@ -49,13 +49,13 @@ const userFavorite = (idxUser, accessToken) => {
       }
     }
     `,
-        variables: { idxUser: idxUser, token: accessToken },
-    };
+    variables: { idxUser: idxUser, token: accessToken },
+  };
 };
 
 const createChart = (chartTitle, checksum, enabled, accessToken) => {
-    return {
-        query: `
+  return {
+    query: `
     mutation createNewChart($name: String!, $checksum: String!, $enabled: String!, $token: String!){
         createChart(Input: {name: $name, checksum: $checksum, enabled: $enabled}, token: $token) {
             chart {
@@ -72,18 +72,18 @@ const createChart = (chartTitle, checksum, enabled, accessToken) => {
         }
     }
         `,
-        variables: {
-            name: chartTitle,
-            checksum: checksum,
-            enabled: enabled,
-            token: accessToken,
-        },
-    };
+    variables: {
+      name: chartTitle,
+      checksum: checksum,
+      enabled: enabled,
+      token: accessToken,
+    },
+  };
 };
 
 const createDatapoint = (datapointID, chartID, enabled, accessToken) => {
-    return {
-        query: `
+  return {
+    query: `
         mutation addDatapoint($datapointID: String!, $chartID: String!, $enabled: String!, $token: String!){
           createChartDataPoint(Input: {idxDatapoint: $datapointID, idxChart: $chartID, enabled: $enabled}, token: $token) {
             chartDatapoint {
@@ -101,18 +101,18 @@ const createDatapoint = (datapointID, chartID, enabled, accessToken) => {
         }
     }
         `,
-        variables: {
-            datapointID: datapointID,
-            chartID: chartID,
-            enabled: enabled,
-            token: accessToken,
-        },
-    };
+    variables: {
+      datapointID: datapointID,
+      chartID: chartID,
+      enabled: enabled,
+      token: accessToken,
+    },
+  };
 };
 
 const createFavorite = (userID, chartID, order, enabled, accessToken) => {
-    return {
-        query: `
+  return {
+    query: `
         mutation createFavorite($userID: String!, $chartID: String!, $order: String!, $enabled: String!, $token: String!){
           createFavorite(Input: {idxUser: $userID, idxChart: $chartID, order: $order, enabled: $enabled}, token: $token) {
             favorite {
@@ -128,25 +128,14 @@ const createFavorite = (userID, chartID, order, enabled, accessToken) => {
             }
           }
         }`,
-        variables: {
-            userID: userID,
-            chartID: chartID,
-            order: order,
-            enabled: enabled,
-            token: accessToken,
-        },
-    };
+    variables: {
+      userID: userID,
+      chartID: chartID,
+      order: order,
+      enabled: enabled,
+      token: accessToken,
+    },
+  };
 };
-
-/*
-import uuid from "uuid";
-
-const datapointID = uuid.v4();
-const chartID = uuid.v4();
-const enabled = "0";
-const accessToken = uuid.v4();
-let expected = createDatapoint(datapointID, chartID, enabled, accessToken);
-
-console.log(expected);*/
 
 export { userAuth, userFavorite, createChart, createFavorite, createDatapoint };

@@ -6,10 +6,9 @@
 // import { userFavorite } from "utils/api";
 
 /* Tailwind css build */
-import "styles/main.css";
 
 function Dashboard() {
-    //Dashboard Page
+  //Dashboard Page
 }
 
 export default Dashboard;

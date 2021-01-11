@@ -7,21 +7,21 @@ import { BrowserRouter } from "react-router-dom";
 import "./styles/main.css";
 
 /* Routes Imports */
-// import RouteClient from "routes/routeClient";
+// import RouteClient from "./routes/routeClient/routesClient";
+
+/* Component Imports */
 import Sidebar from "./components/Sidebar/Sidebar";
 import Header from "./components/Header/Header";
+// import Login from "./routes/login/login";
 
 function App() {
-  return(
+  return (
     <div>
       <Header />
       <Sidebar />
     </div>
   );
-
 }
-
-
 
 ReactDOM.render(
   <React.StrictMode>
