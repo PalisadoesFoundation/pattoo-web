@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 
 /* Route components */
 import Login from "../login/login";
-import Dashboard from "../dashboard/dashboard";
+import Dashboard from "../../components/Dashboard/Dashboard";
 
 function ProtectedRoute({ component: Component, ...props }) {
   return (

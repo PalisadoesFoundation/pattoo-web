@@ -6,7 +6,7 @@ import React from "react";
 // import { authenticate } from "../../utils/query";
 
 /* CSS Imports */
-import "./login.css";
+import "./Login.css";
 
 function Login() {
   return (
