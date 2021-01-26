@@ -1,5 +1,5 @@
 /* React Imports */
-import React from "react";
+import React, {useState} from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
@@ -20,6 +20,7 @@ import "./styles/main.css";
 /* Component Imports */
 import Dashboard from "./components/Dashboard/Dashboard";
 import Login from "./components/Login/Login";
+import ProtectedRoute from "./routes/ProtectedRoute"
 
 // Catches and logs graphql errors
 const errorLink = onError(({ graphqlErrors }) => {
@@ -44,24 +45,27 @@ const client = new ApolloClient({
 
 function App() {
   // Temporary routing until authentication is complete
+
+  //[isAuth,setAuth]
+  const [isAuth] = useState(true); //defaulted to true until authentication is implemented
   return (
-    <ApolloProvider client={client}>
-      <BrowserRouter>
         <Switch>
-          <Route path="/dashboard" component={Dashboard}></Route>
-          <Route path="/login" component={Login}></Route>
-          <Route path="/">
+          <ProtectedRoute path="/dashboard" exact component={Dashboard} isAuth={isAuth}/>
+          <Route path="/login" exact component={Login}></Route>
+          <Route path="/" exact>
             <Redirect to="/dashboard"></Redirect>
           </Route>
         </Switch>
-      </BrowserRouter>
-    </ApolloProvider>
   );
 }
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <App /> 
+      </BrowserRouter>
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
