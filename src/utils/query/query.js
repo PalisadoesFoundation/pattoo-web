@@ -17,7 +17,12 @@ async function query(data) {
   });
 }
 
-// Authenticates and saves access and refresh tokesn for `username` and `password`
+/** Authenticates and saves access and refresh tokens for `username` and `password`
+ * @param { string } username - The username of the user
+ * @param { string } password - The password of the user
+ *
+ * @return { boolean } true if the user is authenticated and false otherwise
+ */
 async function authenticate(username, password) {
   const data = userAuth(username, password);
   const response = await axios({
