@@ -1,5 +1,5 @@
 /* React Imports */
-import React, {useState} from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
@@ -20,7 +20,7 @@ import "./styles/main.css";
 /* Component Imports */
 import Dashboard from "./components/Dashboard/Dashboard";
 import Login from "./components/Login/Login";
-import ProtectedRoute from "./routes/ProtectedRoute"
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 // Catches and logs graphql errors
 const errorLink = onError(({ graphqlErrors }) => {
@@ -49,13 +49,18 @@ function App() {
   //[isAuth,setAuth]
   const [isAuth] = useState(true); //defaulted to true until authentication is implemented
   return (
-        <Switch>
-          <ProtectedRoute path="/dashboard" exact component={Dashboard} isAuth={isAuth}/>
-          <Route path="/login" exact component={Login}></Route>
-          <Route path="/" exact>
-            <Redirect to="/dashboard"></Redirect>
-          </Route>
-        </Switch>
+    <Switch>
+      <ProtectedRoute
+        path="/dashboard"
+        exact
+        component={Dashboard}
+        isAuth={isAuth}
+      />
+      <Route path="/login" exact component={Login}></Route>
+      <Route path="/" exact>
+        <Redirect to="/dashboard"></Redirect>
+      </Route>
+    </Switch>
   );
 }
 
@@ -63,7 +68,7 @@ ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <BrowserRouter>
-        <App /> 
+        <App />
       </BrowserRouter>
     </ApolloProvider>
   </React.StrictMode>,
