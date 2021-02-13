@@ -19,7 +19,6 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-
       black: '#000',
       white: '#fff',
 
@@ -452,6 +451,7 @@ module.exports = {
       '11/12': '91.666667%',
       full: '100%',
       screen: '100vw',
+      sidebar: "258px"
     }),
     zIndex: {
       auto: 'auto',
