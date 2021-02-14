@@ -1,5 +1,5 @@
 /* Authentication query */
-import { userAuth } from "utils/api";
+import { userAuth } from "../api";
 
 /* Imports */
 import axios from "axios";
@@ -52,7 +52,7 @@ async function authenticate(username, password) {
   return true;
 }
 
-function refreshToken(refreshToken) {}
+// function refreshToken(refreshToken) {}
 
 export default query;
-export { authenticate, refreshToken };
+export { authenticate };

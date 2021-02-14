@@ -1,15 +1,15 @@
 /* React Imports */
 import React, { useState } from "react";
-/// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 /* Authentication method imports */
-// import { authenticate } from "../../utils/query";
+import { authenticate } from "../../utils/query/query";
 
 /* CSS Imports */
 import "./Login.css";
 
 function Login() {
-  // const history = useHistory();
+  const history = useHistory();
   const [formState, setFormState] = useState({
     username: "",
     password: "",
@@ -45,7 +45,13 @@ function Login() {
           }}
         ></input>
       </form>
-      <button className="bg-purple-900 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full">
+      <button
+        className="bg-purple-900 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full"
+        onClick={() => {
+          authenticate(formState.username, formState.password);
+          history.push("/");
+        }}
+      >
         Sign in Now
       </button>
       <p className="font-bold mt-5 text-purple-900">

@@ -48,6 +48,7 @@
         "enzyme-adapter-react-16": "^1.15.5",
         "enzyme-to-json": "^3.6.1",
         "postcss-cli": "^7.1.2",
+        "react-transition-group": "^4.4.1",
         "tailwindcss": "^1.9.6"
     }
 }
