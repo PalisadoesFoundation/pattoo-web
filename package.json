@@ -1,0 +1,54 @@
+{
+    "name": "pattoo_web",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@apollo/client": "^3.3.7",
+        "@testing-library/jest-dom": "^4.2.4",
+        "@testing-library/react": "^9.5.0",
+        "@testing-library/user-event": "^7.2.1",
+        "axios": "^0.21.1",
+        "chart.js": "^2.9.3",
+        "graphql": "^15.4.0",
+        "prettier": "^2.0.5",
+        "react": "^16.13.1",
+        "react-chartjs-2": "^2.10.0",
+        "react-dom": "^16.13.1",
+        "react-icons": "^4.1.0",
+        "react-modal": "^3.11.2",
+        "react-responsive": "^8.2.0",
+        "react-router-dom": "^5.2.0",
+        "react-scripts": "^4.0.1"
+    },
+    "scripts": {
+        "start": "npm run build:css && react-scripts start",
+        "build": "npm run build:css && react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "build:css": "postcss ./src/styles/tailwind.css -o ./src/styles/main.css"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "autoprefixer": "^9.8.6",
+        "enzyme": "^3.11.0",
+        "enzyme-adapter-react-16": "^1.15.5",
+        "enzyme-to-json": "^3.6.1",
+        "postcss-cli": "^7.1.2",
+        "react-transition-group": "^4.4.1",
+        "tailwindcss": "^1.9.6"
+    }
+}

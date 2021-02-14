@@ -19,6 +19,7 @@ General information about the project, including the the prerequisite steps to g
    :maxdepth: 2
    :caption: Introduction:
 
+   project-structure
    about
    installation
    configuration
@@ -36,3 +37,4 @@ Developers
    :caption: Developers:
 
    contributing
+   maintainers

@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pattoo Web &#8212; Pattoo Web  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="shortcut icon" href="_static/pattoo-rtd.png"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Project Structure" href="project-structure.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="pattoo-web">
+<h1>Pattoo Web<a class="headerlink" href="#pattoo-web" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">pattoo</span></code> stores timeseries data in a database and makes it available for users via a GraphQL API. <code class="docutils literal notranslate"><span class="pre">pattoo-web</span></code> provides a web front end to access the data.</p>
+<p>Visit the <a class="reference external" href="https://github.com/PalisadoesFoundation/pattoo-web">Pattoo Web GitHub site</a> to see the code.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>General information about the project, including the the prerequisite steps to get it operational on your system.</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Introduction:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="project-structure.html">Project Structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="project-structure.html#project-root">Project Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project-structure.html#key-project-configuration-files">Key Project Configuration Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project-structure.html#source-folder-src">Source Folder (src)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project-structure.html#javascript-module-structure">Javascript Module Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project-structure.html#additional-notes">Additional Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Pattoo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#operational-overview">Operational Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#the-palisadoes-foundation">The Palisadoes Foundation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Basic Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#setting-the-configuration-directory-location">Setting the  Configuration Directory Location</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#configuration-options">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pattoo_webd.html">Pattoo Web API Daemon</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pattoo_webd.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pattoo_webd.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pattoo_webd.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pattoo_webd.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Pattoo Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backup.html">Backup and Restoration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="backup.html#backup">Backup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backup.html#restoration">Restoration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cron.html">Periodic Jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cron.html#logrotate-configuration">Logrotate Configuration</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="developers">
+<h2>Developers<a class="headerlink" href="#developers" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Developers:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How To Contribute</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#code-style-guide">Code Style Guide</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="#">
+              <img class="logo" src="_static/pattoo-rtd.png" alt="Logo"/>
+            </a></p>
+<h3><a href="#">Table of Contents</a></h3>
+<p class="caption"><span class="caption-text">Introduction:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="project-structure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About Pattoo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Basic Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pattoo_webd.html">Pattoo Web API Daemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Pattoo Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backup.html">Backup and Restoration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cron.html">Periodic Jobs</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developers:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How To Contribute</a></li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="project-structure.html" title="next chapter">Project Structure</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Peter Harrison.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

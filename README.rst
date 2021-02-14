@@ -6,6 +6,19 @@ pattoo-web
 
 ``pattoo-web`` is a web GUI to view IoT data stored on ``pattoo`` servers.
 
+Setup and Running pattoo-web
+============================
+
+`Pattoo-web` udpated to run as ReactJS application and utilizes various
+third-party ReactJS modules.
+
+.. code-block:: bash
+
+    cd pattoo_web
+    npm install
+    npm start
+
+
 Introduction
 ============
 
