@@ -2,8 +2,8 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {IconContext} from "react-icons";
-import {MdHome, MdBuild, MdSettings} from "react-icons/md";
 import { IoIosArrowBack } from "react-icons/io";
+import {MdHome, MdBuild, MdSettings} from "react-icons/md";
 
 import "../../styles/main.css";
 import FavoriteItem from "../FavoriteItem/FavoriteItem";
@@ -19,7 +19,7 @@ let favoriteItems=[
 function Sidebar({isStatic, setClosed, isClosed}) {
     return (//make custom sidebar width
     
-        <aside id="sidebar" className={`flex flex-col w-64 flex-shrink-0 min-h-screen bg-gray-800 z-50 ${isStatic ? '' : 'fixed'}`}>
+        <aside id="sidebar" className={`flex flex-col w-64 flex-shrink-0 min-h-full bg-gray-800 z-50 ${isStatic ? '' : 'fixed'}`}>
             <div className="flex h-16 bg-gray-800 items-center justify-around">
                 <div className="flex items-center justify-center">
                     <img src={logo} alt="Logo" className="h-12 w-auto"/>
