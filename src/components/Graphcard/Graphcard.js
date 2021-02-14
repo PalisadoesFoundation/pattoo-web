@@ -4,7 +4,7 @@ import { Line } from "react-chartjs-2"
 import "../../styles/main.css";
 
 //consider Apexcharts for graphs if chart.js presents problems
-function Graphcard() {
+function GraphCard() {
     return (
        <div className="flex flex-col items-center rounded-md bg-white m-4 p-4 w-80 h-64 border shadow-lg">
             <Line
@@ -25,7 +25,7 @@ function Graphcard() {
                         borderWidth: 2
                     }]
                 }}
-                height={400}
+                height={500}
                 width={600}
                 options={{
                     maintainAspectRatio: false,
@@ -49,4 +49,4 @@ function Graphcard() {
     );
 }
 
-export default Graphcard;
+export default GraphCard;

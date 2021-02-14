@@ -1,4 +1,4 @@
-import query, { authenticate, refreshToken } from "./query";
+import query, { authenticate } from "./query";
 
 export default query;
-export { authenticate, refreshToken };
+export { authenticate };

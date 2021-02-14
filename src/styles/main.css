@@ -1773,7 +1773,6 @@ video {
 
 .appearance-none {
   -webkit-appearance: none;
-     -moz-appearance: none;
           appearance: none;
 }
 
@@ -16254,6 +16253,10 @@ video {
   width: 100vw;
 }
 
+.w-sidebar {
+  width: 258px;
+}
+
 .z-0 {
   z-index: 0;
 }
@@ -20398,7 +20401,6 @@ video {
 
   .sm\:appearance-none {
     -webkit-appearance: none;
-       -moz-appearance: none;
             appearance: none;
   }
 
@@ -34879,6 +34881,10 @@ video {
     width: 100vw;
   }
 
+  .sm\:w-sidebar {
+    width: 258px;
+  }
+
   .sm\:z-0 {
     z-index: 0;
   }
@@ -38993,7 +38999,6 @@ video {
 
   .md\:appearance-none {
     -webkit-appearance: none;
-       -moz-appearance: none;
             appearance: none;
   }
 
@@ -53474,6 +53479,10 @@ video {
     width: 100vw;
   }
 
+  .md\:w-sidebar {
+    width: 258px;
+  }
+
   .md\:z-0 {
     z-index: 0;
   }
@@ -57588,7 +57597,6 @@ video {
 
   .lg\:appearance-none {
     -webkit-appearance: none;
-       -moz-appearance: none;
             appearance: none;
   }
 
@@ -72069,6 +72077,10 @@ video {
     width: 100vw;
   }
 
+  .lg\:w-sidebar {
+    width: 258px;
+  }
+
   .lg\:z-0 {
     z-index: 0;
   }
@@ -76183,7 +76195,6 @@ video {
 
   .xl\:appearance-none {
     -webkit-appearance: none;
-       -moz-appearance: none;
             appearance: none;
   }
 
@@ -90662,6 +90673,10 @@ video {
 
   .xl\:w-screen {
     width: 100vw;
+  }
+
+  .xl\:w-sidebar {
+    width: 258px;
   }
 
   .xl\:z-0 {
